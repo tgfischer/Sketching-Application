@@ -29,23 +29,22 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.selectButton = new System.Windows.Forms.Button();
             this.freeDrawButton = new System.Windows.Forms.Button();
             this.lineButton = new System.Windows.Forms.Button();
             this.rectangleButton = new System.Windows.Forms.Button();
             this.squareButton = new System.Windows.Forms.Button();
-            this.ellipsisButton = new System.Windows.Forms.Button();
+            this.ellipseButton = new System.Windows.Forms.Button();
             this.circleButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
+            this.canvas = new Sketch_Application.Canvas();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +52,6 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.colourToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -62,12 +60,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1269, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 19);
-            this.fileToolStripMenuItem.Text = "File";
             // 
             // editToolStripMenuItem
             // 
@@ -81,20 +73,20 @@
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             // 
             // colourToolStripMenuItem
             // 
             this.colourToolStripMenuItem.Name = "colourToolStripMenuItem";
-            this.colourToolStripMenuItem.Size = new System.Drawing.Size(55, 19);
-            this.colourToolStripMenuItem.Text = "Colour";
+            this.colourToolStripMenuItem.Size = new System.Drawing.Size(99, 19);
+            this.colourToolStripMenuItem.Text = "Change Colour";
             this.colourToolStripMenuItem.Click += new System.EventHandler(this.colourToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
@@ -107,10 +99,11 @@
             this.tableLayoutPanel1.Controls.Add(this.lineButton, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.rectangleButton, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.squareButton, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.ellipsisButton, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.ellipseButton, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.circleButton, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.polygonButton, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.colourPanel, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.canvas, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -139,6 +132,7 @@
             this.selectButton.TabIndex = 0;
             this.selectButton.Text = "Select";
             this.selectButton.UseVisualStyleBackColor = true;
+            this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
             // 
             // freeDrawButton
             // 
@@ -150,6 +144,7 @@
             this.freeDrawButton.TabIndex = 1;
             this.freeDrawButton.Text = "Free Draw";
             this.freeDrawButton.UseVisualStyleBackColor = true;
+            this.freeDrawButton.Click += new System.EventHandler(this.freeDrawButton_Click);
             // 
             // lineButton
             // 
@@ -161,6 +156,7 @@
             this.lineButton.TabIndex = 2;
             this.lineButton.Text = "Line";
             this.lineButton.UseVisualStyleBackColor = true;
+            this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
             // 
             // rectangleButton
             // 
@@ -172,6 +168,7 @@
             this.rectangleButton.TabIndex = 3;
             this.rectangleButton.Text = "Rectangle";
             this.rectangleButton.UseVisualStyleBackColor = true;
+            this.rectangleButton.Click += new System.EventHandler(this.rectangleButton_Click);
             // 
             // squareButton
             // 
@@ -183,17 +180,19 @@
             this.squareButton.TabIndex = 4;
             this.squareButton.Text = "Square";
             this.squareButton.UseVisualStyleBackColor = true;
+            this.squareButton.Click += new System.EventHandler(this.squareButton_Click);
             // 
-            // ellipsisButton
+            // ellipseButton
             // 
-            this.ellipsisButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ellipsisButton.Location = new System.Drawing.Point(3, 329);
-            this.ellipsisButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ellipsisButton.Name = "ellipsisButton";
-            this.ellipsisButton.Size = new System.Drawing.Size(81, 57);
-            this.ellipsisButton.TabIndex = 5;
-            this.ellipsisButton.Text = "Ellipsis";
-            this.ellipsisButton.UseVisualStyleBackColor = true;
+            this.ellipseButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ellipseButton.Location = new System.Drawing.Point(3, 329);
+            this.ellipseButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ellipseButton.Name = "ellipseButton";
+            this.ellipseButton.Size = new System.Drawing.Size(81, 57);
+            this.ellipseButton.TabIndex = 5;
+            this.ellipseButton.Text = "Ellipse";
+            this.ellipseButton.UseVisualStyleBackColor = true;
+            this.ellipseButton.Click += new System.EventHandler(this.ellipseButton_Click);
             // 
             // circleButton
             // 
@@ -205,6 +204,7 @@
             this.circleButton.TabIndex = 6;
             this.circleButton.Text = "Circle";
             this.circleButton.UseVisualStyleBackColor = true;
+            this.circleButton.Click += new System.EventHandler(this.circleButton_Click);
             // 
             // polygonButton
             // 
@@ -216,15 +216,29 @@
             this.polygonButton.TabIndex = 7;
             this.polygonButton.Text = "Polygon";
             this.polygonButton.UseVisualStyleBackColor = true;
+            this.polygonButton.Click += new System.EventHandler(this.polygonButton_Click);
             // 
             // colourPanel
             // 
+            this.colourPanel.BackColor = System.Drawing.Color.Black;
+            this.colourPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.colourPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.colourPanel.Location = new System.Drawing.Point(3, 524);
             this.colourPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.colourPanel.Name = "colourPanel";
             this.colourPanel.Size = new System.Drawing.Size(81, 57);
             this.colourPanel.TabIndex = 8;
+            // 
+            // canvas
+            // 
+            this.canvas.BackColor = System.Drawing.Color.White;
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(90, 3);
+            this.canvas.Name = "canvas";
+            this.tableLayoutPanel1.SetRowSpan(this.canvas, 10);
+            this.canvas.Size = new System.Drawing.Size(1176, 613);
+            this.canvas.TabIndex = 9;
             // 
             // MainForm
             // 
@@ -239,6 +253,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SE3353B Sketch Application";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -250,23 +265,22 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colourToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorDialog;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.Button freeDrawButton;
         private System.Windows.Forms.Button lineButton;
         private System.Windows.Forms.Button rectangleButton;
         private System.Windows.Forms.Button squareButton;
-        private System.Windows.Forms.Button ellipsisButton;
+        private System.Windows.Forms.Button ellipseButton;
         private System.Windows.Forms.Button circleButton;
         private System.Windows.Forms.Button polygonButton;
         private System.Windows.Forms.Panel colourPanel;
+        private Canvas canvas;
 
     }
 }
