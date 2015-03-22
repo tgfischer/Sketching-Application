@@ -44,8 +44,8 @@
             this.circleButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
-            this.canvas = new Sketch_Application.Canvas();
             this.clearButton = new System.Windows.Forms.Button();
+            this.canvas = new Sketch_Application.Canvas();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -232,6 +232,17 @@
             this.colourPanel.Size = new System.Drawing.Size(81, 57);
             this.colourPanel.TabIndex = 8;
             // 
+            // clearButton
+            // 
+            this.clearButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clearButton.Location = new System.Drawing.Point(3, 628);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(81, 59);
+            this.clearButton.TabIndex = 10;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // canvas
             // 
             this.canvas.BackColor = System.Drawing.Color.White;
@@ -244,18 +255,8 @@
             this.canvas.TabIndex = 9;
             this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
             this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
-            // 
-            // clearButton
-            // 
-            this.clearButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clearButton.Location = new System.Drawing.Point(3, 628);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(81, 59);
-            this.clearButton.TabIndex = 10;
-            this.clearButton.Text = "Clear";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // MainForm
             // 

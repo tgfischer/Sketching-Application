@@ -12,6 +12,8 @@ namespace Sketch_Application
 {
     public partial class MainForm : Form
     {
+        private bool isMouseDown = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -75,17 +77,36 @@ namespace Sketch_Application
 
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            this.canvas.AddShape(Cursor.Position);
+            if (isMouseDown) 
+            {
+
+            } 
+            else 
+            {
+                this.canvas.AddShape(Cursor.Position);
+            }
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
-
+            this.isMouseDown = false;
         }
 
         private void canvas_MouseLeave(object sender, EventArgs e)
         {
+            this.isMouseDown = false;
+        }
 
+        private void canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown) 
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }
