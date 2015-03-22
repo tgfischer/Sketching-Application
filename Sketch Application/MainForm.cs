@@ -70,7 +70,7 @@ namespace Sketch_Application
 
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
-
+            this.canvas.AddShape(Cursor.Position);
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)

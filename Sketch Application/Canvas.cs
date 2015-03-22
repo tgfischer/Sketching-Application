@@ -26,9 +26,9 @@ namespace Sketch_Application
             this.pen = new Pen(this.Colour, 2F);
         }
 
-        public void AddShape(Point position, Mode type)
+        public void AddShape(Point position)
         {
-            switch (type) {
+            switch (this.Mode) {
                 case Mode.FreeHand:
                     break;
                 case Mode.Line:
