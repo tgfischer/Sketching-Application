@@ -24,6 +24,11 @@ namespace Sketch_Application
             g.DrawLine(pen, start, end);
         }
 
+        public override void Redraw(Graphics g, Pen pen)
+        {
+            g.DrawLine(pen, start, end);
+        }
+
         // TODO: Validate start is on canvas in the set { }
         public Point StartPoint
         {

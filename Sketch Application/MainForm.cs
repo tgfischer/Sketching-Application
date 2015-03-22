@@ -66,7 +66,7 @@ namespace Sketch_Application
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-            this.canvas.ClearCanvas();
+
         }
 
         private void canvas_MouseDown(object sender, MouseEventArgs e)

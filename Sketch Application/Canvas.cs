@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace Sketch_Application
 {
@@ -15,8 +16,6 @@ namespace Sketch_Application
         private List<Shape> shapes;
         private Shape selectedShape;
         private Shape clipBoard;
-        private Graphics g;
-        private Pen pen;
         public Color Colour = Color.Black;
         public Mode Mode = Mode.Select;
 
@@ -27,23 +26,35 @@ namespace Sketch_Application
 
             this.DoubleBuffered = true;
             this.shapes = new List<Shape>();
-            this.pen = new Pen(this.Colour, 2F);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+        }
+
+        protected override void OnPaint(PaintEventArgs p)
+        {
+            base.OnPaint(p);
+
+            p.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            using (Pen pen = new Pen(this.Colour, 2F))
+            {
+                foreach (Shape shape in this.shapes)
+                {
+                    pen.Color = shape.Colour;
+                    shape.Redraw(p.Graphics, pen);
+                }
+            }
         }
 
         public void AddNewShape(Point position)
         {
-            this.g = this.CreateGraphics();
-
             switch (this.Mode) {
                 case Mode.FreeHand:
                     FreeLine freeLine = new FreeLine(position, this.Colour);
-                    freeLine.Draw(this.g, this.pen);
                     this.shapes.Add(freeLine);
 
                     break;
                 case Mode.Line:
                     Line line = new Line(position, this.Colour);
-                    line.Draw(this.g, this.pen);
                     this.shapes.Add(line);
 
                     break;
@@ -68,18 +79,14 @@ namespace Sketch_Application
             {
                 FreeLine freeLine = (FreeLine)shape;
                 freeLine.Points.Add(position);
-                pen.Color = this.Colour;
-                freeLine.Draw(g, pen);
             }
             else if (shape is Line) 
             {
                 Line line = (Line)shape;
-                pen.Color = Color.White;
-                line.Draw(g, pen);
-                pen.Color = line.Colour;
                 line.EndPoint = position;
-                line.Draw(g, pen);
             }
+
+            this.Invalidate(); // Update the canvas
         }
 
         public void Cut()
@@ -91,20 +98,6 @@ namespace Sketch_Application
         public void Paste()
         {
             this.shapes.Add(this.clipBoard);
-        }
-
-        public void RefreshCanvas()
-        {
-            this.ClearCanvas();
-
-            foreach (Shape shape in this.shapes) {
-                //shape.Draw();
-            }
-        }
-
-        public void ClearCanvas()
-        {
-            this.Refresh();
         }
     }
 }

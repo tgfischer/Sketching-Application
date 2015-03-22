@@ -29,5 +29,20 @@ namespace Sketch_Application
                 g.DrawLine(pen, this.Points.Last(), this.Points.Last());
             }
         }
+
+        public override void Redraw(Graphics g, Pen pen)
+        {
+            if (this.Points.Count > 1)
+            {
+                for (var i = 1; i < this.Points.Count; i++)
+                {
+                    g.DrawLine(pen, this.Points.ElementAt(i - 1), this.Points.ElementAt(i));
+                }
+            }
+            else
+            {
+                g.DrawLine(pen, this.Points.Last(), this.Points.Last());
+            }
+        }
     }
 }

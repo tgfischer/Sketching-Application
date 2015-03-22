@@ -18,6 +18,8 @@ namespace Sketch_Application
 
         public abstract void Draw(Graphics g, Pen pen);
 
+        public abstract void Redraw(Graphics g, Pen pen);
+
         //public void Add(Shape shape);
 
         //public void Remove(Shape shape);
