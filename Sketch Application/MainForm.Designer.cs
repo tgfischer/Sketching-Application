@@ -45,6 +45,7 @@
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
             this.clearButton = new System.Windows.Forms.Button();
+            this.mouseDownPanel = new System.Windows.Forms.Panel();
             this.canvas = new Sketch_Application.Canvas();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -106,6 +107,7 @@
             this.tableLayoutPanel1.Controls.Add(this.colourPanel, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.canvas, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.clearButton, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.mouseDownPanel, 0, 9);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -243,6 +245,16 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
+            // mouseDownPanel
+            // 
+            this.mouseDownPanel.BackColor = System.Drawing.Color.White;
+            this.mouseDownPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mouseDownPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mouseDownPanel.Location = new System.Drawing.Point(3, 588);
+            this.mouseDownPanel.Name = "mouseDownPanel";
+            this.mouseDownPanel.Size = new System.Drawing.Size(81, 34);
+            this.mouseDownPanel.TabIndex = 11;
+            // 
             // canvas
             // 
             this.canvas.BackColor = System.Drawing.Color.White;
@@ -300,6 +312,7 @@
         private System.Windows.Forms.Panel colourPanel;
         private Canvas canvas;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Panel mouseDownPanel;
 
     }
 }

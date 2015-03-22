@@ -21,20 +21,26 @@ namespace Sketch_Application
         public Mode Mode = Mode.Select;
 
         public Canvas()
+            : base()
         {
             InitializeComponent();
 
+            this.DoubleBuffered = true;
             this.shapes = new List<Shape>();
             this.pen = new Pen(this.Colour, 2F);
         }
 
-        public void AddShape(Point position)
+        public void AddNewShape(Point position)
         {
+            this.g = this.CreateGraphics();
+
             switch (this.Mode) {
                 case Mode.FreeHand:
                     break;
                 case Mode.Line:
                     Line line = new Line(position);
+                    line.Draw(this.g, this.pen);
+                    this.shapes.Add(line);
                     break;
                 case Mode.Rectangle:
                     break;
@@ -46,6 +52,17 @@ namespace Sketch_Application
                     break;
                 case Mode.Polygon:
                     break;
+            }
+        }
+
+        public void AddToCurrentShape(Point position)
+        {
+            Shape shape = this.shapes.Last();
+            
+            if (shape is Line) {
+                Line line = (Line)shape;
+                line.EndPoint = position;
+                line.Draw(g, pen);
             }
         }
 
@@ -65,7 +82,7 @@ namespace Sketch_Application
             this.ClearCanvas();
 
             foreach (Shape shape in this.shapes) {
-                shape.Draw();
+                //shape.Draw();
             }
         }
 
