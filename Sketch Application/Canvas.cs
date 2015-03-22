@@ -62,9 +62,16 @@ namespace Sketch_Application
 
         public void RefreshCanvas()
         {
+            this.ClearCanvas();
+
             foreach (Shape shape in this.shapes) {
                 shape.Draw();
             }
+        }
+
+        public void ClearCanvas()
+        {
+            this.Refresh();
         }
     }
 }
