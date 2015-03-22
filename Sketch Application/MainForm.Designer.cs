@@ -45,6 +45,7 @@
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
             this.canvas = new Sketch_Application.Canvas();
+            this.clearButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -104,22 +105,24 @@
             this.tableLayoutPanel1.Controls.Add(this.polygonButton, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.colourPanel, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.canvas, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.clearButton, 0, 10);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
+            this.tableLayoutPanel1.RowCount = 11;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1269, 619);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1269, 690);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // selectButton
@@ -200,7 +203,7 @@
             this.circleButton.Location = new System.Drawing.Point(3, 394);
             this.circleButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.circleButton.Name = "circleButton";
-            this.circleButton.Size = new System.Drawing.Size(81, 57);
+            this.circleButton.Size = new System.Drawing.Size(81, 56);
             this.circleButton.TabIndex = 6;
             this.circleButton.Text = "Circle";
             this.circleButton.UseVisualStyleBackColor = true;
@@ -209,10 +212,10 @@
             // polygonButton
             // 
             this.polygonButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.polygonButton.Location = new System.Drawing.Point(3, 459);
+            this.polygonButton.Location = new System.Drawing.Point(3, 458);
             this.polygonButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.polygonButton.Name = "polygonButton";
-            this.polygonButton.Size = new System.Drawing.Size(81, 57);
+            this.polygonButton.Size = new System.Drawing.Size(81, 58);
             this.polygonButton.TabIndex = 7;
             this.polygonButton.Text = "Polygon";
             this.polygonButton.UseVisualStyleBackColor = true;
@@ -236,18 +239,29 @@
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(90, 3);
             this.canvas.Name = "canvas";
-            this.tableLayoutPanel1.SetRowSpan(this.canvas, 10);
-            this.canvas.Size = new System.Drawing.Size(1176, 613);
+            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
+            this.canvas.Size = new System.Drawing.Size(1176, 684);
             this.canvas.TabIndex = 9;
             this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
             this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
+            // clearButton
+            // 
+            this.clearButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clearButton.Location = new System.Drawing.Point(3, 628);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(81, 59);
+            this.clearButton.TabIndex = 10;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1269, 644);
+            this.ClientSize = new System.Drawing.Size(1269, 715);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -284,6 +298,7 @@
         private System.Windows.Forms.Button polygonButton;
         private System.Windows.Forms.Panel colourPanel;
         private Canvas canvas;
+        private System.Windows.Forms.Button clearButton;
 
     }
 }

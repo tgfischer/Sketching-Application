@@ -68,6 +68,11 @@ namespace Sketch_Application
             this.canvas.Mode = Mode.Polygon;
         }
 
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            this.canvas.ClearCanvas();
+        }
+
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
             this.canvas.AddShape(Cursor.Position);
