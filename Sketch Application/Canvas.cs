@@ -36,11 +36,16 @@ namespace Sketch_Application
 
             switch (this.Mode) {
                 case Mode.FreeHand:
+                    FreeLine freeLine = new FreeLine(position, this.Colour);
+                    freeLine.Draw(this.g, this.pen);
+                    this.shapes.Add(freeLine);
+
                     break;
                 case Mode.Line:
                     Line line = new Line(position, this.Colour);
                     line.Draw(this.g, this.pen);
                     this.shapes.Add(line);
+
                     break;
                 case Mode.Rectangle:
                     break;
@@ -59,7 +64,15 @@ namespace Sketch_Application
         {
             Shape shape = this.shapes.Last();
             
-            if (shape is Line) {
+            if (shape is FreeLine)
+            {
+                FreeLine freeLine = (FreeLine)shape;
+                freeLine.Points.Add(position);
+                pen.Color = this.Colour;
+                freeLine.Draw(g, pen);
+            }
+            else if (shape is Line) 
+            {
                 Line line = (Line)shape;
                 pen.Color = Color.White;
                 line.Draw(g, pen);

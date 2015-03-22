@@ -12,26 +12,16 @@ namespace Sketch_Application
 {
     public partial class MainForm : Form
     {
-        private bool isMouseDown;
-        private bool isDrawing;
+        private bool isDrawing = false;
 
         public MainForm()
         {
             InitializeComponent();
-
-            this.isMouseDown = false;
-            this.isDrawing = false;
         }
 
         private void colourToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result = this.colorDialog.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                this.canvas.Colour = this.colorDialog.Color;
-                this.colourPanel.BackColor = this.canvas.Colour;
-            }
+            this.colourPanel_Click(null, null);
         }
 
         private void selectButton_Click(object sender, EventArgs e)
@@ -82,7 +72,6 @@ namespace Sketch_Application
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
             this.mouseDownPanel.BackColor = Color.Tomato;
-            this.isMouseDown = true;
 
             if (this.canvas.Mode != Mode.Select)
             {
@@ -93,15 +82,13 @@ namespace Sketch_Application
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
-            this.isMouseDown = false;
             this.isDrawing = false;
             this.mouseDownPanel.BackColor = Color.White;
         }
 
         private void canvas_MouseLeave(object sender, EventArgs e)
         {
-            //this.isMouseDown = false;
-            //this.mouseDownPanel.BackColor = Color.White;
+
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
@@ -110,6 +97,17 @@ namespace Sketch_Application
             {
                 this.canvas.AddToCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 this.mouseDownPanel.BackColor = Color.Thistle;
+            }
+        }
+
+        private void colourPanel_Click(object sender, MouseEventArgs e)
+        {
+            DialogResult result = this.colorDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.canvas.Colour = this.colorDialog.Color;
+                this.colourPanel.BackColor = this.canvas.Colour;
             }
         }
     }
