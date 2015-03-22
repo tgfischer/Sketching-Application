@@ -13,6 +13,8 @@ namespace Sketch_Application
     public partial class Canvas : Panel
     {
         private List<Shape> shapes;
+        private Shape selectedShape;
+        private Shape clipBoard;
         private Graphics g;
         private Pen pen;
         public Color Colour = Color.Black;
@@ -45,6 +47,17 @@ namespace Sketch_Application
                 case Mode.Polygon:
                     break;
             }
+        }
+
+        public void Cut()
+        {
+            this.clipBoard = selectedShape;
+            this.shapes.Remove(selectedShape);
+        }
+
+        public void Paste()
+        {
+            this.shapes.Add(this.clipBoard);
         }
 
         public void RefreshCanvas()
