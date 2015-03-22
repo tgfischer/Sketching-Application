@@ -38,7 +38,7 @@ namespace Sketch_Application
                 case Mode.FreeHand:
                     break;
                 case Mode.Line:
-                    Line line = new Line(position);
+                    Line line = new Line(position, this.Colour);
                     line.Draw(this.g, this.pen);
                     this.shapes.Add(line);
                     break;
@@ -61,6 +61,9 @@ namespace Sketch_Application
             
             if (shape is Line) {
                 Line line = (Line)shape;
+                pen.Color = Color.White;
+                line.Draw(g, pen);
+                pen.Color = line.Colour;
                 line.EndPoint = position;
                 line.Draw(g, pen);
             }

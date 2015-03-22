@@ -12,13 +12,14 @@ namespace Sketch_Application
         private Point start;
         private Point end;
 
-        public Line(Point start)
+        public Line(Point start, Color colour)
+            : base(colour)
         {
             this.start = start;
             this.end = start;
         }
 
-        public void Draw(Graphics g, Pen pen)
+        public override void Draw(Graphics g, Pen pen)
         {
             g.DrawLine(pen, start, end);
         }

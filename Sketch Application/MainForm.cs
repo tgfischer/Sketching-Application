@@ -13,12 +13,14 @@ namespace Sketch_Application
     public partial class MainForm : Form
     {
         private bool isMouseDown;
+        private bool isDrawing;
 
         public MainForm()
         {
             InitializeComponent();
 
             this.isMouseDown = false;
+            this.isDrawing = false;
         }
 
         private void colourToolStripMenuItem_Click(object sender, EventArgs e)
@@ -81,12 +83,18 @@ namespace Sketch_Application
         {
             this.mouseDownPanel.BackColor = Color.Tomato;
             this.isMouseDown = true;
-            this.canvas.AddNewShape(Cursor.Position);
+
+            if (this.canvas.Mode != Mode.Select)
+            {
+                this.isDrawing = true;
+                this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
+            }
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
             this.isMouseDown = false;
+            this.isDrawing = false;
             this.mouseDownPanel.BackColor = Color.White;
         }
 
@@ -98,9 +106,9 @@ namespace Sketch_Application
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMouseDown) 
+            if (isDrawing) 
             {
-                this.canvas.AddToCurrentShape(Cursor.Position);
+                this.canvas.AddToCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 this.mouseDownPanel.BackColor = Color.Thistle;
             }
         }

@@ -7,9 +7,16 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    interface Shape
+    public abstract class Shape
     {
-        void Draw(Graphics g, Pen pen);
+        public Color Colour;
+
+        public Shape(Color colour)
+        {
+            this.Colour = colour;
+        }
+
+        public abstract void Draw(Graphics g, Pen pen);
 
         //public void Add(Shape shape);
 
