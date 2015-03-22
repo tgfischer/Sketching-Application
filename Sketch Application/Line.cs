@@ -21,5 +21,19 @@ namespace Sketch_Application
         {
 
         }
+
+        // TODO: Validate start is on canvas in the set { }
+        public Point StartPoint
+        {
+            get { return start; }
+            set { this.start = value; }
+        }
+
+        // TODO: Validate end is on canvas in the set { }
+        public Point EndPoint
+        {
+            get { return end; }
+            set { this.end = value; }
+        }
     }
 }
