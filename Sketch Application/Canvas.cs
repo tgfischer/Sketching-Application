@@ -16,6 +16,7 @@ namespace Sketch_Application
         private List<Shape> shapes;
         private Shape selectedShape;
         private Shape clipBoard;
+        private bool clear = false;
         public Color Colour = Color.Black;
         public Mode Mode = Mode.Select;
 
@@ -32,6 +33,13 @@ namespace Sketch_Application
         protected override void OnPaint(PaintEventArgs p)
         {
             base.OnPaint(p);
+
+            if (this.clear)
+            {
+                this.clear = false;
+                p.Graphics.Clear(Color.White);
+                return;
+            }
 
             p.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -117,6 +125,13 @@ namespace Sketch_Application
         public void Paste()
         {
             this.shapes.Add(this.clipBoard);
+        }
+
+        public void ClearCanvas()
+        {
+            this.clear = true;
+            this.shapes.Clear();
+            this.Invalidate();
         }
     }
 }
