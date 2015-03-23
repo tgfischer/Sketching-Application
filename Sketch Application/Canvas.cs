@@ -154,23 +154,20 @@ namespace Sketch_Application
             this.Invalidate(); // Update the canvas
         }
 
-        public void AddLineToCurrentShape(Point position)
+        public bool AddLineToCurrentShape(Point position)
         {
             Shape shape = this.shapes.Last();
-
+            bool isDrawing = true;
+                
             if (shape is Polygon)
             {
                 Polygon polygon = (Polygon)shape;
                 
                 if (Math.Abs(polygon.getStartPoint().X - position.X) < 20 && Math.Abs(polygon.getStartPoint().Y - position.Y) < 20)
                 {
-                    Console.WriteLine("within range");
-                    Console.WriteLine(position);
-                    Console.WriteLine(polygon.getStartPoint());
                     polygon.getCurrentLine().EndPoint = polygon.getStartPoint(); //close polygon
                     polygon.EndPoint = polygon.getStartPoint();
-                    //polygon.EndPoint = polygon.getStartPoint();
-                    
+                    isDrawing = false;
                 }
                 else
                 {
@@ -180,8 +177,8 @@ namespace Sketch_Application
                 }
 
             }
-
-            this.Invalidate(); // Update the canvas
+            this.Invalidate(); //update the canvas
+            return isDrawing;
         }
 
         public void CloseCurrentShape(Point position)

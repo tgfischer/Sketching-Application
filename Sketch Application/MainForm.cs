@@ -82,17 +82,15 @@ namespace Sketch_Application
         {
             this.mouseDownPanel.BackColor = Color.Tomato;
 
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right) //right click
             {
                 this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 this.isDrawing = false;
                 this.mouseDownPanel.BackColor = Color.White;
-                Console.WriteLine("right click");
                 polygonFirst = true;
             }
             else
             {
-
                 if (this.canvas.Mode == Mode.Polygon && polygonFirst)
                 {
                     this.isDrawing = true;
@@ -102,13 +100,15 @@ namespace Sketch_Application
                 else if (this.canvas.Mode == Mode.Polygon)
                 {
                     this.isDrawing = true;
-                    this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                    this.isDrawing = this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                    if (!isDrawing)
+                        polygonFirst = true;
                 }
-                //else if (this.canvas.Mode != Mode.Select)
-                //{
+                else
+                {
                     this.isDrawing = true;
                     this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
-                //}
+                }
             }
         }
 
