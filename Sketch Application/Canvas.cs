@@ -35,7 +35,7 @@ namespace Sketch_Application
 
             p.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(this.Colour, 2F))
+            using (Pen pen = new Pen(this.Colour, 1F))
             {
                 foreach (Shape shape in this.shapes)
                 {
@@ -64,6 +64,8 @@ namespace Sketch_Application
                     break;
 
                 case Mode.Square:
+                    Square square = new Square(position, this.Colour);
+                    this.shapes.Add(square);
                     break;
 
                 case Mode.Ellipse:
@@ -96,6 +98,11 @@ namespace Sketch_Application
             {
                 Rectangle rectangle = (Rectangle)shape;
                 rectangle.EndPoint = position;
+            }
+            else if (shape is Square)
+            {
+                Square square = (Square)shape;
+                square.EndPoint = position;
             }
 
             this.Invalidate(); // Update the canvas

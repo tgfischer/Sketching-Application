@@ -9,8 +9,8 @@ namespace Sketch_Application
 {
     class Rectangle : Shape
     {
-        private Point start;
-        private Point end;
+        protected Point start;
+        protected Point end;
 
         public Rectangle(Point start, Color colour)
             : base(colour)
@@ -44,7 +44,7 @@ namespace Sketch_Application
             get { return Math.Abs(this.start.Y - this.end.Y); }
         }
 
-        public Point EndPoint
+        public virtual Point EndPoint
         {
             set { this.end = value; }
         }
