@@ -22,18 +22,6 @@ namespace Sketch_Application
         {
             if (this.Points.Count > 1)
             {
-                g.DrawLine(pen, this.Points.ElementAt(this.Points.Count - 2), this.Points.Last());
-            } 
-            else
-            {
-                g.DrawLine(pen, this.Points.Last(), this.Points.Last());
-            }
-        }
-
-        public override void Redraw(Graphics g, Pen pen)
-        {
-            if (this.Points.Count > 1)
-            {
                 for (var i = 1; i < this.Points.Count; i++)
                 {
                     g.DrawLine(pen, this.Points.ElementAt(i - 1), this.Points.ElementAt(i));

@@ -9,21 +9,22 @@ namespace Sketch_Application
 {
     public abstract class Shape
     {
-        public Color Colour;
+        protected Color colour;
 
         public Shape(Color colour)
         {
-            this.Colour = colour;
+            this.colour = colour;
+        }
+
+        public Color Colour
+        {
+            get { return this.colour; }
         }
 
         public abstract void Draw(Graphics g, Pen pen);
 
-        public abstract void Redraw(Graphics g, Pen pen);
-
-        //public void Add(Shape shape);
-
-        //public void Remove(Shape shape);
-
-        //public Shape GetChild(Shape shape);
+        // public void Add(Shape shape);
+        // public void Remove(Shape shape);
+        // public Shape GetChild(Shape shape);
     }
 }

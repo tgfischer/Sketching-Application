@@ -40,7 +40,7 @@ namespace Sketch_Application
                 foreach (Shape shape in this.shapes)
                 {
                     pen.Color = shape.Colour;
-                    shape.Redraw(p.Graphics, pen);
+                    shape.Draw(p.Graphics, pen);
                 }
             }
         }
@@ -51,23 +51,30 @@ namespace Sketch_Application
                 case Mode.FreeHand:
                     FreeLine freeLine = new FreeLine(position, this.Colour);
                     this.shapes.Add(freeLine);
-
                     break;
+
                 case Mode.Line:
                     Line line = new Line(position, this.Colour);
                     this.shapes.Add(line);
+                    break;
 
-                    break;
                 case Mode.Rectangle:
+                    Rectangle rectangle = new Rectangle(position, this.Colour);
+                    this.shapes.Add(rectangle);
                     break;
+
                 case Mode.Square:
                     break;
+
                 case Mode.Ellipse:
                     break;
+
                 case Mode.Circle:
                     break;
+
                 case Mode.Polygon:
                     break;
+
             }
         }
 
@@ -84,6 +91,11 @@ namespace Sketch_Application
             {
                 Line line = (Line)shape;
                 line.EndPoint = position;
+            }
+            else if (shape is Rectangle)
+            {
+                Rectangle rectangle = (Rectangle)shape;
+                rectangle.EndPoint = position;
             }
 
             this.Invalidate(); // Update the canvas

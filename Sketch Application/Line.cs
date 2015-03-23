@@ -21,25 +21,11 @@ namespace Sketch_Application
 
         public override void Draw(Graphics g, Pen pen)
         {
-            g.DrawLine(pen, start, end);
+            g.DrawLine(pen, this.start, this.end);
         }
 
-        public override void Redraw(Graphics g, Pen pen)
-        {
-            g.DrawLine(pen, start, end);
-        }
-
-        // TODO: Validate start is on canvas in the set { }
-        public Point StartPoint
-        {
-            get { return start; }
-            set { this.start = value; }
-        }
-
-        // TODO: Validate end is on canvas in the set { }
         public Point EndPoint
         {
-            get { return end; }
             set { this.end = value; }
         }
     }
