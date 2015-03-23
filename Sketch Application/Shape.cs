@@ -19,6 +19,7 @@ namespace Sketch_Application
         public Color Colour
         {
             get { return this.colour; }
+            set { this.colour = value; }
         }
 
         public abstract void Draw(Graphics g, Pen pen);

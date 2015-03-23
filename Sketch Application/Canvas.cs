@@ -14,7 +14,7 @@ namespace Sketch_Application
     public partial class Canvas : Panel
     {
         private List<Shape> shapes;
-        private Shape selectedShape;
+        private List<Shape> selectedShapes;
         private Shape clipBoard;
         private bool clear = false;
         public Color Colour = Color.Black;
@@ -59,7 +59,7 @@ namespace Sketch_Application
 
             switch (this.Mode) {
                 case Mode.Select:
-                    Select select = new Select(position, this.Colour);
+                    Select select = new Select(position);
                     this.shapes.Add(select);
                     break;
 
@@ -159,6 +159,15 @@ namespace Sketch_Application
             {
                 Select select = (Select)shape;
                 select.Points.Add(select.Points.First());
+
+                // Do logic for selection
+
+                this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
+
+                foreach (Shape selectedShape in this.selectedShapes)
+                {
+                    selectedShape.Colour = Color.Blue;
+                }
             }
 
             this.Invalidate(); // Update the canvas
@@ -166,8 +175,8 @@ namespace Sketch_Application
 
         public void Cut()
         {
-            this.clipBoard = selectedShape;
-            this.shapes.Remove(selectedShape);
+            //this.clipBoard = selectedShape;
+            //this.shapes.Remove(selectedShape);
         }
 
         public void Paste(Point startPoint)
