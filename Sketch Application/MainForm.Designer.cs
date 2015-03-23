@@ -129,15 +129,17 @@
             // 
             // selectButton
             // 
+            this.selectButton.BackColor = System.Drawing.Color.DimGray;
             this.selectButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.selectButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.selectButton.ForeColor = System.Drawing.Color.White;
             this.selectButton.Location = new System.Drawing.Point(3, 4);
             this.selectButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.selectButton.Name = "selectButton";
             this.selectButton.Size = new System.Drawing.Size(81, 57);
             this.selectButton.TabIndex = 0;
             this.selectButton.Text = "Select";
-            this.selectButton.UseVisualStyleBackColor = true;
+            this.selectButton.UseVisualStyleBackColor = false;
             this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
             // 
             // freeDrawButton
