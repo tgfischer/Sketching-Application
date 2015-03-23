@@ -45,12 +45,12 @@
             this.circleButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.mouseDownPanel = new System.Windows.Forms.Panel();
+            this.canvas = new Sketch_Application.Canvas();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.canvas = new Sketch_Application.Canvas();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.mouseDownPanel = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -80,14 +80,14 @@
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -253,6 +253,43 @@
             this.colourPanel.TabIndex = 8;
             this.colourPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.colourPanel_Click);
             // 
+            // canvas
+            // 
+            this.canvas.BackColor = System.Drawing.Color.White;
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvas.ContextMenuStrip = this.contextMenuStrip;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(90, 3);
+            this.canvas.Name = "canvas";
+            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
+            this.canvas.Size = new System.Drawing.Size(1176, 684);
+            this.canvas.TabIndex = 9;
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cutRightToolStripMenuItem,
+            this.pasteRightToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip1";
+            this.contextMenuStrip.Size = new System.Drawing.Size(103, 48);
+            // 
+            // cutRightToolStripMenuItem
+            // 
+            this.cutRightToolStripMenuItem.Name = "cutRightToolStripMenuItem";
+            this.cutRightToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.cutRightToolStripMenuItem.Text = "Cut";
+            this.cutRightToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
+            // 
+            // pasteRightToolStripMenuItem
+            // 
+            this.pasteRightToolStripMenuItem.Name = "pasteRightToolStripMenuItem";
+            this.pasteRightToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.pasteRightToolStripMenuItem.Text = "Paste";
+            this.pasteRightToolStripMenuItem.Click += new System.EventHandler(this.pasteRightToolStripMenuItem_Click);
+            // 
             // clearButton
             // 
             this.clearButton.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -274,43 +311,6 @@
             this.mouseDownPanel.Name = "mouseDownPanel";
             this.mouseDownPanel.Size = new System.Drawing.Size(81, 34);
             this.mouseDownPanel.TabIndex = 11;
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cutRightToolStripMenuItem,
-            this.pasteRightToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(103, 48);
-            // 
-            // cutRightToolStripMenuItem
-            // 
-            this.cutRightToolStripMenuItem.Name = "cutRightToolStripMenuItem";
-            this.cutRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cutRightToolStripMenuItem.Text = "Cut";
-            this.cutRightToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
-            // 
-            // pasteRightToolStripMenuItem
-            // 
-            this.pasteRightToolStripMenuItem.Name = "pasteRightToolStripMenuItem";
-            this.pasteRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pasteRightToolStripMenuItem.Text = "Paste";
-            this.pasteRightToolStripMenuItem.Click += new System.EventHandler(this.pasteRightToolStripMenuItem_Click);
-            // 
-            // canvas
-            // 
-            this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.canvas.ContextMenuStrip = this.contextMenuStrip;
-            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(90, 3);
-            this.canvas.Name = "canvas";
-            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
-            this.canvas.Size = new System.Drawing.Size(1176, 684);
-            this.canvas.TabIndex = 9;
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // MainForm
             // 

@@ -10,6 +10,7 @@ namespace Sketch_Application
     public abstract class Shape
     {
         protected Color colour;
+        public bool isSelected = false;
 
         public Shape(Color colour)
         {
@@ -18,7 +19,7 @@ namespace Sketch_Application
 
         public Color Colour
         {
-            get { return this.colour; }
+            get { return this.isSelected ? Color.Blue : this.colour; }
             set { this.colour = value; }
         }
 

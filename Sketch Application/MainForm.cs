@@ -88,7 +88,7 @@ namespace Sketch_Application
                 this.isDrawing = false;
                 polygonFirst = true;
             }
-            else
+            else // Left click
             {
                 if (this.canvas.Mode == Mode.Polygon && polygonFirst)
                 {
@@ -100,8 +100,11 @@ namespace Sketch_Application
                 {
                     this.isDrawing = true;
                     this.isDrawing = this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
+
                     if (!isDrawing)
+                    {
                         polygonFirst = true;
+                    }
                 }
                 else
                 {
@@ -122,7 +125,6 @@ namespace Sketch_Application
 
             if (this.canvas.Mode == Mode.Select)
             {
-                //this.canvas.CloseCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 this.canvas.SelectShapes();
             }
 

@@ -27,6 +27,7 @@ namespace Sketch_Application
 
             this.DoubleBuffered = true;
             this.shapes = new List<Shape>();
+            this.selectedShapes = new List<Shape>();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
@@ -55,8 +56,6 @@ namespace Sketch_Application
 
         public void AddNewShape(Point position)
         {
-            this.shapes.RemoveAll(x => x is Select);
-
             switch (this.Mode) {
                 case Mode.Select:
                     Select select = new Select(position);
@@ -189,39 +188,17 @@ namespace Sketch_Application
             {
                 Select select = (Select)shape;
 
-                // Do logic for selection
+                this.RemoveSelect();
 
                 this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
 
                 foreach (Shape selectedShape in this.selectedShapes)
                 {
-                    selectedShape.Colour = Color.Blue;
+                    selectedShape.isSelected = true;
                 }
             }
 
             this.Invalidate(); // Update the canvas
-        }
-
-        public void CloseCurrentShape(Point position)
-        {
-            /*Shape shape = this.shapes.Last();
-
-            if (shape is Select)
-            {
-                Select select = (Select)shape;
-                select.Points.Add(select.Points.First());
-
-                // Do logic for selection
-
-                //this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
-
-                foreach (Shape selectedShape in this.selectedShapes)
-                {
-                    selectedShape.Colour = Color.Blue;
-                }
-            }
-
-            this.Invalidate(); // Update the canvas*/
         }
 
         public void Cut()
@@ -240,6 +217,16 @@ namespace Sketch_Application
             this.clear = true;
             this.shapes.Clear();
             this.Invalidate();
+        }
+
+        public void RemoveSelect()
+        {
+            this.shapes.RemoveAll(x => x is Select);
+
+            foreach (Shape selectedShape in this.selectedShapes)
+            {
+                selectedShape.isSelected = false;
+            }
         }
     }
 }
