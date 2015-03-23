@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Rectangle : Shape
+    public class Rectangle : Shape
     {
         protected Point start;
         protected Point end;
@@ -22,6 +22,11 @@ namespace Sketch_Application
         public override void Draw(Graphics g, Pen pen)
         {
             g.DrawRectangle(pen, this.StartPointX, this.StartPointY, this.Width, this.Height);
+        }
+
+        public Point StartPoint
+        {
+            get { return new Point(this.StartPointX, this.StartPointY); }
         }
 
         public virtual int StartPointX

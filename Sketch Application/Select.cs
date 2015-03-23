@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Select : Rectangle
+    public class Select : Rectangle
     {
         //public List<Point> Points;                                  // A list that stores all of the points in the line
 
@@ -35,17 +35,17 @@ namespace Sketch_Application
 
         public bool Contains(Shape shape, int width)
         {
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(this.start.X, this.start.Y, this.Width, this.Height);
-
             if (shape is FreeLine)
             {
-                FreeLine freeLine = (FreeLine)shape;
-                return Geometry.FreeLineIntersectsRect(freeLine, rectangle);
+                return Geometry.FreeLineIntersectsSelect((FreeLine)shape, this);
             }
             else if (shape is Line)
             {
-                Line line = (Line)shape;
-                return Geometry.LineIntersectsRect(line.StartPoint, line.EndPoint, rectangle);
+                return Geometry.LineIntersectsSelect((Line)shape, this);
+            }
+            else if (shape is Rectangle)
+            {
+                return Geometry.RectangleIntersectsSelect((Rectangle)shape, this);
             }
 
             return false;
