@@ -95,6 +95,9 @@ namespace Sketch_Application
 
                 case Mode.Polygon:
                     Polygon polygon = new Polygon(position, this.Colour);
+                    Line line1 = new Line(position, this.Colour);
+                    polygon.addLine(line1);
+                    //polygon.addLine(position, this.Colour);
                     this.shapes.Add(polygon);
                     break;
 
@@ -145,10 +148,37 @@ namespace Sketch_Application
             else if (shape is Polygon)
             {
                 Polygon polygon = (Polygon)shape;
-                polygon.EndPoint = position;
+                polygon.getCurrentLine().EndPoint = position;
             }
 
             this.Invalidate(); // Update the canvas
+        }
+
+        public bool AddLineToCurrentShape(Point position)
+        {
+            Shape shape = this.shapes.Last();
+            bool isDrawing = true;
+                
+            if (shape is Polygon)
+            {
+                Polygon polygon = (Polygon)shape;
+                
+                if (Math.Abs(polygon.getStartPoint().X - position.X) < 20 && Math.Abs(polygon.getStartPoint().Y - position.Y) < 20)
+                {
+                    polygon.getCurrentLine().EndPoint = polygon.getStartPoint(); //close polygon
+                    polygon.EndPoint = polygon.getStartPoint();
+                    isDrawing = false;
+                }
+                else
+                {
+                    polygon.getCurrentLine().EndPoint = position;
+                    Line line = new Line(position, this.Colour);
+                    polygon.addLine(line);
+                }
+
+            }
+            this.Invalidate(); //update the canvas
+            return isDrawing;
         }
 
         public void CloseCurrentShape(Point position)

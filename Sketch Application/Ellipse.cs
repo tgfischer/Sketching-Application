@@ -24,12 +24,12 @@ namespace Sketch_Application
             g.DrawEllipse(pen, this.StartPointX, this.StartPointY, this.Width, this.Height);
         }
 
-        public int StartPointX
+        public virtual int StartPointX
         {
             get { return Math.Min(this.start.X, this.end.X); }
         }
 
-        public int StartPointY
+        public virtual int StartPointY
         {
             get { return Math.Min(this.start.Y, this.end.Y); }
         }

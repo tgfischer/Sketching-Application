@@ -13,6 +13,7 @@ namespace Sketch_Application
     public partial class MainForm : Form
     {
         private bool isDrawing = false;
+        private bool polygonFirst = true;
 
         public MainForm()
         {
@@ -80,14 +81,44 @@ namespace Sketch_Application
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
             this.mouseDownPanel.BackColor = Color.Tomato;
-            this.isDrawing = true;
-            this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
+
+            if (e.Button == MouseButtons.Right) //right click
+            {
+                this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                this.isDrawing = false;
+                this.mouseDownPanel.BackColor = Color.White;
+                polygonFirst = true;
+            }
+            else
+            {
+                if (this.canvas.Mode == Mode.Polygon && polygonFirst)
+                {
+                    this.isDrawing = true;
+                    this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
+                    polygonFirst = false;
+                }
+                else if (this.canvas.Mode == Mode.Polygon)
+                {
+                    this.isDrawing = true;
+                    this.isDrawing = this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                    if (!isDrawing)
+                        polygonFirst = true;
+                }
+                else
+                {
+                    this.isDrawing = true;
+                    this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
+                }
+            }
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
-            this.isDrawing = false;
-            this.mouseDownPanel.BackColor = Color.White;
+            if (this.canvas.Mode != Mode.Polygon)
+            {
+                this.isDrawing = false;
+                this.mouseDownPanel.BackColor = Color.White;
+            }
 
             if (this.canvas.Mode == Mode.Select)
             {
