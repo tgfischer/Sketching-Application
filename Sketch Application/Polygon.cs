@@ -11,22 +11,46 @@ namespace Sketch_Application
     {
         private Point start;
         private Point end;
-
+        private Line currentLine;
+        private List<Line> lines;
+        
         public Polygon(Point start, Color colour)
             : base(colour)
         {
+            this.lines = new List<Line>();
             this.start = start;
             this.end = start;
         }
 
         public override void Draw(Graphics g, Pen pen)
         {
-            g.DrawLine(pen, this.start, this.end);
+            foreach(Line line in lines){
+                line.Draw(g, pen);
+            }
+            //g.DrawLine(pen, this.start, this.end);
+        }
+
+        public void addLine(Line line)
+        {
+            currentLine = line;
+            lines.Add(currentLine);
+        }
+       
+        public Line getCurrentLine()
+        {
+            return currentLine;
+        }
+
+        public Point getStartPoint()
+        {
+            return start;
         }
 
         public virtual Point EndPoint
         {
             set { this.end = value; }
+           
         }
+
     }
 }

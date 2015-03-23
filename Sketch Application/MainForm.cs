@@ -13,6 +13,7 @@ namespace Sketch_Application
     public partial class MainForm : Form
     {
         private bool isDrawing = false;
+        private bool polygonFirst = true;
 
         public MainForm()
         {
@@ -81,17 +82,47 @@ namespace Sketch_Application
         {
             this.mouseDownPanel.BackColor = Color.Tomato;
 
-            if (this.canvas.Mode != Mode.Select)
+            if (e.Button == MouseButtons.Right)
             {
-                this.isDrawing = true;
-                this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
+                this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                this.isDrawing = false;
+                this.mouseDownPanel.BackColor = Color.White;
+                Console.WriteLine("right click");
+                polygonFirst = true;
             }
+            else
+            {
+
+                if (this.canvas.Mode == Mode.Polygon && polygonFirst)
+                {
+                    this.isDrawing = true;
+                    this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
+                    polygonFirst = false;
+                }
+                else if (this.canvas.Mode == Mode.Polygon)
+                {
+                    this.isDrawing = true;
+                    this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                }
+                else if (this.canvas.Mode != Mode.Select)
+                {
+                    this.isDrawing = true;
+                    this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
+                }
+            }
+
+
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
-            this.isDrawing = false;
-            this.mouseDownPanel.BackColor = Color.White;
+
+            if (this.canvas.Mode != Mode.Polygon)
+            {
+                this.isDrawing = false;
+                this.mouseDownPanel.BackColor = Color.White;
+            }
+
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)

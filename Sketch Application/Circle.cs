@@ -7,33 +7,47 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Circle : Shape
+    class Circle : Ellipse
     {
-        protected Point start;
-        protected Point end;
-
+        private int width = 0;
+        private int height = 0;
+        
         public Circle(Point start, Color colour)
-            : base(colour)
-        {
-            this.start = start;
-            this.end = start;
-        }
+            : base(start, colour) {}
 
         public override void Draw(Graphics g, Pen pen)
         {
             g.DrawEllipse(pen, this.StartPointX, this.StartPointY, this.Diameter, this.Diameter);
         }
 
-        public int StartPointX
+        public override int StartPointX
         {
-            //get { return Math.Min(this.start.X, this.end.X); }
-            get { return this.start.X; }
+            get
+            {
+                if (this.start.X > this.end.X)
+                {
+                    return Math.Min(this.start.X, this.start.X - width);
+                }
+                else
+                {
+                    return Math.Min(this.start.X, this.start.X + width);
+                }
+            }
         }
 
-        public int StartPointY
+        public override int StartPointY
         {
-            //get { return Math.Min(this.start.Y, this.end.Y); }
-            get { return this.start.Y; }
+            get
+            {
+                if (this.start.Y > this.end.Y)
+                {
+                    return Math.Min(this.start.Y, this.start.Y - width);
+                }
+                else
+                {
+                    return Math.Min(this.start.Y, this.start.Y + width);
+                }
+            }
         }
 
         public int Diameter
@@ -50,9 +64,18 @@ namespace Sketch_Application
         }
 
         // TODO: Validate end is on canvas in the set { }
-        public virtual Point EndPoint
+        public override Point EndPoint
         {
-            set { this.end = value; }
+            set
+            {
+                this.end = value;
+
+                int width = Math.Abs(this.start.X - this.end.X);
+                int height = Math.Abs(this.start.Y - this.end.Y);
+
+                this.width = width < height ? width : height;
+                this.height = height < width ? height : width;
+            }
         }
     }
 }
