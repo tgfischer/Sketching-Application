@@ -21,7 +21,7 @@ namespace Sketch_Application
 
         public override void Draw(Graphics g, Pen pen)
         {
-            g.DrawRectangle(pen, this.StartPointX, this.StartPointY, Math.Abs(this.start.X - this.end.X), Math.Abs(this.start.Y - this.end.Y));
+            g.DrawRectangle(pen, this.StartPointX, this.StartPointY, this.Width, this.Height);
         }
 
         public virtual int StartPointX
@@ -32,6 +32,16 @@ namespace Sketch_Application
         public virtual int StartPointY
         {
             get { return Math.Min(this.start.Y, this.end.Y); }
+        }
+
+        public int Width
+        {
+            get { return Math.Abs(this.start.X - this.end.X); }
+        }
+
+        public int Height
+        {
+            get { return Math.Abs(this.start.Y - this.end.Y); }
         }
 
         public virtual Point EndPoint

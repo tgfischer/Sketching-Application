@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.components = new System.ComponentModel.Container();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,22 +47,26 @@
             this.colourPanel = new System.Windows.Forms.Panel();
             this.clearButton = new System.Windows.Forms.Button();
             this.mouseDownPanel = new System.Windows.Forms.Panel();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cutRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.canvas = new Sketch_Application.Canvas();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
             this.colourToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1269, 25);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
+            this.menuStrip.Size = new System.Drawing.Size(1269, 25);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip";
             // 
             // editToolStripMenuItem
             // 
@@ -75,14 +80,16 @@
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cutToolStripMenuItem.Text = "Cut";
+            this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // colourToolStripMenuItem
             // 
@@ -129,15 +136,17 @@
             // 
             // selectButton
             // 
+            this.selectButton.BackColor = System.Drawing.Color.DimGray;
             this.selectButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.selectButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.selectButton.ForeColor = System.Drawing.Color.White;
             this.selectButton.Location = new System.Drawing.Point(3, 4);
             this.selectButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.selectButton.Name = "selectButton";
             this.selectButton.Size = new System.Drawing.Size(81, 57);
             this.selectButton.TabIndex = 0;
             this.selectButton.Text = "Select";
-            this.selectButton.UseVisualStyleBackColor = true;
+            this.selectButton.UseVisualStyleBackColor = false;
             this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
             // 
             // freeDrawButton
@@ -266,10 +275,33 @@
             this.mouseDownPanel.Size = new System.Drawing.Size(81, 34);
             this.mouseDownPanel.TabIndex = 11;
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cutRightToolStripMenuItem,
+            this.pasteRightToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip1";
+            this.contextMenuStrip.Size = new System.Drawing.Size(103, 48);
+            // 
+            // cutRightToolStripMenuItem
+            // 
+            this.cutRightToolStripMenuItem.Name = "cutRightToolStripMenuItem";
+            this.cutRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutRightToolStripMenuItem.Text = "Cut";
+            this.cutRightToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
+            // 
+            // pasteRightToolStripMenuItem
+            // 
+            this.pasteRightToolStripMenuItem.Name = "pasteRightToolStripMenuItem";
+            this.pasteRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteRightToolStripMenuItem.Text = "Paste";
+            this.pasteRightToolStripMenuItem.Click += new System.EventHandler(this.pasteRightToolStripMenuItem_Click);
+            // 
             // canvas
             // 
             this.canvas.BackColor = System.Drawing.Color.White;
             this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvas.ContextMenuStrip = this.contextMenuStrip;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(90, 3);
             this.canvas.Name = "canvas";
@@ -286,17 +318,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1269, 715);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SE3353B Sketch Application";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,7 +337,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
@@ -323,6 +356,9 @@
         private Canvas canvas;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Panel mouseDownPanel;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem cutRightToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteRightToolStripMenuItem;
 
     }
 }
