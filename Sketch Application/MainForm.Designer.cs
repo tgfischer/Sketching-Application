@@ -44,9 +44,9 @@
             this.circleButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
-            this.canvas = new Sketch_Application.Canvas();
             this.clearButton = new System.Windows.Forms.Button();
             this.mouseDownPanel = new System.Windows.Forms.Panel();
+            this.canvas = new Sketch_Application.Canvas();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -130,6 +130,7 @@
             // selectButton
             // 
             this.selectButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.selectButton.Location = new System.Drawing.Point(3, 4);
             this.selectButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.selectButton.Name = "selectButton";
@@ -142,6 +143,8 @@
             // freeDrawButton
             // 
             this.freeDrawButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.freeDrawButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.freeDrawButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.freeDrawButton.Location = new System.Drawing.Point(3, 69);
             this.freeDrawButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.freeDrawButton.Name = "freeDrawButton";
@@ -154,6 +157,7 @@
             // lineButton
             // 
             this.lineButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lineButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.lineButton.Location = new System.Drawing.Point(3, 134);
             this.lineButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lineButton.Name = "lineButton";
@@ -166,6 +170,7 @@
             // rectangleButton
             // 
             this.rectangleButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rectangleButton.Location = new System.Drawing.Point(3, 199);
             this.rectangleButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rectangleButton.Name = "rectangleButton";
@@ -178,6 +183,7 @@
             // squareButton
             // 
             this.squareButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.squareButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.squareButton.Location = new System.Drawing.Point(3, 264);
             this.squareButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.squareButton.Name = "squareButton";
@@ -190,6 +196,7 @@
             // ellipseButton
             // 
             this.ellipseButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ellipseButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ellipseButton.Location = new System.Drawing.Point(3, 329);
             this.ellipseButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ellipseButton.Name = "ellipseButton";
@@ -202,6 +209,7 @@
             // circleButton
             // 
             this.circleButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.circleButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.circleButton.Location = new System.Drawing.Point(3, 394);
             this.circleButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.circleButton.Name = "circleButton";
@@ -214,6 +222,7 @@
             // polygonButton
             // 
             this.polygonButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.polygonButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.polygonButton.Location = new System.Drawing.Point(3, 458);
             this.polygonButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.polygonButton.Name = "polygonButton";
@@ -235,24 +244,10 @@
             this.colourPanel.TabIndex = 8;
             this.colourPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.colourPanel_Click);
             // 
-            // canvas
-            // 
-            this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(90, 3);
-            this.canvas.Name = "canvas";
-            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
-            this.canvas.Size = new System.Drawing.Size(1176, 684);
-            this.canvas.TabIndex = 9;
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
-            // 
             // clearButton
             // 
             this.clearButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.clearButton.Location = new System.Drawing.Point(3, 628);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(81, 59);
@@ -270,6 +265,20 @@
             this.mouseDownPanel.Name = "mouseDownPanel";
             this.mouseDownPanel.Size = new System.Drawing.Size(81, 34);
             this.mouseDownPanel.TabIndex = 11;
+            // 
+            // canvas
+            // 
+            this.canvas.BackColor = System.Drawing.Color.White;
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(90, 3);
+            this.canvas.Name = "canvas";
+            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
+            this.canvas.Size = new System.Drawing.Size(1176, 684);
+            this.canvas.TabIndex = 9;
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // MainForm
             // 

@@ -20,6 +20,36 @@ namespace Sketch_Application
             g.DrawRectangle(pen, this.StartPointX, this.StartPointY, this.width, this.height);
         }
 
+        public override int StartPointX
+        {
+            get 
+            { 
+                if (this.start.X > this.end.X)
+                {
+                    return Math.Min(this.start.X, this.start.X - width); 
+                }
+                else
+                {
+                    return Math.Min(this.start.X, this.start.X + width); 
+                }
+            }
+        }
+
+        public override int StartPointY
+        {
+            get 
+            {
+                if (this.start.Y > this.end.Y)
+                {
+                    return Math.Min(this.start.Y, this.start.Y - width);
+                }
+                else
+                {
+                    return Math.Min(this.start.Y, this.start.Y + width);
+                } 
+            }
+        }
+
         public override Point EndPoint
         {
             set 
@@ -29,8 +59,8 @@ namespace Sketch_Application
                 int width = Math.Abs(this.start.X - this.end.X);
                 int height = Math.Abs(this.start.Y - this.end.Y);
 
-                this.width = width > height ? width : height;
-                this.height = height > width ? height : width;
+                this.width = width < height ? width : height;
+                this.height = height < width ? height : width;
             }
         }
     }

@@ -27,41 +27,49 @@ namespace Sketch_Application
         private void selectButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Select;
+            this.SetCurrentButton(this, (Button)sender);
         }
 
         private void freeDrawButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.FreeHand;
+            this.SetCurrentButton(this, (Button)sender);
         }
 
         private void lineButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Line;
+            this.SetCurrentButton(this, (Button)sender);
         }
 
         private void rectangleButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Rectangle;
+            this.SetCurrentButton(this, (Button)sender);
         }
 
         private void squareButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Square;
+            this.SetCurrentButton(this, (Button)sender);
         }
 
         private void ellipseButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Ellipse;
+            this.SetCurrentButton(this, (Button)sender);
         }
 
         private void circleButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Circle;
+            this.SetCurrentButton(this, (Button)sender);
         }
 
         private void polygonButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Polygon;
+            this.SetCurrentButton(this, (Button)sender);
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -86,17 +94,12 @@ namespace Sketch_Application
             this.mouseDownPanel.BackColor = Color.White;
         }
 
-        private void canvas_MouseLeave(object sender, EventArgs e)
-        {
-            //this.canvas.ClearCanvas();
-        }
-
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (isDrawing) 
             {
                 this.canvas.AddToCurrentShape(this.canvas.PointToClient(Cursor.Position));
-                this.mouseDownPanel.BackColor = Color.Thistle;
+                this.mouseDownPanel.BackColor = Color.CornflowerBlue;
             }
         }
 
@@ -108,6 +111,30 @@ namespace Sketch_Application
             {
                 this.canvas.Colour = this.colorDialog.Color;
                 this.colourPanel.BackColor = this.canvas.Colour;
+            }
+        }
+
+        private void SetCurrentButton(Control parent, Button button)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (control.HasChildren)
+                {
+                    SetCurrentButton(control, button);
+                }
+                else if (control is Button)
+                {
+                    if (control == button)
+                    {
+                        control.BackColor = Color.DimGray;
+                        control.ForeColor = Color.White;
+                    }
+                    else
+                    {
+                        control.BackColor = default(Color);
+                        control.ForeColor = default(Color);
+                    }
+                }
             }
         }
     }
