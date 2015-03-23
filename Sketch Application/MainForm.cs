@@ -86,7 +86,6 @@ namespace Sketch_Application
             {
                 this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 this.isDrawing = false;
-                this.mouseDownPanel.BackColor = Color.White;
                 polygonFirst = true;
             }
             else
@@ -110,6 +109,8 @@ namespace Sketch_Application
                     this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
                 }
             }
+
+            this.mouseDownPanel.BackColor = Color.White;
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
@@ -117,13 +118,14 @@ namespace Sketch_Application
             if (this.canvas.Mode != Mode.Polygon)
             {
                 this.isDrawing = false;
-                this.mouseDownPanel.BackColor = Color.White;
             }
 
             if (this.canvas.Mode == Mode.Select)
             {
                 this.canvas.CloseCurrentShape(this.canvas.PointToClient(Cursor.Position));
             }
+
+            this.mouseDownPanel.BackColor = Color.White;
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
