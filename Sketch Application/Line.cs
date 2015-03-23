@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Line : Shape
+    public class Line : Shape
     {
         private Point start;
         private Point end;

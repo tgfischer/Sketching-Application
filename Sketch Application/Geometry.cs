@@ -9,25 +9,17 @@ namespace Sketch_Application
 {
     public static class Geometry
     {
-        public static bool FindLineIntersection(Point start1, Point end1, Point start2, Point end2)
+        public static bool FreeLineIntersectsRect(FreeLine freeLine, System.Drawing.Rectangle rectangle)
         {
-            float denom = ((end1.X - start1.X) * (end2.Y - start2.Y)) - ((end1.Y - start1.Y) * (end2.X - start2.X));
+            for (int i = 1; i < freeLine.Points.Count; i++)
+            {
+                if (LineIntersectsRect(freeLine.Points.ElementAt(i - 1), freeLine.Points.ElementAt(i), rectangle))
+                {
+                    return true;
+                }
+            }
 
-            if (denom == 0)
-                return false;
-
-            float numer = ((start1.Y - start2.Y) * (end2.X - start2.X)) - ((start1.X - start2.X) * (end2.Y - start2.Y));
-
-            float r = numer / denom;
-
-            float numer2 = ((start1.Y - start2.Y) * (end1.X - start1.X)) - ((start1.X - start2.X) * (end1.Y - start1.Y));
-
-            float s = numer2 / denom;
-
-            if ((r < 0 || r > 1) || (s < 0 || s > 1))
-                return false;
-
-            return true;
+            return false;
         }
 
         public static bool LineIntersectsRect(Point p1, Point p2, System.Drawing.Rectangle r)
@@ -61,5 +53,7 @@ namespace Sketch_Application
 
             return true;
         }
+
+
     }
 }

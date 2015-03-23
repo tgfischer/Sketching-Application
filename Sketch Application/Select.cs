@@ -35,10 +35,17 @@ namespace Sketch_Application
 
         public bool Contains(Shape shape, int width)
         {
-            if (shape is Line)
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(this.start.X, this.start.Y, this.Width, this.Height);
+
+            if (shape is FreeLine)
+            {
+                FreeLine freeLine = (FreeLine)shape;
+                return Geometry.FreeLineIntersectsRect(freeLine, rectangle);
+            }
+            else if (shape is Line)
             {
                 Line line = (Line)shape;
-                return Geometry.LineIntersectsRect(line.StartPoint, line.EndPoint, new System.Drawing.Rectangle(this.start.X, this.start.Y, this.Width, this.Height));
+                return Geometry.LineIntersectsRect(line.StartPoint, line.EndPoint, rectangle);
             }
 
             return false;
