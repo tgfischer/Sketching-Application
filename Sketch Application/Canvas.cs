@@ -77,9 +77,13 @@ namespace Sketch_Application
                     break;
 
                 case Mode.Ellipse:
+                    Ellipse ellipse = new Ellipse(position, this.Colour);
+                    this.shapes.Add(ellipse);
                     break;
 
                 case Mode.Circle:
+                    Circle circle = new Circle(position, this.Colour);
+                    this.shapes.Add(circle);
                     break;
 
                 case Mode.Polygon:
@@ -91,13 +95,13 @@ namespace Sketch_Application
         public void AddToCurrentShape(Point position)
         {
             Shape shape = this.shapes.Last();
-            
+
             if (shape is FreeLine)
             {
                 FreeLine freeLine = (FreeLine)shape;
                 freeLine.Points.Add(position);
             }
-            else if (shape is Line) 
+            else if (shape is Line)
             {
                 Line line = (Line)shape;
                 line.EndPoint = position;
@@ -111,6 +115,16 @@ namespace Sketch_Application
             {
                 Square square = (Square)shape;
                 square.EndPoint = position;
+            }
+            else if (shape is Ellipse)
+            {
+                Ellipse ellipse = (Ellipse)shape;
+                ellipse.EndPoint = position;
+            }
+            else if (shape is Circle)
+            {
+                Circle circle = (Circle)shape;
+                circle.EndPoint = position;
             }
 
             this.Invalidate(); // Update the canvas
