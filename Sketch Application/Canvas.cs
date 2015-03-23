@@ -92,6 +92,8 @@ namespace Sketch_Application
                     break;
 
             }
+
+            this.Invalidate(); // Update the canvas
         }
 
         public void AddToCurrentShape(Point position)
