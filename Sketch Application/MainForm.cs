@@ -80,18 +80,19 @@ namespace Sketch_Application
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
             this.mouseDownPanel.BackColor = Color.Tomato;
-
-            if (this.canvas.Mode != Mode.Select)
-            {
-                this.isDrawing = true;
-                this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
-            }
+            this.isDrawing = true;
+            this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
             this.isDrawing = false;
             this.mouseDownPanel.BackColor = Color.White;
+
+            if (this.canvas.Mode == Mode.Select)
+            {
+                this.canvas.CloseCurrentShape(this.canvas.PointToClient(Cursor.Position));
+            }
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
@@ -136,6 +137,21 @@ namespace Sketch_Application
                     }
                 }
             }
+        }
+
+        private void pasteRightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.canvas.Paste(this.canvas.PointToClient(Cursor.Position));
+        }
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.canvas.Cut();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.canvas.Paste(new Point(0, 0));
         }
     }
 }

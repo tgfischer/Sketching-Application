@@ -55,7 +55,14 @@ namespace Sketch_Application
 
         public void AddNewShape(Point position)
         {
+            this.shapes.RemoveAll(x => x is Select);
+
             switch (this.Mode) {
+                case Mode.Select:
+                    Select select = new Select(position, this.Colour);
+                    this.shapes.Add(select);
+                    break;
+
                 case Mode.FreeHand:
                     FreeLine freeLine = new FreeLine(position, this.Colour);
                     this.shapes.Add(freeLine);
@@ -100,7 +107,12 @@ namespace Sketch_Application
         {
             Shape shape = this.shapes.Last();
 
-            if (shape is FreeLine)
+            if (shape is Select)
+            {
+                Select select = (Select)shape;
+                select.Points.Add(position);
+            }
+            else if (shape is FreeLine)
             {
                 FreeLine freeLine = (FreeLine)shape;
                 freeLine.Points.Add(position);
@@ -139,13 +151,26 @@ namespace Sketch_Application
             this.Invalidate(); // Update the canvas
         }
 
+        public void CloseCurrentShape(Point position)
+        {
+            Shape shape = this.shapes.Last();
+
+            if (shape is Select)
+            {
+                Select select = (Select)shape;
+                select.Points.Add(select.Points.First());
+            }
+
+            this.Invalidate(); // Update the canvas
+        }
+
         public void Cut()
         {
             this.clipBoard = selectedShape;
             this.shapes.Remove(selectedShape);
         }
 
-        public void Paste()
+        public void Paste(Point startPoint)
         {
             this.shapes.Add(this.clipBoard);
         }
