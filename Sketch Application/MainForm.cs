@@ -122,7 +122,8 @@ namespace Sketch_Application
 
             if (this.canvas.Mode == Mode.Select)
             {
-                this.canvas.CloseCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                //this.canvas.CloseCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                this.canvas.SelectShapes();
             }
 
             this.mouseDownPanel.BackColor = Color.White;

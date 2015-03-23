@@ -7,18 +7,44 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Select : Shape
+    class Select : Rectangle
     {
-        public List<Point> Points;                                  // A list that stores all of the points in the line
+        //public List<Point> Points;                                  // A list that stores all of the points in the line
 
         public Select(Point start)
-            : base(Color.Red)
+            : base(start, Color.Red)
         {
-            this.Points = new List<Point>();                        // Create a new list of points
-            this.Points.Add(start);                                 // Add the first point to the list
+            //this.Points = new List<Point>();                        // Create a new list of points
+            //this.Points.Add(start);                                 // Add the first point to the list
         }
 
-        public override void Draw(Graphics g, Pen pen)
+        public List<Shape> FindContainedShapes(List<Shape> shapes, int width)
+        {
+            List<Shape> containedShapes = new List<Shape>();
+
+            foreach (Shape shape in shapes)
+            {
+                if (this.Contains(shape, width))
+                {
+                    containedShapes.Add(shape);
+                }
+            }
+
+            return containedShapes;
+        }
+
+        public bool Contains(Shape shape, int width)
+        {
+            if (shape is Line)
+            {
+                Line line = (Line)shape;
+                return Geometry.LineIntersectsRect(line.StartPoint, line.EndPoint, new System.Drawing.Rectangle(this.start.X, this.start.Y, this.Width, this.Height));
+            }
+
+            return false;
+        }
+
+        /*public override void Draw(Graphics g, Pen pen)
         {
             if (this.Points.Count > 3)                              // Make sure there is more than 1 point in the list
             {
@@ -58,6 +84,13 @@ namespace Sketch_Application
                         Point a2 = new Point(width, a1.Y);
                         Point b1 = this.Points.ElementAt(i - 1);
                         Point b2 = this.Points.ElementAt(i);
+
+                        bool intersects = Geometry.FindLineIntersection(a1, a2, b1, b2);
+
+                        if (intersects)
+                        {
+                            counter++;
+                        }
 
                         int o1 = this.Orientation(a1, b1, a2);
                         int o2 = this.Orientation(a1, b1, b2);
@@ -120,6 +153,6 @@ namespace Sketch_Application
             }
 
             return false;
-        }
+        }*/
     }
 }

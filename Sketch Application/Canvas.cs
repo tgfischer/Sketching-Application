@@ -113,7 +113,7 @@ namespace Sketch_Application
             if (shape is Select)
             {
                 Select select = (Select)shape;
-                select.Points.Add(position);
+                select.EndPoint = position;
             }
             else if (shape is FreeLine)
             {
@@ -181,14 +181,13 @@ namespace Sketch_Application
             return isDrawing;
         }
 
-        public void CloseCurrentShape(Point position)
+        public void SelectShapes()
         {
             Shape shape = this.shapes.Last();
 
             if (shape is Select)
             {
                 Select select = (Select)shape;
-                select.Points.Add(select.Points.First());
 
                 // Do logic for selection
 
@@ -201,6 +200,28 @@ namespace Sketch_Application
             }
 
             this.Invalidate(); // Update the canvas
+        }
+
+        public void CloseCurrentShape(Point position)
+        {
+            /*Shape shape = this.shapes.Last();
+
+            if (shape is Select)
+            {
+                Select select = (Select)shape;
+                select.Points.Add(select.Points.First());
+
+                // Do logic for selection
+
+                //this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
+
+                foreach (Shape selectedShape in this.selectedShapes)
+                {
+                    selectedShape.Colour = Color.Blue;
+                }
+            }
+
+            this.Invalidate(); // Update the canvas*/
         }
 
         public void Cut()

@@ -24,8 +24,15 @@ namespace Sketch_Application
             g.DrawLine(pen, this.start, this.end);
         }
 
+        public Point StartPoint
+        {
+            get { return this.start; }
+            set { this.start = value; }
+        }
+
         public Point EndPoint
         {
+            get { return this.end; }
             set { this.end = value; }
         }
     }
