@@ -87,6 +87,8 @@ namespace Sketch_Application
                     break;
 
                 case Mode.Polygon:
+                    Polygon polygon = new Polygon(position, this.Colour);
+                    this.shapes.Add(polygon);
                     break;
 
             }
@@ -125,6 +127,11 @@ namespace Sketch_Application
             {
                 Circle circle = (Circle)shape;
                 circle.EndPoint = position;
+            }
+            else if (shape is Polygon)
+            {
+                Polygon polygon = (Polygon)shape;
+                polygon.EndPoint = position;
             }
 
             this.Invalidate(); // Update the canvas

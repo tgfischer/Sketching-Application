@@ -26,12 +26,14 @@ namespace Sketch_Application
 
         public int StartPointX
         {
-            get { return Math.Min(this.start.X, this.end.X); }
+            //get { return Math.Min(this.start.X, this.end.X); }
+            get { return this.start.X; }
         }
 
         public int StartPointY
         {
-            get { return Math.Min(this.start.Y, this.end.Y); }
+            //get { return Math.Min(this.start.Y, this.end.Y); }
+            get { return this.start.Y; }
         }
 
         public int Diameter
