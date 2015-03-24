@@ -225,17 +225,32 @@ namespace Sketch_Application
                 else if (s is Line)
                 {
                     Line line = (Line)s;
-                    //line.EndPoint = position;
+                    Line newLine = new Line(startPoint, Color.Black);
+                    int xD = startPoint.X - line.StartPoint.X + line.EndPoint.X;
+                    int yD = startPoint.Y - line.StartPoint.Y + line.EndPoint.Y;
+                    Point newEndPoint = new Point(xD, yD);
+                    newLine.EndPoint = newEndPoint;
+                    this.shapes.Add(newLine);
                 }
                 else if (s is Rectangle)
                 {
                     Rectangle rectangle = (Rectangle)s;
-                    //rectangle.EndPoint = position;
+                    Rectangle newRectangle = new Rectangle(startPoint, Color.Black);
+                    int xD = startPoint.X + rectangle.Width;
+                    int yD = startPoint.Y + rectangle.Height;
+                    Point newEndPoint = new Point(xD, yD);
+                    newRectangle.EndPoint = newEndPoint;
+                    this.shapes.Add(newRectangle);
                 }
                 else if (s is Square)
                 {
                     Square square = (Square)s;
-                    //square.EndPoint = position;
+                    Square newSquare = new Square(startPoint, Color.Black);
+                    int xD = startPoint.X + square.Height;
+                    int yD = startPoint.Y + square.Height;
+                    Point newEndPoint = new Point(xD, yD);
+                    newSquare.EndPoint = newEndPoint;
+                    this.shapes.Add(newSquare);
                 }
                 else if (s is Ellipse)
                 {
