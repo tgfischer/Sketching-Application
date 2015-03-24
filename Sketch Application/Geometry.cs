@@ -82,7 +82,5 @@ namespace Sketch_Application
 
             return true;
         }
-
-
     }
 }

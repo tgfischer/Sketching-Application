@@ -44,11 +44,10 @@ namespace Sketch_Application
 
             p.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(this.Colour, 1F))
+            foreach (Shape shape in this.shapes)
             {
-                foreach (Shape shape in this.shapes)
+                using (Pen pen = new Pen(shape.Colour, shape.Thickness))
                 {
-                    pen.Color = shape.Colour;
                     shape.Draw(p.Graphics, pen);
                 }
             }
@@ -191,11 +190,6 @@ namespace Sketch_Application
                 this.RemoveSelect();
 
                 this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
-
-                foreach (Shape selectedShape in this.selectedShapes)
-                {
-                    selectedShape.isSelected = true;
-                }
             }
 
             this.Invalidate(); // Update the canvas
@@ -226,6 +220,7 @@ namespace Sketch_Application
             foreach (Shape selectedShape in this.selectedShapes)
             {
                 selectedShape.isSelected = false;
+                selectedShape.Thickness = 1F;
             }
         }
     }

@@ -11,6 +11,7 @@ namespace Sketch_Application
     {
         protected Color colour;
         public bool isSelected = false;
+        public float Thickness = 1F;
 
         public Shape(Color colour)
         {
@@ -24,9 +25,5 @@ namespace Sketch_Application
         }
 
         public abstract void Draw(Graphics g, Pen pen);
-
-        // public void Add(Shape shape);
-        // public void Remove(Shape shape);
-        // public Shape GetChild(Shape shape);
     }
 }
