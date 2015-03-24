@@ -88,6 +88,9 @@ namespace Sketch_Application
 
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
+            //Console.WriteLine(this.canvas.Bounds);
+            //Console.WriteLine(this.canvas.PointToScreen(Cursor.Position));
+
             if (e.Button == MouseButtons.Right) //right click
             {
                 this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
@@ -139,6 +142,12 @@ namespace Sketch_Application
             {
                 this.canvas.AddToCurrentShape(this.canvas.PointToClient(Cursor.Position));
             }
+        }
+
+        private void canvas_MouseLeave(object sender, EventArgs e)
+        {
+            this.isDrawing = false;
+            polygonFirst = true;
         }
 
         private void colourPanel_Click(object sender, MouseEventArgs e)

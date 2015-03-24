@@ -62,6 +62,15 @@
             this.moveButton = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+
+            //this.selectButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.circleToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.ellipseToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.squareToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.rectangleToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.polygonToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.lineToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.freeDrawToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -335,10 +344,11 @@
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(90, 3);
             this.canvas.Name = "canvas";
-            this.tableLayoutPanel1.SetRowSpan(this.canvas, 12);
-            this.canvas.Size = new System.Drawing.Size(1176, 774);
+            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
+            this.canvas.Size = new System.Drawing.Size(1176, 684);
             this.canvas.TabIndex = 9;
             this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
