@@ -227,6 +227,7 @@ namespace Sketch_Application
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public List<Shape> Shapes
         {
             get { return this.shapes; }

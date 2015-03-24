@@ -62,15 +62,6 @@
             this.moveButton = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-
-            //this.selectButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
-            //this.circleToolTip = new System.Windows.Forms.ToolTip(this.components);
-            //this.ellipseToolTip = new System.Windows.Forms.ToolTip(this.components);
-            //this.squareToolTip = new System.Windows.Forms.ToolTip(this.components);
-            //this.rectangleToolTip = new System.Windows.Forms.ToolTip(this.components);
-            //this.polygonToolTip = new System.Windows.Forms.ToolTip(this.components);
-            //this.lineToolTip = new System.Windows.Forms.ToolTip(this.components);
-            //this.freeDrawToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -103,20 +94,20 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -345,7 +336,7 @@
             this.canvas.Location = new System.Drawing.Point(90, 3);
             this.canvas.Name = "canvas";
             this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
-            this.canvas.Size = new System.Drawing.Size(1176, 684);
+            this.canvas.Size = new System.Drawing.Size(1176, 709);
             this.canvas.TabIndex = 9;
             this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
             this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
@@ -415,7 +406,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SE3353B Sketch Application";
+            this.Text = "Untitled";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
