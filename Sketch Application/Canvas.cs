@@ -14,9 +14,9 @@ namespace Sketch_Application
 {
     public partial class Canvas : Panel
     {
-        private List<Shape> shapes;
-        private List<Shape> selectedShapes;
-        private List<Shape> clipBoard;
+        private List<Shape> shapes = new List<Shape>();
+        private List<Shape> selectedShapes = new List<Shape>();
+        private List<Shape> clipBoard = new List<Shape>();
         private bool clear = false;
         public Color Colour = Color.Black;
         public Mode Mode = Mode.Select;
@@ -27,8 +27,6 @@ namespace Sketch_Application
             InitializeComponent();
 
             this.DoubleBuffered = true;
-            this.shapes = new List<Shape>();
-            this.selectedShapes = new List<Shape>();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
@@ -229,13 +227,6 @@ namespace Sketch_Application
             }
         }
 
-        [XmlElement(typeof(FreeLine))]
-        [XmlElement(typeof(Line))]
-        [XmlElement(typeof(Rectangle))]
-        [XmlElement(typeof(Square))]
-        [XmlElement(typeof(Ellipse))]
-        [XmlElement(typeof(Circle))]
-        [XmlElement(typeof(Polygon))]
         public List<Shape> Shapes
         {
             get { return this.shapes; }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using System.Xml.Serialization;
 
 namespace Sketch_Application
 {
@@ -55,7 +54,6 @@ namespace Sketch_Application
            
         }
 
-        [XmlArrayItem(ElementName = "Line")]
         public List<Line> Lines
         {
             get { return this.lines; }
