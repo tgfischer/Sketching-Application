@@ -50,14 +50,6 @@
             this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearButton = new System.Windows.Forms.Button();
             this.mouseDownPanel = new System.Windows.Forms.Panel();
-            this.selectButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.circleToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.ellipseToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.squareToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.rectangleToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.polygonToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lineToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.freeDrawToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.canvas = new Sketch_Application.Canvas();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -154,7 +146,6 @@
             this.selectButton.Size = new System.Drawing.Size(81, 57);
             this.selectButton.TabIndex = 0;
             this.selectButton.Text = "Select";
-            this.selectButtonToolTip.SetToolTip(this.selectButton, "Select shapes by clicking and dragging your mouse");
             this.selectButton.UseVisualStyleBackColor = false;
             this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
             // 
@@ -169,7 +160,6 @@
             this.freeDrawButton.Size = new System.Drawing.Size(81, 57);
             this.freeDrawButton.TabIndex = 1;
             this.freeDrawButton.Text = "Free Draw";
-            this.freeDrawToolTip.SetToolTip(this.freeDrawButton, "Draw free hand lines on the canvas by clicking and dragging with your mouse");
             this.freeDrawButton.UseVisualStyleBackColor = true;
             this.freeDrawButton.Click += new System.EventHandler(this.freeDrawButton_Click);
             // 
@@ -183,7 +173,6 @@
             this.lineButton.Size = new System.Drawing.Size(81, 57);
             this.lineButton.TabIndex = 2;
             this.lineButton.Text = "Line";
-            this.lineToolTip.SetToolTip(this.lineButton, "Draw straight lines on the canvas by clicking and dragging with your mouse");
             this.lineButton.UseVisualStyleBackColor = true;
             this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
             // 
@@ -197,7 +186,6 @@
             this.rectangleButton.Size = new System.Drawing.Size(81, 57);
             this.rectangleButton.TabIndex = 3;
             this.rectangleButton.Text = "Rectangle";
-            this.rectangleToolTip.SetToolTip(this.rectangleButton, "Draw rectangles on the canvas by clicking and dragging with your mouse");
             this.rectangleButton.UseVisualStyleBackColor = true;
             this.rectangleButton.Click += new System.EventHandler(this.rectangleButton_Click);
             // 
@@ -211,7 +199,6 @@
             this.squareButton.Size = new System.Drawing.Size(81, 57);
             this.squareButton.TabIndex = 4;
             this.squareButton.Text = "Square";
-            this.squareToolTip.SetToolTip(this.squareButton, "Draw squares on the canvas by clicking and dragging with your mouse");
             this.squareButton.UseVisualStyleBackColor = true;
             this.squareButton.Click += new System.EventHandler(this.squareButton_Click);
             // 
@@ -225,7 +212,6 @@
             this.ellipseButton.Size = new System.Drawing.Size(81, 57);
             this.ellipseButton.TabIndex = 5;
             this.ellipseButton.Text = "Ellipse";
-            this.ellipseToolTip.SetToolTip(this.ellipseButton, "Draw ellipses on the canvas by clicking and dragging with your mouse");
             this.ellipseButton.UseVisualStyleBackColor = true;
             this.ellipseButton.Click += new System.EventHandler(this.ellipseButton_Click);
             // 
@@ -239,7 +225,6 @@
             this.circleButton.Size = new System.Drawing.Size(81, 56);
             this.circleButton.TabIndex = 6;
             this.circleButton.Text = "Circle";
-            this.circleToolTip.SetToolTip(this.circleButton, "Draw circles on the canvas by clicking and dragging with your mouse");
             this.circleButton.UseVisualStyleBackColor = true;
             this.circleButton.Click += new System.EventHandler(this.circleButton_Click);
             // 
@@ -253,7 +238,6 @@
             this.polygonButton.Size = new System.Drawing.Size(81, 58);
             this.polygonButton.TabIndex = 7;
             this.polygonButton.Text = "Polygon";
-            this.polygonToolTip.SetToolTip(this.polygonButton, "Draw polygons on the canvas by clicking and dragging with your mouse");
             this.polygonButton.UseVisualStyleBackColor = true;
             this.polygonButton.Click += new System.EventHandler(this.polygonButton_Click);
             // 
@@ -375,14 +359,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem cutRightToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteRightToolStripMenuItem;
-        private System.Windows.Forms.ToolTip selectButtonToolTip;
-        private System.Windows.Forms.ToolTip ellipseToolTip;
-        private System.Windows.Forms.ToolTip circleToolTip;
-        private System.Windows.Forms.ToolTip polygonToolTip;
-        private System.Windows.Forms.ToolTip squareToolTip;
-        private System.Windows.Forms.ToolTip rectangleToolTip;
-        private System.Windows.Forms.ToolTip lineToolTip;
-        private System.Windows.Forms.ToolTip freeDrawToolTip;
 
     }
 }
