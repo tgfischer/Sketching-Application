@@ -207,7 +207,11 @@ namespace Sketch_Application
 
         public void Paste(Point startPoint)
         {
-            //this.shapes.Add(this.clipBoard);
+            foreach (Shape s in clipBoard)
+            {
+                this.shapes.Add(s);
+            }
+            this.Invalidate();
         }
 
         public void ClearCanvas()
