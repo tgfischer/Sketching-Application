@@ -12,6 +12,8 @@ namespace Sketch_Application
         public List<Point> Points;                                  // A list that stores all of the points in the line
         private const int smoothness = 3;                           // Higher number = smoother the curve. Default = 1
 
+        private FreeLine() { }
+
         public FreeLine(Point start, Color colour)
             : base(colour)
         {

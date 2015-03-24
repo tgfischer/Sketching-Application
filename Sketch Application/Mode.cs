@@ -9,6 +9,7 @@ namespace Sketch_Application
     public enum Mode
     {
         Select,
+        Move,
         FreeHand,
         Line,
         Rectangle,

@@ -7,10 +7,12 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Ellipse : Shape
+    public class Ellipse : Shape
     {
         protected Point start;
         protected Point end;
+
+        protected Ellipse() { }
 
         public Ellipse(Point start, Color colour)
             : base(colour)

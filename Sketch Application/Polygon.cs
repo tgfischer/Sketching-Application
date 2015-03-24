@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace Sketch_Application
 {
-    class Polygon : Shape
+    public class Polygon : Shape
     {
         private Point start;
         private Point end;
         private Line currentLine;
         private List<Line> lines;
         
+        private Polygon() { }
+
         public Polygon(Point start, Color colour)
             : base(colour)
         {
@@ -52,5 +55,10 @@ namespace Sketch_Application
            
         }
 
+        [XmlArrayItem(ElementName = "Line")]
+        public List<Line> Lines
+        {
+            get { return this.lines; }
+        }
     }
 }

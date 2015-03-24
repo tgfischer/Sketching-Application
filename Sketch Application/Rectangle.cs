@@ -12,6 +12,8 @@ namespace Sketch_Application
         protected Point start;
         protected Point end;
 
+        protected Rectangle() { }
+
         public Rectangle(Point start, Color colour)
             : base(colour)
         {

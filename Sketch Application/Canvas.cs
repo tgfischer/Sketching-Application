@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Xml.Serialization;
 
 namespace Sketch_Application
 {
@@ -222,6 +223,19 @@ namespace Sketch_Application
                 selectedShape.isSelected = false;
                 selectedShape.Thickness = 1F;
             }
+        }
+
+        [XmlElement(typeof(FreeLine))]
+        [XmlElement(typeof(Line))]
+        [XmlElement(typeof(Rectangle))]
+        [XmlElement(typeof(Square))]
+        [XmlElement(typeof(Ellipse))]
+        [XmlElement(typeof(Circle))]
+        [XmlElement(typeof(Polygon))]
+        public List<Shape> Shapes
+        {
+            get { return this.shapes; }
+            set { this.shapes = value; }
         }
     }
 }

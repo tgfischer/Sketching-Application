@@ -7,11 +7,13 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Circle : Ellipse
+    public class Circle : Ellipse
     {
         private int width = 0;
         private int height = 0;
-        
+
+        private Circle() { }
+
         public Circle(Point start, Color colour)
             : base(start, colour) {}
 
