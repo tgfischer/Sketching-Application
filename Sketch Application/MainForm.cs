@@ -193,5 +193,11 @@ namespace Sketch_Application
         {
             this.canvas.Paste(new Point(0, 0));
         }
+
+        private void canvas_MouseLeave(object sender, EventArgs e)
+        {
+            this.isDrawing = false;
+            polygonFirst = true;
+        }
     }
 }
