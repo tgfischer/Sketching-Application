@@ -59,6 +59,7 @@ namespace Sketch_Application
         public List<Line> Lines
         {
             get { return this.lines; }
+            set { this.lines = value; }
         }
     }
 }
