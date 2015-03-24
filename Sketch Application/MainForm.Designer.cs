@@ -54,7 +54,6 @@
             this.circleButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
-            this.canvas = new Sketch_Application.Canvas();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,6 +61,7 @@
             this.moveButton = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.canvas = new Sketch_Application.Canvas();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -327,22 +327,6 @@
             this.colourPanel.TabIndex = 8;
             this.colourPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.colourPanel_Click);
             // 
-            // canvas
-            // 
-            this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.canvas.ContextMenuStrip = this.contextMenuStrip;
-            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(90, 3);
-            this.canvas.Name = "canvas";
-            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
-            this.canvas.Size = new System.Drawing.Size(1176, 709);
-            this.canvas.TabIndex = 9;
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
-            // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -393,6 +377,22 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // canvas
+            // 
+            this.canvas.BackColor = System.Drawing.Color.White;
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvas.ContextMenuStrip = this.contextMenuStrip;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(90, 3);
+            this.canvas.Name = "canvas";
+            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
+            this.canvas.Size = new System.Drawing.Size(1176, 709);
+            this.canvas.TabIndex = 9;
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -406,7 +406,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Untitled";
+            this.Text = "Untitled - Paint";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
