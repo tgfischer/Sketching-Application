@@ -12,6 +12,8 @@ namespace Sketch_Application
         private Point start;
         private Point end;
 
+        private Line() { }
+
         public Line(Point start, Color colour)
             : base(colour)
         {

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace Sketch_Application
 {
@@ -28,6 +30,12 @@ namespace Sketch_Application
         private void selectButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Select;
+            this.SetCurrentButton(this, (Button)sender);
+        }
+
+        private void moveButton_Click(object sender, EventArgs e)
+        {
+            this.canvas.Mode = Mode.Move;
             this.SetCurrentButton(this, (Button)sender);
         }
 
@@ -80,10 +88,8 @@ namespace Sketch_Application
 
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            this.mouseDownPanel.BackColor = Color.Tomato;
-
-            Console.WriteLine(this.canvas.Bounds);
-            Console.WriteLine(this.canvas.PointToScreen(Cursor.Position));
+            //Console.WriteLine(this.canvas.Bounds);
+            //Console.WriteLine(this.canvas.PointToScreen(Cursor.Position));
 
             if (e.Button == MouseButtons.Right) //right click
             {
@@ -115,8 +121,6 @@ namespace Sketch_Application
                     this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
                 }
             }
-
-            this.mouseDownPanel.BackColor = Color.White;
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
@@ -130,8 +134,6 @@ namespace Sketch_Application
             {
                 this.canvas.SelectShapes();
             }
-
-            this.mouseDownPanel.BackColor = Color.White;
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
@@ -139,9 +141,13 @@ namespace Sketch_Application
             if (isDrawing) 
             {
                 this.canvas.AddToCurrentShape(this.canvas.PointToClient(Cursor.Position));
-                this.mouseDownPanel.BackColor = Color.CornflowerBlue;
-                //this.canvas.Bounds;
             }
+        }
+
+        private void canvas_MouseLeave(object sender, EventArgs e)
+        {
+            this.isDrawing = false;
+            polygonFirst = true;
         }
 
         private void colourPanel_Click(object sender, MouseEventArgs e)
@@ -194,10 +200,57 @@ namespace Sketch_Application
             this.canvas.Paste(new Point(0, 0));
         }
 
-        private void canvas_MouseLeave(object sender, EventArgs e)
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.isDrawing = false;
-            polygonFirst = true;
+            this.canvas.RemoveSelect();
+            
+            this.saveFileDialog.FileName = "image.xml";
+            this.saveFileDialog.Filter = "XML File (*.xml)|*.xml|All files (*.*)|*.*";
+
+            if (this.saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                XmlSerializer serializer = new XmlSerializer(this.canvas.Shapes.GetType(), new Type[] {
+                    typeof(FreeLine),
+                    typeof(Line),
+                    typeof(Rectangle),
+                    typeof(Square),
+                    typeof(Ellipse),
+                    typeof(Circle),
+                    typeof(Polygon)
+                });
+
+                using (StreamWriter writer = new StreamWriter(this.saveFileDialog.FileName))
+                {
+                    serializer.Serialize(writer, this.canvas.Shapes);
+                }
+            }
+
+            this.canvas.Invalidate();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.canvas.ClearCanvas();
+
+            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                XmlSerializer serializer = new XmlSerializer(this.canvas.Shapes.GetType(), new Type[] {
+                    typeof(FreeLine),
+                    typeof(Line),
+                    typeof(Rectangle),
+                    typeof(Square),
+                    typeof(Ellipse),
+                    typeof(Circle),
+                    typeof(Polygon)
+                });
+
+                using (StreamReader reader = new StreamReader(this.openFileDialog.FileName))
+                {
+                    this.canvas.Shapes = (List<Shape>)serializer.Deserialize(reader);
+                }
+            }
+
+            this.canvas.Invalidate();
         }
     }
 }

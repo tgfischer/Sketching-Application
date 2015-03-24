@@ -7,10 +7,12 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Square : Rectangle
+    public class Square : Rectangle
     {
         private int width = 0;
         private int height = 0;
+
+        private Square() { }
 
         public Square(Point start, Color colour)
             : base(start, colour) { }
@@ -52,6 +54,7 @@ namespace Sketch_Application
 
         public override Point EndPoint
         {
+            get { return this.end; }
             set 
             {
                 this.end = value;

@@ -7,10 +7,12 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Ellipse : Shape
+    public class Ellipse : Shape
     {
         protected Point start;
         protected Point end;
+
+        protected Ellipse() { }
 
         public Ellipse(Point start, Color colour)
             : base(colour)
@@ -22,6 +24,12 @@ namespace Sketch_Application
         public override void Draw(Graphics g, Pen pen)
         {
             g.DrawEllipse(pen, this.StartPointX, this.StartPointY, this.Width, this.Height);
+        }
+
+        public Point StartPoint
+        {
+            get { return new Point(this.StartPointX, this.StartPointY); }
+            set { this.start = value; }
         }
 
         public virtual int StartPointX
@@ -46,6 +54,7 @@ namespace Sketch_Application
 
         public virtual Point EndPoint
         {
+            get { return this.end; }
             set { this.end = value; }
         }
     }

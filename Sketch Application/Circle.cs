@@ -7,11 +7,13 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class Circle : Ellipse
+    public class Circle : Ellipse
     {
         private int width = 0;
         private int height = 0;
-        
+
+        private Circle() { }
+
         public Circle(Point start, Color colour)
             : base(start, colour) {}
 
@@ -66,6 +68,7 @@ namespace Sketch_Application
         // TODO: Validate end is on canvas in the set { }
         public override Point EndPoint
         {
+            get { return this.end; }
             set
             {
                 this.end = value;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace Sketch_Application
 {
@@ -11,6 +12,8 @@ namespace Sketch_Application
     {
         protected Point start;
         protected Point end;
+
+        protected Rectangle() { }
 
         public Rectangle(Point start, Color colour)
             : base(colour)
@@ -27,6 +30,13 @@ namespace Sketch_Application
         public Point StartPoint
         {
             get { return new Point(this.StartPointX, this.StartPointY); }
+            set { this.start = value; }
+        }
+
+        public virtual Point EndPoint
+        {
+            get { return this.end; }
+            set { this.end = value; }
         }
 
         public virtual int StartPointX
@@ -47,11 +57,6 @@ namespace Sketch_Application
         public int Height
         {
             get { return Math.Abs(this.start.Y - this.end.Y); }
-        }
-
-        public virtual Point EndPoint
-        {
-            set { this.end = value; }
         }
     }
 }
