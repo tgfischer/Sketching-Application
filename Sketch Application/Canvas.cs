@@ -15,7 +15,7 @@ namespace Sketch_Application
     {
         private List<Shape> shapes;
         private List<Shape> selectedShapes;
-        private Shape clipBoard;
+        private List<Shape> clipBoard;
         private bool clear = false;
         public Color Colour = Color.Black;
         public Mode Mode = Mode.Select;
@@ -197,13 +197,17 @@ namespace Sketch_Application
 
         public void Cut()
         {
-            //this.clipBoard = selectedShape;
-            //this.shapes.Remove(selectedShape);
+            this.clipBoard = selectedShapes;
+            foreach (Shape s in clipBoard)
+            {
+                this.shapes.Remove(s);
+            }
+            this.Invalidate();
         }
 
         public void Paste(Point startPoint)
         {
-            this.shapes.Add(this.clipBoard);
+            //this.shapes.Add(this.clipBoard);
         }
 
         public void ClearCanvas()

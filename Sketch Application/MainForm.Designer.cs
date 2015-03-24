@@ -45,12 +45,23 @@
             this.circleButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
+            this.canvas = new Sketch_Application.Canvas();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearButton = new System.Windows.Forms.Button();
             this.mouseDownPanel = new System.Windows.Forms.Panel();
+
             this.canvas = new Sketch_Application.Canvas();
+
+            //this.selectButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.circleToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.ellipseToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.squareToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.rectangleToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.polygonToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.lineToolTip = new System.Windows.Forms.ToolTip(this.components);
+            //this.freeDrawToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -253,6 +264,22 @@
             this.colourPanel.TabIndex = 8;
             this.colourPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.colourPanel_Click);
             // 
+            // canvas
+            // 
+            this.canvas.BackColor = System.Drawing.Color.White;
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvas.ContextMenuStrip = this.contextMenuStrip;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(90, 3);
+            this.canvas.Name = "canvas";
+            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
+            this.canvas.Size = new System.Drawing.Size(1176, 684);
+            this.canvas.TabIndex = 9;
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -296,21 +323,6 @@
             this.mouseDownPanel.Name = "mouseDownPanel";
             this.mouseDownPanel.Size = new System.Drawing.Size(81, 34);
             this.mouseDownPanel.TabIndex = 11;
-            // 
-            // canvas
-            // 
-            this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.canvas.ContextMenuStrip = this.contextMenuStrip;
-            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(90, 3);
-            this.canvas.Name = "canvas";
-            this.tableLayoutPanel1.SetRowSpan(this.canvas, 11);
-            this.canvas.Size = new System.Drawing.Size(1176, 684);
-            this.canvas.TabIndex = 9;
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // MainForm
             // 
