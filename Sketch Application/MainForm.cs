@@ -85,7 +85,7 @@ namespace Sketch_Application
             Console.WriteLine(this.canvas.Bounds);
             Console.WriteLine(this.canvas.PointToScreen(Cursor.Position));
 
-            if (e.Button == MouseButtons.Right) //right click
+            if (e.Button == MouseButtons.Right && this.canvas.Mode == Mode.Polygon) //right click
             {
                 this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 this.isDrawing = false;
