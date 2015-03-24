@@ -68,6 +68,7 @@ namespace Sketch_Application
         // TODO: Validate end is on canvas in the set { }
         public override Point EndPoint
         {
+            get { return this.end; }
             set
             {
                 this.end = value;

@@ -54,6 +54,7 @@ namespace Sketch_Application
 
         public override Point EndPoint
         {
+            get { return this.end; }
             set 
             {
                 this.end = value;

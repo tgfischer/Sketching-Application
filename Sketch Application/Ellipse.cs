@@ -26,6 +26,12 @@ namespace Sketch_Application
             g.DrawEllipse(pen, this.StartPointX, this.StartPointY, this.Width, this.Height);
         }
 
+        public Point StartPoint
+        {
+            get { return new Point(this.StartPointX, this.StartPointY); }
+            set { this.start = value; }
+        }
+
         public virtual int StartPointX
         {
             get { return Math.Min(this.start.X, this.end.X); }
@@ -48,6 +54,7 @@ namespace Sketch_Application
 
         public virtual Point EndPoint
         {
+            get { return this.end; }
             set { this.end = value; }
         }
     }
