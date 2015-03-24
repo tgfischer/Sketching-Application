@@ -225,6 +225,7 @@ namespace Sketch_Application
                 }
             }
 
+            this.Text = this.saveFileDialog.FileName;
             this.canvas.Invalidate();
         }
 
