@@ -209,7 +209,49 @@ namespace Sketch_Application
         {
             foreach (Shape s in clipBoard)
             {
-                this.shapes.Add(s);
+                if (s is FreeLine)
+                {
+                    FreeLine freeLine = (FreeLine)s;
+                    FreeLine newLine = new FreeLine(startPoint, Color.Black);
+                    List<Point> points = new List<Point>();
+                    int xD = startPoint.X - freeLine.Points.First<Point>().X;
+                    int yD = startPoint.Y - freeLine.Points.First<Point>().Y;
+                    foreach (Point p in freeLine.Points)
+                    {
+                        newLine.Points.Add(new Point(p.X+xD, p.Y+yD));
+                    }
+                    this.shapes.Add(newLine);
+                }
+                else if (s is Line)
+                {
+                    Line line = (Line)s;
+                    //line.EndPoint = position;
+                }
+                else if (s is Rectangle)
+                {
+                    Rectangle rectangle = (Rectangle)s;
+                    //rectangle.EndPoint = position;
+                }
+                else if (s is Square)
+                {
+                    Square square = (Square)s;
+                    //square.EndPoint = position;
+                }
+                else if (s is Ellipse)
+                {
+                    Ellipse ellipse = (Ellipse)s;
+                    //ellipse.EndPoint = position;
+                }
+                else if (s is Circle)
+                {
+                    Circle circle = (Circle)s;
+                    //circle.EndPoint = position;
+                }
+                else if (s is Polygon)
+                {
+                    Polygon polygon = (Polygon)s;
+                    //polygon.getCurrentLine().EndPoint = position;
+                }
             }
             this.Invalidate();
         }
