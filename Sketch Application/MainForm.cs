@@ -151,6 +151,7 @@ namespace Sketch_Application
             if (this.canvas.Mode == Mode.Select)
             {
                 this.groupShapesToolStripMenuItem.Enabled = this.canvas.SelectShapes();
+                this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton();
             }
             else if (this.canvas.Mode == Mode.Move)
             {
