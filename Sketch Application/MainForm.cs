@@ -132,9 +132,9 @@ namespace Sketch_Application
                     {
                         this.file.IsSaved = false;
                         this.Text = this.FormTitle;
+                    }
                 }
             }
-        }
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
@@ -230,6 +230,7 @@ namespace Sketch_Application
 
             this.canvas.RemoveSelect();
             this.groupShapesToolStripMenuItem.Enabled = false;
+            this.ungroupShapesToolStripMenuItem.Enabled = false;
 
             this.file.Save(this.canvas.Shapes);
 
@@ -247,6 +248,7 @@ namespace Sketch_Application
 
             this.canvas.RemoveSelect();
             this.groupShapesToolStripMenuItem.Enabled = false;
+            this.ungroupShapesToolStripMenuItem.Enabled = false;
 
             this.saveFileDialog.FileName = this.file.FileName;
             this.saveFileDialog.Filter = "XML File (*.xml)|*.xml|All files (*.*)|*.*";
@@ -276,11 +278,27 @@ namespace Sketch_Application
         private void groupShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.canvas.GroupSelectedShapes();
+            this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton();
         }
 
         private void ungroupShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private bool EnableUngroupButton()
+        {
+            if (this.canvas.SelectedShape.Shapes.Count == 0 || this.canvas.Shapes.Count == 0)
+            {
+                return false;
+            }
+
+            if (this.canvas.Shapes.Contains(this.canvas.SelectedShape))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private string FormTitle

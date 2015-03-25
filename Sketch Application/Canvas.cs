@@ -272,5 +272,10 @@ namespace Sketch_Application
             get { return this.shapes; }
             set { this.shapes = value; }
         }
+
+        public GroupedShape SelectedShape
+        {
+            get { return this.selectedShapes; }
+        }
     }
 }
