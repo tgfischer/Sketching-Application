@@ -37,5 +37,13 @@ namespace Sketch_Application
             get { return this.end; }
             set { this.end = value; }
         }
+
+        public override Point UpperLeftPoint
+        {
+            get
+            {
+                return new Point(0, 0);
+            }
+        }
     }
 }

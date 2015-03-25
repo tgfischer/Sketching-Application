@@ -36,5 +36,10 @@ namespace Sketch_Application
         }
 
         public abstract void Draw(Graphics g, Pen pen);
+
+        public abstract Point UpperLeftPoint
+        {
+            get;
+        }
     }
 }

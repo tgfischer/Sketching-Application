@@ -54,6 +54,7 @@
     <Compile Include="Ellipse.cs" />
     <Compile Include="FreeLine.cs" />
     <Compile Include="Geometry.cs" />
+    <Compile Include="GroupedShape.cs" />
     <Compile Include="ImageFile.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="MainForm.cs">

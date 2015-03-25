@@ -57,5 +57,13 @@ namespace Sketch_Application
         {
             get { return Math.Abs(this.start.Y - this.end.Y); }
         }
+
+        public override Point UpperLeftPoint
+        {
+            get
+            {
+                return this.StartPoint;
+            }
+        }
     }
 }

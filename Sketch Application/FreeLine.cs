@@ -79,5 +79,13 @@ namespace Sketch_Application
                 }
             }*/
         }
+
+        public override Point UpperLeftPoint
+        {
+            get
+            {
+                return new Point(0, 0);
+            }
+        }
     }
 }

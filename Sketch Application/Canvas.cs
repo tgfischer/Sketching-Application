@@ -107,6 +107,7 @@ namespace Sketch_Application
         {
             if (this.shapes.Count == 0)
                 return;
+
             Shape shape = this.shapes.Last();
 
             if (shape is Select)
@@ -157,6 +158,7 @@ namespace Sketch_Application
         {
             if (this.shapes.Count == 0)
                 return false;
+
             Shape shape = this.shapes.Last();
             bool isDrawing = true;
                 
@@ -186,6 +188,7 @@ namespace Sketch_Application
         {
             if (this.shapes.Count() == 0)
                 return;
+
             Shape shape = this.shapes.Last();
 
             if (shape is Select)
@@ -203,10 +206,12 @@ namespace Sketch_Application
         public void Cut()
         {
             this.clipBoard = selectedShapes;
+
             foreach (Shape s in clipBoard)
             {
                 this.shapes.Remove(s);
             }
+
             this.Invalidate();
         }
 
