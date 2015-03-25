@@ -94,10 +94,8 @@ namespace Sketch_Application
                     Polygon polygon = new Polygon(position, this.Colour);
                     Line line1 = new Line(position, this.Colour);
                     polygon.addLine(line1);
-                    //polygon.addLine(position, this.Colour);
                     this.shapes.Add(polygon);
                     break;
-
             }
 
             this.Invalidate(); // Update the canvas
@@ -227,8 +225,9 @@ namespace Sketch_Application
             this.shapes.Add(this.selectedShapes);
         }
 
-        public void Cut()
-        {
+        public void Cut() 
+        { 
+            //work with grouped shape instead of individual shape
             this.clipBoard = selectedShapes;
             foreach (Shape s in clipBoard.Shapes)
             {
