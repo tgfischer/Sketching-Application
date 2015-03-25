@@ -46,6 +46,7 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.selectButton = new System.Windows.Forms.Button();
+            this.moveButton = new System.Windows.Forms.Button();
             this.freeDrawButton = new System.Windows.Forms.Button();
             this.lineButton = new System.Windows.Forms.Button();
             this.rectangleButton = new System.Windows.Forms.Button();
@@ -54,14 +55,15 @@
             this.circleButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.canvas = new Sketch_Application.Canvas();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ungroupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cutRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.moveButton = new System.Windows.Forms.Button();
+            this.groupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.canvas = new Sketch_Application.Canvas();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -239,6 +241,21 @@
             this.selectButton.UseVisualStyleBackColor = false;
             this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
             // 
+            // moveButton
+            // 
+            this.moveButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("moveButton.BackgroundImage")));
+            this.moveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.moveButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.moveButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.moveButton.Location = new System.Drawing.Point(83, 3);
+            this.moveButton.Name = "moveButton";
+            this.moveButton.Size = new System.Drawing.Size(74, 74);
+            this.moveButton.TabIndex = 12;
+            this.moveButton.Text = "Move";
+            this.moveButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.moveButton.UseVisualStyleBackColor = true;
+            this.moveButton.Click += new System.EventHandler(this.moveButton_Click);
+            // 
             // freeDrawButton
             // 
             this.freeDrawButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("freeDrawButton.BackgroundImage")));
@@ -364,29 +381,6 @@
             this.colourPanel.TabIndex = 8;
             this.colourPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.colourPanel_Click);
             // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cutRightToolStripMenuItem,
-            this.pasteRightToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(103, 48);
-            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
-            // 
-            // cutRightToolStripMenuItem
-            // 
-            this.cutRightToolStripMenuItem.Name = "cutRightToolStripMenuItem";
-            this.cutRightToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
-            this.cutRightToolStripMenuItem.Text = "Cut";
-            this.cutRightToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
-            // 
-            // pasteRightToolStripMenuItem
-            // 
-            this.pasteRightToolStripMenuItem.Name = "pasteRightToolStripMenuItem";
-            this.pasteRightToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
-            this.pasteRightToolStripMenuItem.Text = "Paste";
-            this.pasteRightToolStripMenuItem.Click += new System.EventHandler(this.pasteRightToolStripMenuItem_Click);
-            // 
             // clearButton
             // 
             this.clearButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("clearButton.BackgroundImage")));
@@ -401,25 +395,6 @@
             this.clearButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
-            // 
-            // moveButton
-            // 
-            this.moveButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("moveButton.BackgroundImage")));
-            this.moveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.moveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.moveButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.moveButton.Location = new System.Drawing.Point(83, 3);
-            this.moveButton.Name = "moveButton";
-            this.moveButton.Size = new System.Drawing.Size(74, 74);
-            this.moveButton.TabIndex = 12;
-            this.moveButton.Text = "Move";
-            this.moveButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.moveButton.UseVisualStyleBackColor = true;
-            this.moveButton.Click += new System.EventHandler(this.moveButton_Click);
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
             // 
             // canvas
             // 
@@ -437,6 +412,47 @@
             this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cutRightToolStripMenuItem,
+            this.pasteRightToolStripMenuItem,
+            this.groupShapesToolStripMenuItem,
+            this.ungroupShapesToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip1";
+            this.contextMenuStrip.Size = new System.Drawing.Size(162, 114);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
+            // ungroupShapesToolStripMenuItem
+            // 
+            this.ungroupShapesToolStripMenuItem.Name = "ungroupShapesToolStripMenuItem";
+            this.ungroupShapesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.ungroupShapesToolStripMenuItem.Text = "Ungroup Shapes";
+            // 
+            // cutRightToolStripMenuItem
+            // 
+            this.cutRightToolStripMenuItem.Name = "cutRightToolStripMenuItem";
+            this.cutRightToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.cutRightToolStripMenuItem.Text = "Cut";
+            this.cutRightToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
+            // 
+            // pasteRightToolStripMenuItem
+            // 
+            this.pasteRightToolStripMenuItem.Name = "pasteRightToolStripMenuItem";
+            this.pasteRightToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.pasteRightToolStripMenuItem.Text = "Paste";
+            this.pasteRightToolStripMenuItem.Click += new System.EventHandler(this.pasteRightToolStripMenuItem_Click);
+            // 
+            // groupShapesToolStripMenuItem
+            // 
+            this.groupShapesToolStripMenuItem.Name = "groupShapesToolStripMenuItem";
+            this.groupShapesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.groupShapesToolStripMenuItem.Text = "Group Shapes";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
             // 
             // MainForm
             // 
@@ -496,6 +512,8 @@
         private System.Windows.Forms.Button moveButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem ungroupShapesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem groupShapesToolStripMenuItem;
 
     }
 }
