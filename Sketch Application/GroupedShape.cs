@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class GroupedShape : Shape
+    public class GroupedShape : Shape
     {
         public List<Shape> Shapes = new List<Shape>();
 

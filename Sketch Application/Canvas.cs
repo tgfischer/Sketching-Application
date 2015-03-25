@@ -15,8 +15,8 @@ namespace Sketch_Application
     public partial class Canvas : Panel
     {
         private List<Shape> shapes = new List<Shape>();
-        private List<Shape> selectedShapes = new List<Shape>();
-        private List<Shape> clipBoard = new List<Shape>();
+        private GroupedShape selectedShapes = new GroupedShape();
+        private GroupedShape clipBoard = new GroupedShape();
         private bool clear = false;
         public Color Colour = Color.Black;
         public Mode Mode = Mode.Select;
@@ -207,7 +207,7 @@ namespace Sketch_Application
         {
             this.clipBoard = selectedShapes;
 
-            foreach (Shape s in clipBoard)
+            foreach (Shape s in clipBoard.Shapes)
             {
                 this.shapes.Remove(s);
             }
@@ -219,7 +219,7 @@ namespace Sketch_Application
         {
             //int minX = Int32.MaxValue;
             //int minY = Int32.MaxValue;
-            foreach (Shape s in clipBoard)
+            foreach (Shape s in clipBoard.Shapes)
             {
                 if (s is FreeLine)
                 {
@@ -348,7 +348,7 @@ namespace Sketch_Application
         {
             this.shapes.RemoveAll(x => x is Select);
 
-            foreach (Shape selectedShape in this.selectedShapes)
+            foreach (Shape selectedShape in this.selectedShapes.Shapes)
             {
                 selectedShape.isSelected = false;
                 selectedShape.Thickness = 1F;
