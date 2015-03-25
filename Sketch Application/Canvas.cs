@@ -217,24 +217,16 @@ namespace Sketch_Application
 
         public void Paste(Point startPoint)
         {
+            //int minX = Int32.MaxValue;
+            //int minY = Int32.MaxValue;
             foreach (Shape s in clipBoard)
             {
                 if (s is FreeLine)
                 {
                     FreeLine freeLine = (FreeLine)s;
-                    int minX = 100000;
-                    int minY = 100000;
 
-                    foreach (Point p in freeLine.Points)
-                    {
-                        if (p.X < minX)
-                            minX = p.X;
-                        if (p.Y < minY)
-                            minY = p.Y;
-                    }
-
-                    int xD = startPoint.X - minX;
-                    int yD = startPoint.Y - minY;
+                    int xD = startPoint.X - freeLine.UpperLeftPoint.X;
+                    int yD = startPoint.Y - freeLine.UpperLeftPoint.Y;
 
                     int firstX = freeLine.Points.First<Point>().X + xD;
                     int firstY = freeLine.Points.First<Point>().Y + yD;
@@ -246,30 +238,52 @@ namespace Sketch_Application
                     }
                     this.shapes.Add(newLine);
                 }
+                else if (s is GroupedShape)
+                {
+                    GroupedShape gShape = (GroupedShape)s;
+
+                    int xD = startPoint.X - gShape.UpperLeftPoint.X;
+                    int yD = startPoint.Y - gShape.UpperLeftPoint.Y;
+
+                    foreach (Shape sh in gShape.Shapes)
+                    {
+                        if (sh is FreeLine)
+                        {
+                            FreeLine freeLine = (FreeLine)sh;
+                            int firstX = freeLine.Points.First<Point>().X + xD;
+                            int firstY = freeLine.Points.First<Point>().Y + yD;
+                            FreeLine newLine = new FreeLine(new Point(firstX, firstY), Color.Black);
+                            List<Point> points = new List<Point>();
+                            foreach (Point p in freeLine.Points)
+                            {
+                                newLine.Points.Add(new Point(p.X + xD, p.Y + yD));
+                            }
+                            this.shapes.Add(newLine);
+                        }
+                        else if (s is Line)
+                        {
+                            Line line = (Line)sh;
+                            int firstX = line.StartPoint.X + xD;
+                            int firstY = line.StartPoint.Y + yD;
+                            Line newLine = new Line(new Point(firstX, firstY), Color.Black);
+                            Point newEndPoint = new Point(line.EndPoint.X + xD, line.EndPoint.Y + yD);
+                            newLine.EndPoint = newEndPoint;
+                            this.shapes.Add(newLine);
+                        }
+                        this.shapes.Add(sh);
+                    }
+                }
                 else if (s is Line)
                 {
                     Line line = (Line)s;
 
-                    int minX = line.StartPoint.X;
-                    int minY = line.StartPoint.Y;
-
-                    if (minX > line.EndPoint.X)
-                        minX = line.EndPoint.X;
-                    if (minY > line.EndPoint.Y)
-                        minY = line.EndPoint.Y;
-
-                    /*float midX = (line.StartPoint.X + line.EndPoint.X)/2;
-                    float midY = (line.StartPoint.Y + line.EndPoint.Y) / 2;*/
-
-                    int xD = startPoint.X - minX;
-                    int yD = startPoint.Y - minY;
+                    int xD = startPoint.X - line.UpperLeftPoint.X;
+                    int yD = startPoint.Y - line.UpperLeftPoint.Y;
 
                     int firstX = line.StartPoint.X + xD;
                     int firstY = line.StartPoint.Y + yD;
 
                     Line newLine = new Line(new Point(firstX, firstY), Color.Black);
-                    /*int xD = startPoint.X - line.StartPoint.X + line.EndPoint.X;
-                    int yD = startPoint.Y - line.StartPoint.Y + line.EndPoint.Y;*/
                     Point newEndPoint = new Point(line.EndPoint.X+xD, line.EndPoint.Y+yD);
                     newLine.EndPoint = newEndPoint;
                     this.shapes.Add(newLine);
