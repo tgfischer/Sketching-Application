@@ -19,7 +19,7 @@ namespace Sketch_Application
 
         public override void Draw(Graphics g, Pen pen)
         {
-            g.DrawRectangle(pen, this.StartPoint.X, this.StartPoint.Y, this.width, this.height);
+            g.DrawRectangle(pen, this.StartPoint.X, this.StartPoint.Y, this.Width, this.Height);
         }
 
         public override Point StartPoint
@@ -54,16 +54,28 @@ namespace Sketch_Application
         public override Point EndPoint
         {
             get { return this.end; }
-            set 
+            set
             {
                 this.end = value;
 
                 int width = Math.Abs(this.start.X - this.end.X);
                 int height = Math.Abs(this.start.Y - this.end.Y);
 
-                this.width = width < height ? width : height;
-                this.height = height < width ? height : width;
+                this.Width = width < height ? width : height;
+                this.Height = height < width ? height : width;
             }
+        }
+
+        public override int Width
+        {
+            get { return this.width; }
+            set { this.width = value; }
+        }
+
+        public override int Height
+        {
+            get { return this.height; }
+            set { this.height = value; }
         }
     }
 }

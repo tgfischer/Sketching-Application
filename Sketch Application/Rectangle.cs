@@ -43,14 +43,16 @@ namespace Sketch_Application
             set { this.end = value; }
         }
 
-        public int Width
+        public virtual int Width
         {
             get { return Math.Abs(this.start.X - this.end.X); }
+            set { }
         }
 
-        public int Height
+        public virtual int Height
         {
             get { return Math.Abs(this.start.Y - this.end.Y); }
+            set { }
         }
 
         public override Point UpperLeftPoint
