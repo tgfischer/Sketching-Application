@@ -180,18 +180,21 @@ namespace Sketch_Application
 
         public void SelectShapes()
         {
-            Shape shape = this.shapes.Last();
-
-            if (shape is Select)
+            if (this.shapes.Count() > 0)
             {
-                Select select = (Select)shape;
+                Shape shape = this.shapes.Last();
 
-                this.RemoveSelect();
+                if (shape is Select)
+                {
+                    Select select = (Select)shape;
 
-                this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
+                    this.RemoveSelect();
+
+                    this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
+                }
+
+                this.Invalidate(); // Update the canvas
             }
-
-            this.Invalidate(); // Update the canvas
         }
 
         public void Cut()

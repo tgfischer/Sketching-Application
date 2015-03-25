@@ -143,7 +143,7 @@ namespace Sketch_Application
             {
                 this.isDrawing = false;
             }
-
+            
             if (this.canvas.Mode == Mode.Select)
             {
                 this.canvas.SelectShapes();
