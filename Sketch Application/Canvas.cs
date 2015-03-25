@@ -230,17 +230,16 @@ namespace Sketch_Application
         public void Cut()
         {
             this.clipBoard = selectedShapes;
-
             foreach (Shape s in clipBoard.Shapes)
             {
                 this.shapes.Remove(s);
             }
-
             this.Invalidate();
         }
 
         public void Paste(Point startPoint)
         {
+            //Shape newShape = clipBoard;
             int xD = startPoint.X - clipBoard.UpperLeftPoint.X;
             int yD = startPoint.Y - clipBoard.UpperLeftPoint.Y;
             clipBoard.Shift(xD, yD);
