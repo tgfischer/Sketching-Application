@@ -209,6 +209,15 @@ namespace Sketch_Application
                     }
                     freeLine.Points = points; //update all points in the free line
                 }
+                else if (shape is Rectangle)
+                {
+                    Rectangle rectangle = (Rectangle)shape;
+                    Point point = new Point();
+                    point.X = position.X + (rectangle.EndPoint.X - rectangle.StartPoint.X);
+                    point.Y = position.Y + (rectangle.EndPoint.Y - rectangle.StartPoint.Y);
+                    rectangle.StartPoint = position;
+                    rectangle.EndPoint = point;
+                }
             }
             this.Invalidate();
         }
