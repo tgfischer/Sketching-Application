@@ -206,7 +206,92 @@ namespace Sketch_Application
 
         public void Paste(Point startPoint)
         {
-            //this.shapes.Add(this.clipBoard);
+            foreach (Shape s in clipBoard)
+            {
+                if (s is FreeLine)
+                {
+                    FreeLine freeLine = (FreeLine)s;
+                    int minX = 10000;
+                    int minY = 10000;
+
+                    foreach (Point p in freeLine.Points)
+                    {
+                        if (p.X < minX)
+                            minX = p.X;
+                        if (p.Y < minY)
+                            minY = p.Y;
+                    }
+
+                    int xD = startPoint.X - minX;
+                    int yD = startPoint.Y - minY;
+
+                    int firstX = freeLine.Points.First<Point>().X + xD;
+                    int firstY = freeLine.Points.First<Point>().Y + yD;
+                    FreeLine newLine = new FreeLine(new Point(firstX, firstY), Color.Black);
+                    List<Point> points = new List<Point>();
+                    foreach (Point p in freeLine.Points)
+                    {
+                        newLine.Points.Add(new Point(p.X+xD, p.Y+yD));
+                    }
+                    this.shapes.Add(newLine);
+                }
+                else if (s is Line)
+                {
+                    Line line = (Line)s;
+                    Line newLine = new Line(startPoint, Color.Black);
+                    int xD = startPoint.X - line.StartPoint.X + line.EndPoint.X;
+                    int yD = startPoint.Y - line.StartPoint.Y + line.EndPoint.Y;
+                    Point newEndPoint = new Point(xD, yD);
+                    newLine.EndPoint = newEndPoint;
+                    this.shapes.Add(newLine);
+                }
+                else if (s is Rectangle)
+                {
+                    Rectangle rectangle = (Rectangle)s;
+                    Rectangle newRectangle = new Rectangle(startPoint, Color.Black);
+                    int xD = startPoint.X + rectangle.Width;
+                    int yD = startPoint.Y + rectangle.Height;
+                    Point newEndPoint = new Point(xD, yD);
+                    newRectangle.EndPoint = newEndPoint;
+                    this.shapes.Add(newRectangle);
+                }
+                else if (s is Square)
+                {
+                    Square square = (Square)s;
+                    Square newSquare = new Square(startPoint, Color.Black);
+                    int xD = startPoint.X - square.StartPointX + square.EndPoint.X;
+                    int yD = startPoint.Y - square.StartPointY + square.EndPoint.Y;
+                    Point newEndPoint = new Point(xD, yD);
+                    newSquare.EndPoint = newEndPoint;
+                    this.shapes.Add(newSquare);
+                }
+                else if (s is Ellipse)
+                {
+                    Ellipse ellipse = (Ellipse)s;
+                    Ellipse newEllipse = new Ellipse(startPoint, Color.Black);
+                    int xD = startPoint.X - ellipse.StartPointX + ellipse.EndPoint.X;
+                    int yD = startPoint.Y - ellipse.StartPointY + ellipse.EndPoint.Y;
+                    Point newEndPoint = new Point(xD, yD);
+                    newEllipse.EndPoint = newEndPoint;
+                    this.shapes.Add(newEllipse);
+                }
+                else if (s is Circle)
+                {
+                    Circle circle = (Circle)s;
+                    Circle newCircle = new Circle(startPoint, Color.Black);
+                    int xD = startPoint.X - circle.StartPointX + circle.EndPoint.X;
+                    int yD = startPoint.Y - circle.StartPointY + circle.EndPoint.Y;
+                    Point newEndPoint = new Point(xD, yD);
+                    newCircle.EndPoint = newEndPoint;
+                    this.shapes.Add(newCircle);
+                }
+                else if (s is Polygon)
+                {
+                    Polygon polygon = (Polygon)s;
+                    //polygon.getCurrentLine().EndPoint = position;
+                }
+            }
+            this.Invalidate();
         }
 
         public void ClearCanvas()
