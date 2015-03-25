@@ -211,8 +211,8 @@ namespace Sketch_Application
                 if (s is FreeLine)
                 {
                     FreeLine freeLine = (FreeLine)s;
-                    int minX = 10000;
-                    int minY = 10000;
+                    int minX = 100000;
+                    int minY = 100000;
 
                     foreach (Point p in freeLine.Points)
                     {
@@ -238,10 +238,25 @@ namespace Sketch_Application
                 else if (s is Line)
                 {
                     Line line = (Line)s;
-                    Line newLine = new Line(startPoint, Color.Black);
-                    int xD = startPoint.X - line.StartPoint.X + line.EndPoint.X;
-                    int yD = startPoint.Y - line.StartPoint.Y + line.EndPoint.Y;
-                    Point newEndPoint = new Point(xD, yD);
+
+                    int minX = line.StartPoint.X;
+                    int minY = line.StartPoint.Y;
+
+                    if (minX > line.EndPoint.X)
+                        minX = line.EndPoint.X;
+                    if (minY > line.EndPoint.Y)
+                        minY = line.EndPoint.Y;
+
+                    int xD = startPoint.X - minX;
+                    int yD = startPoint.Y - minY;
+
+                    int firstX = line.StartPoint.X + xD;
+                    int firstY = line.StartPoint.Y + yD;
+
+                    Line newLine = new Line(new Point(firstX, firstY), Color.Black);
+                    /*int xD = startPoint.X - line.StartPoint.X + line.EndPoint.X;
+                    int yD = startPoint.Y - line.StartPoint.Y + line.EndPoint.Y;*/
+                    Point newEndPoint = new Point(line.EndPoint.X+xD, line.EndPoint.Y+yD);
                     newLine.EndPoint = newEndPoint;
                     this.shapes.Add(newLine);
                 }
