@@ -94,6 +94,8 @@ namespace Sketch_Application
 
         private void clearButton_Click(object sender, EventArgs e)
         {
+            this.file.IsSaved = false;
+            this.Text = this.FormTitle;
             this.canvas.ClearCanvas();
         }
 
