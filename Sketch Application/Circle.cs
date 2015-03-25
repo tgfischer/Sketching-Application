@@ -56,12 +56,12 @@ namespace Sketch_Application
         {
             get
             {
-                if (Math.Abs(this.start.X - this.end.X) <= Math.Abs(this.start.X - this.end.X))
+                if (Math.Abs(this.start.X - this.end.X) <= Math.Abs(this.start.Y - this.end.Y))
                 {
                     return Math.Abs(this.start.X - this.end.X);
                 }
                 else
-                    return Math.Abs(this.start.X - this.end.X);
+                    return Math.Abs(this.start.Y - this.end.Y);
             }
         }
 

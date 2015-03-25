@@ -105,6 +105,8 @@ namespace Sketch_Application
 
         public void AddToCurrentShape(Point position)
         {
+            if (this.shapes.Count == 0)
+                return;
             Shape shape = this.shapes.Last();
 
             if (shape is Select)
@@ -153,6 +155,8 @@ namespace Sketch_Application
 
         public bool AddLineToCurrentShape(Point position)
         {
+            if (this.shapes.Count == 0)
+                return false;
             Shape shape = this.shapes.Last();
             bool isDrawing = true;
                 
@@ -180,6 +184,8 @@ namespace Sketch_Application
 
         public void SelectShapes()
         {
+            if (this.shapes.Count() == 0)
+                return;
             Shape shape = this.shapes.Last();
 
             if (shape is Select)

@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Xml.Serialization;
 
 namespace Sketch_Application
 {
@@ -16,10 +15,13 @@ namespace Sketch_Application
     {
         private bool isDrawing = false;
         private bool polygonFirst = true;
+        private ImageFile file;
 
         public MainForm()
         {
             InitializeComponent();
+
+            this.file = new ImageFile();
         }
 
         private void colourToolStripMenuItem_Click(object sender, EventArgs e)
@@ -31,54 +33,63 @@ namespace Sketch_Application
         {
             this.canvas.Mode = Mode.Select;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Cross;
         }
 
         private void moveButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Move;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.SizeAll;
         }
 
         private void freeDrawButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.FreeHand;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void lineButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Line;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void rectangleButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Rectangle;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void squareButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Square;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void ellipseButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Ellipse;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void circleButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Circle;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void polygonButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Polygon;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -116,8 +127,14 @@ namespace Sketch_Application
                 {
                     this.isDrawing = true;
                     this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
+
+                    if (this.file.IsSaved)
+                    {
+                        this.file.IsSaved = false;
+                        this.Text = this.FormTitle;
                 }
             }
+        }
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
@@ -126,7 +143,7 @@ namespace Sketch_Application
             {
                 this.isDrawing = false;
             }
-
+            
             if (this.canvas.Mode == Mode.Select)
             {
                 this.canvas.SelectShapes();
@@ -198,32 +215,47 @@ namespace Sketch_Application
             this.canvas.Paste(new Point(0, 0));
         }
 
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.canvas.Shapes.Count == 0)
+            {
+                MessageBox.Show("There is nothing to save!");
+                return;
+            }
+
+            if (!File.Exists(this.file.FilePath))
+            {
+                this.saveAsToolStripMenuItem_Click(null, null);
+                return;
+            }
+
+            this.canvas.RemoveSelect();
+
+            this.file.Save(this.canvas.Shapes);
+
+            this.Text = this.FormTitle;
+            this.canvas.Invalidate();
+        }
+
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.canvas.Shapes.Count == 0)
+            {
+                MessageBox.Show("There is nothing to save!");
+                return;
+            }
+
             this.canvas.RemoveSelect();
             
-            this.saveFileDialog.FileName = "image.xml";
+            this.saveFileDialog.FileName = this.file.FileName;
             this.saveFileDialog.Filter = "XML File (*.xml)|*.xml|All files (*.*)|*.*";
 
             if (this.saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                XmlSerializer serializer = new XmlSerializer(this.canvas.Shapes.GetType(), new Type[] {
-                    typeof(FreeLine),
-                    typeof(Line),
-                    typeof(Rectangle),
-                    typeof(Square),
-                    typeof(Ellipse),
-                    typeof(Circle),
-                    typeof(Polygon)
-                });
-
-                using (StreamWriter writer = new StreamWriter(this.saveFileDialog.FileName))
-                {
-                    serializer.Serialize(writer, this.canvas.Shapes);
-                }
+                this.file.SaveAs(this.canvas.Shapes, this.saveFileDialog.FileName);
             }
 
-            this.Text = this.saveFileDialog.FileName;
+            this.Text = this.FormTitle;
             this.canvas.Invalidate();
         }
 
@@ -233,23 +265,26 @@ namespace Sketch_Application
 
             if (this.openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                XmlSerializer serializer = new XmlSerializer(this.canvas.Shapes.GetType(), new Type[] {
-                    typeof(FreeLine),
-                    typeof(Line),
-                    typeof(Rectangle),
-                    typeof(Square),
-                    typeof(Ellipse),
-                    typeof(Circle),
-                    typeof(Polygon)
-                });
-
-                using (StreamReader reader = new StreamReader(this.openFileDialog.FileName))
-                {
-                    this.canvas.Shapes = (List<Shape>)serializer.Deserialize(reader);
-                }
+                this.canvas.Shapes = this.file.Open(this.canvas.Shapes, this.openFileDialog.FileName);
             }
 
+            this.Text = this.FormTitle;
             this.canvas.Invalidate();
+        }
+
+        private string FormTitle
+        {
+            get 
+            {
+                if (this.file.IsSaved)
+                {
+                    return this.file.FileName + " - Paint";
+                }
+                else
+                {
+                    return this.file.FileName + "* - Paint";
+                }
+            }
         }
 
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e) //opens on right click
