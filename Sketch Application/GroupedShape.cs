@@ -28,8 +28,8 @@ namespace Sketch_Application
         {
             get 
             {
-                int x = 0;
-                int y = 0;
+                int x = Int32.MaxValue;
+                int y = Int32.MaxValue;
 
                 foreach (Shape shape in this.Shapes)
                 {

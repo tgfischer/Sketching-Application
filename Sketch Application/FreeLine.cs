@@ -82,9 +82,20 @@ namespace Sketch_Application
 
         public override Point UpperLeftPoint
         {
-            get
+            get 
             {
-                return new Point(0, 0);
+                int x = Int32.MaxValue;
+                int y = Int32.MaxValue;
+
+                foreach (Point p in this.Points)
+                    {
+                        if (p.X < x)
+                            x = p.X;
+                        if (p.Y < y)
+                            y = p.Y;
+                    }
+
+                return new Point(x, y);
             }
         }
     }

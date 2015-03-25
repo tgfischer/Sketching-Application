@@ -42,7 +42,19 @@ namespace Sketch_Application
         {
             get
             {
-                return new Point(0, 0);
+                int x = Int32.MaxValue;
+                int y = Int32.MaxValue;
+
+                if (this.EndPoint.X < x)
+                    x = this.EndPoint.X;
+                if (this.EndPoint.Y < y)
+                    y = this.EndPoint.Y;
+                if (this.StartPoint.X < x)
+                    x = this.StartPoint.X;
+                if (this.StartPoint.Y < y)
+                    y = this.StartPoint.Y;
+
+                return new Point(x, y);
             }
         }
     }
