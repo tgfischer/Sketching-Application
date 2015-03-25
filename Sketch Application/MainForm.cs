@@ -107,15 +107,15 @@ namespace Sketch_Application
             }
             else if (e.Button != MouseButtons.Right) // Left click
             {
+                this.isDrawing = true;
+
                 if (this.canvas.Mode == Mode.Polygon && polygonFirst)
                 {
-                    this.isDrawing = true;
                     this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
                     polygonFirst = false;
                 }
                 else if (this.canvas.Mode == Mode.Polygon)
                 {
-                    this.isDrawing = true;
                     this.isDrawing = this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
 
                     if (!isDrawing)
@@ -123,13 +123,12 @@ namespace Sketch_Application
                         polygonFirst = true;
                     }
                 }
-                else if(this.canvas.Mode == Mode.Move){
-                    this.isDrawing = true;
+                else if(this.canvas.Mode == Mode.Move)
+                {
                     this.canvas.MoveCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 }
                 else
                 {
-                    this.isDrawing = true;
                     this.canvas.AddNewShape(this.canvas.PointToClient(Cursor.Position));
 
                     if (this.file.IsSaved)
