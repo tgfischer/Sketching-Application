@@ -217,6 +217,16 @@ namespace Sketch_Application
             this.shapes.Add(this.selectedShapes);
         }
 
+        public void UngroupSelectedShapes()
+        {
+            foreach (Shape shape in this.selectedShapes.Shapes)
+            {
+                this.shapes.Remove(shape);
+            }
+
+            this.shapes.Add(this.selectedShapes);
+        }
+
         public void Cut()
         {
             this.clipBoard = selectedShapes;
