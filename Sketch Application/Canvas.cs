@@ -184,10 +184,12 @@ namespace Sketch_Application
             return isDrawing;
         }
 
-        public void SelectShapes()
+        public bool SelectShapes()
         {
             if (this.shapes.Count() == 0)
-                return;
+            {
+                return false;
+            }
 
             Shape shape = this.shapes.Last();
 
@@ -201,6 +203,18 @@ namespace Sketch_Application
             }
 
             this.Invalidate(); // Update the canvas
+
+            return this.selectedShapes.Shapes.Count > 0;
+        }
+
+        public void GroupSelectedShapes()
+        {
+            foreach (Shape shape in this.selectedShapes.Shapes)
+            {
+                this.shapes.Remove(shape);
+            }
+
+            this.shapes.Add(this.selectedShapes);
         }
 
         public void Cut()

@@ -56,14 +56,14 @@
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
             this.clearButton = new System.Windows.Forms.Button();
+            this.canvas = new Sketch_Application.Canvas();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ungroupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cutRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ungroupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.canvas = new Sketch_Application.Canvas();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -396,6 +396,23 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
+            // canvas
+            // 
+            this.canvas.BackColor = System.Drawing.Color.White;
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel.SetColumnSpan(this.canvas, 12);
+            this.canvas.ContextMenuStrip = this.contextMenuStrip;
+            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(3, 83);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(1263, 832);
+            this.canvas.TabIndex = 9;
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -404,15 +421,8 @@
             this.groupShapesToolStripMenuItem,
             this.ungroupShapesToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(162, 92);
+            this.contextMenuStrip.Size = new System.Drawing.Size(162, 114);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
-            // 
-            // ungroupShapesToolStripMenuItem
-            // 
-            this.ungroupShapesToolStripMenuItem.Enabled = false;
-            this.ungroupShapesToolStripMenuItem.Name = "ungroupShapesToolStripMenuItem";
-            this.ungroupShapesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.ungroupShapesToolStripMenuItem.Text = "Ungroup Shapes";
             // 
             // cutRightToolStripMenuItem
             // 
@@ -434,27 +444,19 @@
             this.groupShapesToolStripMenuItem.Name = "groupShapesToolStripMenuItem";
             this.groupShapesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.groupShapesToolStripMenuItem.Text = "Group Shapes";
+            this.groupShapesToolStripMenuItem.Click += new System.EventHandler(this.groupShapesToolStripMenuItem_Click);
+            // 
+            // ungroupShapesToolStripMenuItem
+            // 
+            this.ungroupShapesToolStripMenuItem.Enabled = false;
+            this.ungroupShapesToolStripMenuItem.Name = "ungroupShapesToolStripMenuItem";
+            this.ungroupShapesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.ungroupShapesToolStripMenuItem.Text = "Ungroup Shapes";
+            this.ungroupShapesToolStripMenuItem.Click += new System.EventHandler(this.ungroupShapesToolStripMenuItem_Click);
             // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
-            // 
-            // canvas
-            // 
-            this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tableLayoutPanel.SetColumnSpan(this.canvas, 12);
-            this.canvas.ContextMenuStrip = this.contextMenuStrip;
-            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(3, 83);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(1263, 832);
-            this.canvas.TabIndex = 9;
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // MainForm
             // 
