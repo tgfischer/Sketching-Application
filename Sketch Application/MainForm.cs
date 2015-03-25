@@ -295,27 +295,27 @@ namespace Sketch_Application
 
         private void ungroupShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.canvas.UngroupSelectedShapes();
+            this.canvas.UngroupSelectedShapes(this.canvas.SelectedShape);
             this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton(this.canvas.SelectedShape);
         }
 
-        private bool EnableUngroupButton(Shape selectedShape)
+        private bool EnableUngroupButton(Shape shape)
         {
             if (this.canvas.Shapes.Count == 0)
             {
                 return false;
             }
 
-            if (selectedShape is GroupedShape)
+            if (shape is GroupedShape)
             {
-                GroupedShape groupedShape = (GroupedShape)selectedShape;
+                GroupedShape selectedShapes = (GroupedShape)shape;
 
-                if (groupedShape.Shapes.Count == 1 && groupedShape.Shapes.First() is GroupedShape)
+                if (selectedShapes.Shapes.Count == 1 && selectedShapes.Shapes.First() is GroupedShape)
                 {
-                    return EnableUngroupButton(groupedShape.Shapes.First());
+                    return EnableUngroupButton(selectedShapes.Shapes.First());
                 }
 
-                return groupedShape.Shapes.Count > 1;
+                return selectedShapes.Shapes.Count > 1;
             }
 
             return false;

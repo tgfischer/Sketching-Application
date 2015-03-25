@@ -94,7 +94,6 @@ namespace Sketch_Application
                 this.Points.Remove(new Point(p.X - x, p.Y - y));
                 this.Points.Add(p);
             }
-
         }
 
         public override Point UpperLeftPoint

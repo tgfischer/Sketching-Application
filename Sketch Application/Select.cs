@@ -17,19 +17,18 @@ namespace Sketch_Application
 
         public GroupedShape FindContainedShapes(List<Shape> shapes, int width)
         {
-            GroupedShape groupedShape = new GroupedShape();
+            GroupedShape selectedShapes = new GroupedShape();
 
             foreach (Shape shape in shapes)
             {
                 if (this.Contains(shape, width))
                 {
-                    shape.Thickness = thickness;
-                    shape.isSelected = true;
-                    groupedShape.Shapes.Add(shape);
+                    shape.Select();
+                    selectedShapes.Shapes.Add(shape);
                 }
             }
 
-            return groupedShape;
+            return selectedShapes;
         }
 
         public bool Contains(Shape shape, int width)
