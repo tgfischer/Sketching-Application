@@ -226,12 +226,17 @@ namespace Sketch_Application
 
         public void UngroupSelectedShapes()
         {
-            foreach (Shape shape in this.selectedShapes.Shapes)
+            if (!this.shapes.Contains(this.selectedShapes))
             {
-                this.shapes.Remove(shape);
+                return;
             }
 
-            this.shapes.Add(this.selectedShapes);
+            this.shapes.Remove(this.selectedShapes);
+
+            foreach (Shape shape in this.selectedShapes.Shapes)
+            {
+                this.shapes.Add(shape);
+            }
         }
 
         public void Cut()

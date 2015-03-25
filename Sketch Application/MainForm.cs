@@ -150,7 +150,7 @@ namespace Sketch_Application
             if (this.canvas.Mode == Mode.Select)
             {
                 this.groupShapesToolStripMenuItem.Enabled = this.canvas.SelectShapes();
-                this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton();
+                this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton(this.canvas.SelectedShape);
             }
             else if (this.canvas.Mode == Mode.Move)
             {
@@ -290,24 +290,32 @@ namespace Sketch_Application
         private void groupShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.canvas.GroupSelectedShapes();
-            this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton();
+            this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton(this.canvas.SelectedShape);
         }
 
         private void ungroupShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.canvas.UngroupSelectedShapes();
+            this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton(this.canvas.SelectedShape);
         }
 
-        private bool EnableUngroupButton()
+        private bool EnableUngroupButton(Shape selectedShape)
         {
-            if (this.canvas.SelectedShape.Shapes.Count == 0 || this.canvas.Shapes.Count == 0)
+            if (this.canvas.Shapes.Count == 0)
             {
                 return false;
             }
 
-            if (this.canvas.Shapes.Contains(this.canvas.SelectedShape))
+            if (selectedShape is GroupedShape)
             {
-                return true;
+                GroupedShape groupedShape = (GroupedShape)selectedShape;
+
+                if (groupedShape.Shapes.Count == 1 && groupedShape.Shapes.First() is GroupedShape)
+                {
+                    return EnableUngroupButton(groupedShape.Shapes.First());
+                }
+
+                return groupedShape.Shapes.Count > 1;
             }
 
             return false;
