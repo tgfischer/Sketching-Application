@@ -33,7 +33,10 @@ namespace Sketch_Application
 
         public override void Shift(int x, int y)
         {
-
+            foreach (Line line in this.Lines)
+            {
+                line.Shift(x, y);
+            }
         }
 
         public void addLine(Line line)
