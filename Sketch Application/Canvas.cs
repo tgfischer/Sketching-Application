@@ -15,8 +15,8 @@ namespace Sketch_Application
     public partial class Canvas : Panel
     {
         private List<Shape> shapes = new List<Shape>();
-        private List<Shape> selectedShapes = new List<Shape>();
-        private List<Shape> clipBoard = new List<Shape>();
+        private GroupedShape selectedShapes = new GroupedShape();
+        private GroupedShape clipBoard = new GroupedShape();
         private bool clear = false;
         public Color Colour = Color.Black;
         public Mode Mode = Mode.Select;
@@ -184,53 +184,23 @@ namespace Sketch_Application
 
         public void MoveCurrentShape(Point position)
         {
-            Console.WriteLine("moving");
-            if (this.selectedShapes.Count == 0)
+            if (this.selectedShapes.Shapes.Count == 0)
                 return;
-            foreach (Shape shape in selectedShapes)
-            {
-                if (shape is Line)
-                {
-                    Line line = (Line)shape;
-                    Point point = new Point();
-                    point.X = position.X + (line.EndPoint.X - line.StartPoint.X);
-                    point.Y = position.Y + (line.EndPoint.Y - line.StartPoint.Y);
-                    line.StartPoint = position;
-                    line.EndPoint = point;
-                }
-                else if (shape is FreeLine)
-                {
-                    FreeLine freeLine = (FreeLine)shape;
-                    Point start = freeLine.Points.First();
-                    List<Point> points = new List<Point>();
-                    for (int i = 0; i < freeLine.Points.Count; i++)
-                    {
-                        points.Add(new Point(position.X + (freeLine.Points[i].X - start.X), position.Y + (freeLine.Points[i].Y - start.Y)));
-                    }
-                    freeLine.Points = points; //update all points in the free line
-                }
-                else if (shape is Rectangle)
-                {
-                    Rectangle rectangle = (Rectangle)shape;
-                    Point point = new Point();
-                    point.X = position.X + (rectangle.EndPoint.X - rectangle.StartPoint.X);
-                    point.Y = position.Y + (rectangle.EndPoint.Y - rectangle.StartPoint.Y);
-                    rectangle.StartPoint = position;
-                    rectangle.EndPoint = point;
-                }
-                //else if (shape is Square)
-                //{
-                //    Square square = (Square)shape;
-
-                //}
-            }
+            
+            int xD = position.X - selectedShapes.UpperLeftPoint.X;
+            int yD = position.Y - selectedShapes.UpperLeftPoint.Y;
+            selectedShapes.Shift(xD, yD);
+                
             this.Invalidate();
         }
 
-        public void SelectShapes()
+        public bool SelectShapes()
         {
             if (this.shapes.Count() == 0)
-                return;
+            {
+                return false;
+            }
+
             Shape shape = this.shapes.Last();
 
             if (shape is Select)
@@ -243,12 +213,24 @@ namespace Sketch_Application
             }
 
             this.Invalidate(); // Update the canvas
+
+            return this.selectedShapes.Shapes.Count > 0;
+        }
+
+        public void GroupSelectedShapes()
+        {
+            foreach (Shape shape in this.selectedShapes.Shapes)
+            {
+                this.shapes.Remove(shape);
+            }
+
+            this.shapes.Add(this.selectedShapes);
         }
 
         public void Cut()
         {
             this.clipBoard = selectedShapes;
-            foreach (Shape s in clipBoard)
+            foreach (Shape s in clipBoard.Shapes)
             {
                 this.shapes.Remove(s);
             }
@@ -257,105 +239,100 @@ namespace Sketch_Application
 
         public void Paste(Point startPoint)
         {
-            foreach (Shape s in clipBoard)
+            foreach (Shape s in clipBoard.Shapes)
             {
-                if (s is FreeLine)
-                {
-                    FreeLine freeLine = (FreeLine)s;
-                    int minX = 100000;
-                    int minY = 100000;
+                int xD = startPoint.X - s.UpperLeftPoint.X;
+                int yD = startPoint.Y - s.UpperLeftPoint.Y;
+                s.Shift(xD, yD);
+                this.Shapes.Add(s);
+                //if (s is FreeLine)
+                //{
+                //    FreeLine freeLine = (FreeLine)s;
+                //    int xD = startPoint.X - freeLine.UpperLeftPoint.X;
+                //    int yD = startPoint.Y - freeLine.UpperLeftPoint.Y;
+                //    freeLine.Shift(xD, yD);
+                //    this.shapes.Add(freeLine);
+                //}
+                //else if (s is Line)
+                //{
+                //    Line line = (Line)s;
+                //    int xD = startPoint.X - line.UpperLeftPoint.X;
+                //    int yD = startPoint.Y - line.UpperLeftPoint.Y;
+                //    line.Shift(xD, yD);
+                //    this.shapes.Add(line);
+                //}
+                //else if (s is Rectangle)
+                //{
+                //    Rectangle rectangle = (Rectangle)s;
+                //    int xD = startPoint.X - rectangle.UpperLeftPoint.X;
+                //    int yD = startPoint.Y - rectangle.UpperLeftPoint.Y;
+                //    rectangle.Shift(xD, yD);
+                //    this.shapes.Add(rectangle);
+                //}
+                //else if (s is Square)
+                //{
+                //    Square square = (Square)s;
+                //    int xD = startPoint.X - square.UpperLeftPoint.X;
+                //    int yD = startPoint.Y - square.UpperLeftPoint.Y;
+                //    square.Shift(xD, yD);
+                //    this.shapes.Add(square);
+                //}
+                //else if (s is Ellipse)
+                //{
+                //    Ellipse ellipse = (Ellipse)s;
+                //    int xD = startPoint.X - ellipse.UpperLeftPoint.X;
+                //    int yD = startPoint.Y - ellipse.UpperLeftPoint.Y;
+                //    ellipse.Shift(xD, yD);
+                //    this.shapes.Add(ellipse);
+                //}
+                //else if (s is Circle)
+                //{
+                //    Circle circle = (Circle)s;
+                //    int xD = startPoint.X - circle.UpperLeftPoint.X;
+                //    int yD = startPoint.Y - circle.UpperLeftPoint.Y;
+                //    circle.Shift(xD, yD);
+                //    this.shapes.Add(circle);
+                //}
+                //else if (s is Polygon)
+                //{
+                //    Polygon polygon = (Polygon)s;
+                //    //polygon.getCurrentLine().EndPoint = position;
+                //}
+                //if (s is GroupedShape)
+                //{
+                //    GroupedShape gShape = (GroupedShape)s;
 
-                    foreach (Point p in freeLine.Points)
-                    {
-                        if (p.X < minX)
-                            minX = p.X;
-                        if (p.Y < minY)
-                            minY = p.Y;
-                    }
+                //    int xD = startPoint.X - gShape.UpperLeftPoint.X;
+                //    int yD = startPoint.Y - gShape.UpperLeftPoint.Y;
 
-                    int xD = startPoint.X - minX;
-                    int yD = startPoint.Y - minY;
-
-                    int firstX = freeLine.Points.First<Point>().X + xD;
-                    int firstY = freeLine.Points.First<Point>().Y + yD;
-                    FreeLine newLine = new FreeLine(new Point(firstX, firstY), Color.Black);
-                    List<Point> points = new List<Point>();
-                    foreach (Point p in freeLine.Points)
-                    {
-                        newLine.Points.Add(new Point(p.X+xD, p.Y+yD));
-                    }
-                    this.shapes.Add(newLine);
-                }
-                else if (s is Line)
-                {
-                    Line line = (Line)s;
-
-                    int minX = line.StartPoint.X;
-                    int minY = line.StartPoint.Y;
-
-                    if (minX > line.EndPoint.X)
-                        minX = line.EndPoint.X;
-                    if (minY > line.EndPoint.Y)
-                        minY = line.EndPoint.Y;
-
-                    int xD = startPoint.X - minX;
-                    int yD = startPoint.Y - minY;
-
-                    int firstX = line.StartPoint.X + xD;
-                    int firstY = line.StartPoint.Y + yD;
-
-                    Line newLine = new Line(new Point(firstX, firstY), Color.Black);
-                    /*int xD = startPoint.X - line.StartPoint.X + line.EndPoint.X;
-                    int yD = startPoint.Y - line.StartPoint.Y + line.EndPoint.Y;*/
-                    Point newEndPoint = new Point(line.EndPoint.X+xD, line.EndPoint.Y+yD);
-                    newLine.EndPoint = newEndPoint;
-                    this.shapes.Add(newLine);
-                }
-                else if (s is Rectangle)
-                {
-                    Rectangle rectangle = (Rectangle)s;
-                    Rectangle newRectangle = new Rectangle(startPoint, Color.Black);
-                    int xD = startPoint.X + rectangle.Width;
-                    int yD = startPoint.Y + rectangle.Height;
-                    Point newEndPoint = new Point(xD, yD);
-                    newRectangle.EndPoint = newEndPoint;
-                    this.shapes.Add(newRectangle);
-                }
-                else if (s is Square)
-                {
-                    Square square = (Square)s;
-                    Square newSquare = new Square(startPoint, Color.Black);
-                    int xD = startPoint.X - square.StartPoint.X + square.EndPoint.X;
-                    int yD = startPoint.Y - square.StartPoint.Y + square.EndPoint.Y;
-                    Point newEndPoint = new Point(xD, yD);
-                    newSquare.EndPoint = newEndPoint;
-                    this.shapes.Add(newSquare);
-                }
-                else if (s is Ellipse)
-                {
-                    Ellipse ellipse = (Ellipse)s;
-                    Ellipse newEllipse = new Ellipse(startPoint, Color.Black);
-                    int xD = startPoint.X - ellipse.StartPoint.X + ellipse.EndPoint.X;
-                    int yD = startPoint.Y - ellipse.StartPoint.Y + ellipse.EndPoint.Y;
-                    Point newEndPoint = new Point(xD, yD);
-                    newEllipse.EndPoint = newEndPoint;
-                    this.shapes.Add(newEllipse);
-                }
-                else if (s is Circle)
-                {
-                    Circle circle = (Circle)s;
-                    Circle newCircle = new Circle(startPoint, Color.Black);
-                    int xD = startPoint.X - circle.StartPoint.X + circle.EndPoint.X;
-                    int yD = startPoint.Y - circle.StartPoint.Y + circle.EndPoint.Y;
-                    Point newEndPoint = new Point(xD, yD);
-                    newCircle.EndPoint = newEndPoint;
-                    this.shapes.Add(newCircle);
-                }
-                else if (s is Polygon)
-                {
-                    Polygon polygon = (Polygon)s;
-                    //polygon.getCurrentLine().EndPoint = position;
-                }
+                //    foreach (Shape sh in gShape.Shapes)
+                //    {
+                //        if (sh is FreeLine)
+                //        {
+                //            FreeLine freeLine = (FreeLine)sh;
+                //            int firstX = freeLine.Points.First<Point>().X + xD;
+                //            int firstY = freeLine.Points.First<Point>().Y + yD;
+                //            FreeLine newLine = new FreeLine(new Point(firstX, firstY), Color.Black);
+                //            List<Point> points = new List<Point>();
+                //            foreach (Point p in freeLine.Points)
+                //            {
+                //                newLine.Points.Add(new Point(p.X + xD, p.Y + yD));
+                //            }
+                //            this.shapes.Add(newLine);
+                //        }
+                //        else if (s is Line)
+                //        {
+                //            Line line = (Line)sh;
+                //            int firstX = line.StartPoint.X + xD;
+                //            int firstY = line.StartPoint.Y + yD;
+                //            Line newLine = new Line(new Point(firstX, firstY), Color.Black);
+                //            Point newEndPoint = new Point(line.EndPoint.X + xD, line.EndPoint.Y + yD);
+                //            newLine.EndPoint = newEndPoint;
+                //            this.shapes.Add(newLine);
+                //        }
+                //        this.shapes.Add(sh);
+                //    }
+                //}
             }
             this.Invalidate();
         }
@@ -371,7 +348,7 @@ namespace Sketch_Application
         {
             this.shapes.RemoveAll(x => x is Select);
 
-            foreach (Shape selectedShape in this.selectedShapes)
+            foreach (Shape selectedShape in this.selectedShapes.Shapes)
             {
                 selectedShape.isSelected = false;
                 selectedShape.Thickness = 1F;

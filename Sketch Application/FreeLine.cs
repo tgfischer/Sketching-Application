@@ -82,7 +82,18 @@ namespace Sketch_Application
 
         public override void Shift(int x, int y)
         {
-
+            List<Point> points = new List<Point>();
+            //create new freeline and store in temp list
+            foreach (Point p in this.Points)
+            {
+                points.Add(new Point(p.X + x, p.Y + y));
+            }
+            //draw new line and erase old
+            foreach (Point p in points)
+            {
+                this.Points.Remove(new Point(p.X - x, p.Y - y));
+                this.Points.Add(p);
+            }
         }
 
         public override Point UpperLeftPoint
