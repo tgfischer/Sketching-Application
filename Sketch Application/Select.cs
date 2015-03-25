@@ -46,6 +46,18 @@ namespace Sketch_Application
             {
                 return Geometry.RectangleIntersectsSelect((Rectangle)shape, this);
             }
+            else if (shape is GroupedShape)
+            {
+                GroupedShape groupedShape = (GroupedShape)shape;
+
+                foreach (Shape subShape in groupedShape.Shapes)
+                {
+                    if (this.Contains(subShape, width))
+                    {
+                        return true;
+                    }
+                }
+            }
 
             return false;
         }

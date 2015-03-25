@@ -99,9 +99,7 @@ namespace Sketch_Application
 
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            //this.mouseDownPanel.BackColor = Color.Tomato;
-
-            if (e.Button == MouseButtons.Right && this.canvas.Mode == Mode.Polygon && isDrawing) //right click
+            if (e.Button == MouseButtons.Right && this.canvas.Mode == Mode.Polygon && isDrawing) // Right click
             {
                 this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
             }
@@ -146,7 +144,7 @@ namespace Sketch_Application
             
             if (this.canvas.Mode == Mode.Select)
             {
-                this.canvas.SelectShapes();
+                this.groupShapesToolStripMenuItem.Enabled = this.canvas.SelectShapes();
             }
         }
 
@@ -155,7 +153,6 @@ namespace Sketch_Application
             if (isDrawing) 
             {
                 this.canvas.AddToCurrentShape(this.canvas.PointToClient(Cursor.Position));
-                //this.mouseDownPanel.BackColor = Color.CornflowerBlue;
             }
         }
 
@@ -230,6 +227,7 @@ namespace Sketch_Application
             }
 
             this.canvas.RemoveSelect();
+            this.groupShapesToolStripMenuItem.Enabled = false;
 
             this.file.Save(this.canvas.Shapes);
 
@@ -246,7 +244,8 @@ namespace Sketch_Application
             }
 
             this.canvas.RemoveSelect();
-            
+            this.groupShapesToolStripMenuItem.Enabled = false;
+
             this.saveFileDialog.FileName = this.file.FileName;
             this.saveFileDialog.Filter = "XML File (*.xml)|*.xml|All files (*.*)|*.*";
 
@@ -270,6 +269,16 @@ namespace Sketch_Application
 
             this.Text = this.FormTitle;
             this.canvas.Invalidate();
+        }
+
+        private void groupShapesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.canvas.GroupSelectedShapes();
+        }
+
+        private void ungroupShapesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private string FormTitle
@@ -296,6 +305,5 @@ namespace Sketch_Application
                 polygonFirst = true; 
             }
         }
-
     }
 }
