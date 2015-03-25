@@ -123,6 +123,10 @@ namespace Sketch_Application
                         polygonFirst = true;
                     }
                 }
+                else if(this.canvas.Mode == Mode.Move){
+                    this.isDrawing = true;
+                    this.canvas.MoveCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                }
                 else
                 {
                     this.isDrawing = true;
@@ -148,11 +152,19 @@ namespace Sketch_Application
             {
                 this.canvas.SelectShapes();
             }
+            else if (this.canvas.Mode == Mode.Move)
+            {
+                this.isDrawing = false;
+            }
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isDrawing) 
+            if (isDrawing && this.canvas.Mode == Mode.Move)
+            {
+                this.canvas.MoveCurrentShape(this.canvas.PointToClient(Cursor.Position));
+            }
+            else if (isDrawing) 
             {
                 this.canvas.AddToCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 //this.mouseDownPanel.BackColor = Color.CornflowerBlue;
