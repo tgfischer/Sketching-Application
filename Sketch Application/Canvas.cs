@@ -105,6 +105,8 @@ namespace Sketch_Application
 
         public void AddToCurrentShape(Point position)
         {
+            if (this.shapes.Count == 0)
+                return;
             Shape shape = this.shapes.Last();
 
             if (shape is Select)
@@ -153,6 +155,8 @@ namespace Sketch_Application
 
         public bool AddLineToCurrentShape(Point position)
         {
+            if (this.shapes.Count == 0)
+                return false;
             Shape shape = this.shapes.Last();
             bool isDrawing = true;
                 
@@ -180,21 +184,20 @@ namespace Sketch_Application
 
         public void SelectShapes()
         {
-            if (this.shapes.Count() > 0)
+            if (this.shapes.Count() == 0)
+                return;
+            Shape shape = this.shapes.Last();
+
+            if (shape is Select)
             {
-                Shape shape = this.shapes.Last();
+                Select select = (Select)shape;
 
-                if (shape is Select)
-                {
-                    Select select = (Select)shape;
+                this.RemoveSelect();
 
-                    this.RemoveSelect();
-
-                    this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
-                }
-
-                this.Invalidate(); // Update the canvas
+                this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
             }
+
+            this.Invalidate(); // Update the canvas
         }
 
         public void Cut()
