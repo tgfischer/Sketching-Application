@@ -94,10 +94,8 @@ namespace Sketch_Application
                     Polygon polygon = new Polygon(position, this.Colour);
                     Line line1 = new Line(position, this.Colour);
                     polygon.addLine(line1);
-                    //polygon.addLine(position, this.Colour);
                     this.shapes.Add(polygon);
                     break;
-
             }
 
             this.Invalidate(); // Update the canvas
@@ -107,7 +105,6 @@ namespace Sketch_Application
         {
             if (this.shapes.Count == 0)
                 return;
-
             Shape shape = this.shapes.Last();
 
             if (shape is Select)
@@ -158,7 +155,6 @@ namespace Sketch_Application
         {
             if (this.shapes.Count == 0)
                 return false;
-
             Shape shape = this.shapes.Last();
             bool isDrawing = true;
                 
@@ -182,6 +178,18 @@ namespace Sketch_Application
             }
             this.Invalidate(); //update the canvas
             return isDrawing;
+        }
+
+        public void MoveCurrentShape(Point position)
+        {
+            if (this.selectedShapes.Shapes.Count == 0)
+                return;
+            
+            int xD = position.X - selectedShapes.UpperLeftPoint.X;
+            int yD = position.Y - selectedShapes.UpperLeftPoint.Y;
+            selectedShapes.Shift(xD, yD);
+                
+            this.Invalidate();
         }
 
         public bool SelectShapes()

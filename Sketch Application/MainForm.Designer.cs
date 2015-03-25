@@ -56,12 +56,16 @@
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
             this.clearButton = new System.Windows.Forms.Button();
+
             this.canvas = new Sketch_Application.Canvas();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             this.groupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             this.ungroupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip.SuspendLayout();
@@ -220,7 +224,7 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(1269, 918);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(1269, 708);
             this.tableLayoutPanel.TabIndex = 1;
             // 
             // selectButton
@@ -396,6 +400,7 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
+
             // canvas
             // 
             this.canvas.BackColor = System.Drawing.Color.White;
@@ -413,6 +418,7 @@
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
+
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -454,6 +460,53 @@
             this.ungroupShapesToolStripMenuItem.Text = "Ungroup Shapes";
             this.ungroupShapesToolStripMenuItem.Click += new System.EventHandler(this.ungroupShapesToolStripMenuItem_Click);
             // 
+//<<<<<<< HEAD
+
+//            // canvas
+//            // 
+//            this.canvas.BackColor = System.Drawing.Color.White;
+//            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+//            this.tableLayoutPanel.SetColumnSpan(this.canvas, 12);
+//            this.canvas.ContextMenuStrip = this.contextMenuStrip;
+//            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+//            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+//            this.canvas.Location = new System.Drawing.Point(3, 83);
+//            this.canvas.Name = "canvas";
+//            this.canvas.Size = new System.Drawing.Size(1263, 622);
+//            this.canvas.TabIndex = 9;
+//            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+//            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
+//            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+//            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+//=======
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+//>>>>>>> fe5826e254bf35b797b819a750c10b74d914be1b
+//            // 
+//            // contextMenuStrip
+//            // 
+//            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+//            this.cutRightToolStripMenuItem,
+//            this.pasteRightToolStripMenuItem});
+//            this.contextMenuStrip.Name = "contextMenuStrip1";
+//            this.contextMenuStrip.Size = new System.Drawing.Size(103, 48);
+//            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+//            // 
+//            // cutRightToolStripMenuItem
+//            // 
+//            this.cutRightToolStripMenuItem.Name = "cutRightToolStripMenuItem";
+//            this.cutRightToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+//            this.cutRightToolStripMenuItem.Text = "Cut";
+//            this.cutRightToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
+//            // 
+//            // pasteRightToolStripMenuItem
+//            // 
+//            this.pasteRightToolStripMenuItem.Name = "pasteRightToolStripMenuItem";
+//            this.pasteRightToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+//            this.pasteRightToolStripMenuItem.Text = "Paste";
+//            this.pasteRightToolStripMenuItem.Click += new System.EventHandler(this.pasteRightToolStripMenuItem_Click);
+//            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
@@ -462,7 +515,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1269, 943);
+            this.ClientSize = new System.Drawing.Size(1269, 733);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
