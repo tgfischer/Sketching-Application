@@ -80,6 +80,11 @@ namespace Sketch_Application
             }*/
         }
 
+        public override void Shift(int x, int y)
+        {
+
+        }
+
         public override Point UpperLeftPoint
         {
             get

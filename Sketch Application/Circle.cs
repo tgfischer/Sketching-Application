@@ -19,36 +19,35 @@ namespace Sketch_Application
 
         public override void Draw(Graphics g, Pen pen)
         {
-            g.DrawEllipse(pen, this.StartPointX, this.StartPointY, this.Diameter, this.Diameter);
+            g.DrawEllipse(pen, this.StartPoint.X, this.StartPoint.Y, this.Diameter, this.Diameter);
         }
 
-        public override int StartPointX
+        public override Point StartPoint
         {
             get
             {
+                int x = 0;
+                int y = 0;
+
                 if (this.start.X > this.end.X)
                 {
-                    return Math.Min(this.start.X, this.start.X - width);
+                    x = Math.Min(this.start.X, this.start.X - width);
                 }
                 else
                 {
-                    return Math.Min(this.start.X, this.start.X + width);
+                    x = Math.Min(this.start.X, this.start.X + width);
                 }
-            }
-        }
 
-        public override int StartPointY
-        {
-            get
-            {
                 if (this.start.Y > this.end.Y)
                 {
-                    return Math.Min(this.start.Y, this.start.Y - width);
+                    y = Math.Min(this.start.Y, this.start.Y - width);
                 }
                 else
                 {
-                    return Math.Min(this.start.Y, this.start.Y + width);
+                    y = Math.Min(this.start.Y, this.start.Y + width);
                 }
+
+                return new Point(x, y);
             }
         }
 

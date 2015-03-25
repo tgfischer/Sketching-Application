@@ -288,8 +288,8 @@ namespace Sketch_Application
                 {
                     Square square = (Square)s;
                     Square newSquare = new Square(startPoint, Color.Black);
-                    int xD = startPoint.X - square.StartPointX + square.EndPoint.X;
-                    int yD = startPoint.Y - square.StartPointY + square.EndPoint.Y;
+                    int xD = startPoint.X - square.StartPoint.X + square.EndPoint.X;
+                    int yD = startPoint.Y - square.StartPoint.Y + square.EndPoint.Y;
                     Point newEndPoint = new Point(xD, yD);
                     newSquare.EndPoint = newEndPoint;
                     this.shapes.Add(newSquare);
@@ -298,8 +298,8 @@ namespace Sketch_Application
                 {
                     Ellipse ellipse = (Ellipse)s;
                     Ellipse newEllipse = new Ellipse(startPoint, Color.Black);
-                    int xD = startPoint.X - ellipse.StartPointX + ellipse.EndPoint.X;
-                    int yD = startPoint.Y - ellipse.StartPointY + ellipse.EndPoint.Y;
+                    int xD = startPoint.X - ellipse.StartPoint.X + ellipse.EndPoint.X;
+                    int yD = startPoint.Y - ellipse.StartPoint.Y + ellipse.EndPoint.Y;
                     Point newEndPoint = new Point(xD, yD);
                     newEllipse.EndPoint = newEndPoint;
                     this.shapes.Add(newEllipse);
@@ -308,8 +308,8 @@ namespace Sketch_Application
                 {
                     Circle circle = (Circle)s;
                     Circle newCircle = new Circle(startPoint, Color.Black);
-                    int xD = startPoint.X - circle.StartPointX + circle.EndPoint.X;
-                    int yD = startPoint.Y - circle.StartPointY + circle.EndPoint.Y;
+                    int xD = startPoint.X - circle.StartPoint.X + circle.EndPoint.X;
+                    int yD = startPoint.Y - circle.StartPoint.Y + circle.EndPoint.Y;
                     Point newEndPoint = new Point(xD, yD);
                     newCircle.EndPoint = newEndPoint;
                     this.shapes.Add(newCircle);

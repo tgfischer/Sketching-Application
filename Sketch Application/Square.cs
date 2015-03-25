@@ -19,36 +19,35 @@ namespace Sketch_Application
 
         public override void Draw(Graphics g, Pen pen)
         {
-            g.DrawRectangle(pen, this.StartPointX, this.StartPointY, this.width, this.height);
+            g.DrawRectangle(pen, this.StartPoint.X, this.StartPoint.Y, this.width, this.height);
         }
 
-        public override int StartPointX
-        {
-            get 
-            { 
-                if (this.start.X > this.end.X)
-                {
-                    return Math.Min(this.start.X, this.start.X - width); 
-                }
-                else
-                {
-                    return Math.Min(this.start.X, this.start.X + width); 
-                }
-            }
-        }
-
-        public override int StartPointY
+        public override Point StartPoint
         {
             get 
             {
-                if (this.start.Y > this.end.Y)
+                int x = 0;
+                int y = 0;
+
+                if (this.start.X > this.end.X)
                 {
-                    return Math.Min(this.start.Y, this.start.Y - width);
+                    x = Math.Min(this.start.X, this.start.X - width); 
                 }
                 else
                 {
-                    return Math.Min(this.start.Y, this.start.Y + width);
-                } 
+                    x = Math.Min(this.start.X, this.start.X + width); 
+                }
+
+                if (this.start.Y > this.end.Y)
+                {
+                    y = Math.Min(this.start.Y, this.start.Y - width);
+                }
+                else
+                {
+                    y = Math.Min(this.start.Y, this.start.Y + width);
+                }
+
+                return new Point(x, y);
             }
         }
 

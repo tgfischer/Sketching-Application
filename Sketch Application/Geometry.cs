@@ -11,7 +11,7 @@ namespace Sketch_Application
     {
         public static bool FreeLineIntersectsSelect(FreeLine freeLine, Select select)
         {
-            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(select.StartPointX, select.StartPointY, select.Width, select.Height);
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(select.StartPoint.X, select.StartPoint.Y, select.Width, select.Height);
 
             for (int i = 1; i < freeLine.Points.Count; i++)
             {
@@ -26,18 +26,18 @@ namespace Sketch_Application
 
         public static bool LineIntersectsSelect(Line line, Select select)
         {
-            return LineIntersectsRect(line.StartPoint, line.EndPoint, new System.Drawing.Rectangle(select.StartPointX, select.StartPointY, select.Width, select.Height));
+            return LineIntersectsRect(line.StartPoint, line.EndPoint, new System.Drawing.Rectangle(select.StartPoint.X, select.StartPoint.Y, select.Width, select.Height));
         }
 
         public static bool RectangleIntersectsSelect(Rectangle rectangle, Select select)
         {
-            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(select.StartPointX, select.StartPointY, select.Width, select.Height);
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(select.StartPoint.X, select.StartPoint.Y, select.Width, select.Height);
 
             List<Point> points = new List<Point>();
             points.Add(rectangle.StartPoint);
-            points.Add(new Point(rectangle.StartPointX + rectangle.Width, rectangle.StartPointY));
-            points.Add(new Point(rectangle.StartPointX + rectangle.Width, rectangle.StartPointY + rectangle.Height));
-            points.Add(new Point(rectangle.StartPointX, rectangle.StartPointY + rectangle.Height));
+            points.Add(new Point(rectangle.StartPoint.X + rectangle.Width, rectangle.StartPoint.Y));
+            points.Add(new Point(rectangle.StartPoint.X + rectangle.Width, rectangle.StartPoint.Y + rectangle.Height));
+            points.Add(new Point(rectangle.StartPoint.X, rectangle.StartPoint.Y + rectangle.Height));
 
 
             for (int i = 1; i < points.Count; i++)

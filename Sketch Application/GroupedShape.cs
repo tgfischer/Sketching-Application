@@ -24,12 +24,20 @@ namespace Sketch_Application
             }
         }
 
+        public override void Shift(int x, int y)
+        {
+            foreach (Shape shape in this.Shapes)
+            {
+                shape.Shift(x, y);
+            }
+        }
+
         public override Point UpperLeftPoint
         {
             get 
             {
-                int x = 0;
-                int y = 0;
+                int x = Int32.MaxValue;
+                int y = Int32.MaxValue;
 
                 foreach (Shape shape in this.Shapes)
                 {
