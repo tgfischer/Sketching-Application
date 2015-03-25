@@ -247,6 +247,9 @@ namespace Sketch_Application
                     if (minY > line.EndPoint.Y)
                         minY = line.EndPoint.Y;
 
+                    /*float midX = (line.StartPoint.X + line.EndPoint.X)/2;
+                    float midY = (line.StartPoint.Y + line.EndPoint.Y) / 2;*/
+
                     int xD = startPoint.X - minX;
                     int yD = startPoint.Y - minY;
 
