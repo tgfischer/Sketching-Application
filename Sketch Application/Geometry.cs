@@ -36,8 +36,8 @@ namespace Sketch_Application
             List<Point> points = new List<Point>();
             points.Add(rectangle.StartPoint);
             points.Add(new Point(rectangle.StartPointX + rectangle.Width, rectangle.StartPointY));
-            points.Add(new Point(rectangle.StartPointX, rectangle.StartPointY + rectangle.Height));
             points.Add(new Point(rectangle.StartPointX + rectangle.Width, rectangle.StartPointY + rectangle.Height));
+            points.Add(new Point(rectangle.StartPointX, rectangle.StartPointY + rectangle.Height));
 
 
             for (int i = 1; i < points.Count; i++)
@@ -46,6 +46,11 @@ namespace Sketch_Application
                 {
                     return true;
                 }
+            }
+
+            if (LineIntersectsRect(points.Last(), points.First(), rect))
+            {
+                return true;
             }
 
             return false;

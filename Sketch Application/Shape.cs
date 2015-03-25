@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using System.Xml.Serialization;
 
 namespace Sketch_Application
 {
@@ -21,14 +20,12 @@ namespace Sketch_Application
             this.colour = colour;
         }
 
-        [XmlIgnore]
         public Color Colour
         {
             get { return this.isSelected ? Color.Blue : this.colour; }
             set { this.colour = value; }
         }
 
-        [XmlElement("Colour")]
         public string HtmlColour
         {
             get { return ColorTranslator.ToHtml(this.Colour); }
