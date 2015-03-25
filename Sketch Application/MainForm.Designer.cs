@@ -46,6 +46,7 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.selectButton = new System.Windows.Forms.Button();
+            this.moveButton = new System.Windows.Forms.Button();
             this.freeDrawButton = new System.Windows.Forms.Button();
             this.lineButton = new System.Windows.Forms.Button();
             this.rectangleButton = new System.Windows.Forms.Button();
@@ -54,14 +55,13 @@
             this.circleButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.canvas = new Sketch_Application.Canvas();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.moveButton = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.canvas = new Sketch_Application.Canvas();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -218,7 +218,7 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(1269, 918);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(1269, 708);
             this.tableLayoutPanel.TabIndex = 1;
             // 
             // selectButton
@@ -238,6 +238,21 @@
             this.selectButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.selectButton.UseVisualStyleBackColor = false;
             this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
+            // 
+            // moveButton
+            // 
+            this.moveButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("moveButton.BackgroundImage")));
+            this.moveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.moveButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.moveButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.moveButton.Location = new System.Drawing.Point(83, 3);
+            this.moveButton.Name = "moveButton";
+            this.moveButton.Size = new System.Drawing.Size(74, 74);
+            this.moveButton.TabIndex = 12;
+            this.moveButton.Text = "Move";
+            this.moveButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.moveButton.UseVisualStyleBackColor = true;
+            this.moveButton.Click += new System.EventHandler(this.moveButton_Click);
             // 
             // freeDrawButton
             // 
@@ -364,6 +379,38 @@
             this.colourPanel.TabIndex = 8;
             this.colourPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.colourPanel_Click);
             // 
+            // clearButton
+            // 
+            this.clearButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("clearButton.BackgroundImage")));
+            this.clearButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.clearButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.clearButton.Location = new System.Drawing.Point(1192, 3);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(74, 74);
+            this.clearButton.TabIndex = 10;
+            this.clearButton.Text = "Clear";
+            this.clearButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
+            // canvas
+            // 
+            this.canvas.BackColor = System.Drawing.Color.White;
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel.SetColumnSpan(this.canvas, 12);
+            this.canvas.ContextMenuStrip = this.contextMenuStrip;
+            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(3, 83);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(1263, 622);
+            this.canvas.TabIndex = 9;
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -387,62 +434,15 @@
             this.pasteRightToolStripMenuItem.Text = "Paste";
             this.pasteRightToolStripMenuItem.Click += new System.EventHandler(this.pasteRightToolStripMenuItem_Click);
             // 
-            // clearButton
-            // 
-            this.clearButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("clearButton.BackgroundImage")));
-            this.clearButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.clearButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.clearButton.Location = new System.Drawing.Point(1192, 3);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(74, 74);
-            this.clearButton.TabIndex = 10;
-            this.clearButton.Text = "Clear";
-            this.clearButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
-            // 
-            // moveButton
-            // 
-            this.moveButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("moveButton.BackgroundImage")));
-            this.moveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.moveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.moveButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.moveButton.Location = new System.Drawing.Point(83, 3);
-            this.moveButton.Name = "moveButton";
-            this.moveButton.Size = new System.Drawing.Size(74, 74);
-            this.moveButton.TabIndex = 12;
-            this.moveButton.Text = "Move";
-            this.moveButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.moveButton.UseVisualStyleBackColor = true;
-            this.moveButton.Click += new System.EventHandler(this.moveButton_Click);
-            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
-            // 
-            // canvas
-            // 
-            this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tableLayoutPanel.SetColumnSpan(this.canvas, 12);
-            this.canvas.ContextMenuStrip = this.contextMenuStrip;
-            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(3, 83);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(1263, 832);
-            this.canvas.TabIndex = 9;
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1269, 943);
+            this.ClientSize = new System.Drawing.Size(1269, 733);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

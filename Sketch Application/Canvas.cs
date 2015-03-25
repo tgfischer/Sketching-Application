@@ -182,6 +182,37 @@ namespace Sketch_Application
             return isDrawing;
         }
 
+        public void MoveCurrentShape(Point position)
+        {
+            Console.WriteLine("moving");
+            if (this.selectedShapes.Count == 0)
+                return;
+            foreach (Shape shape in selectedShapes)
+            {
+                if (shape is Line)
+                {
+                    Line line = (Line)shape;
+                    Point point = new Point();
+                    point.X = position.X + (line.EndPoint.X - line.StartPoint.X);
+                    point.Y = position.Y + (line.EndPoint.Y - line.StartPoint.Y);
+                    line.StartPoint = position;
+                    line.EndPoint = point;
+                }
+                else if (shape is FreeLine)
+                {
+                    FreeLine freeLine = (FreeLine)shape;
+                    Point start = freeLine.Points.First();
+                    List<Point> points = new List<Point>();
+                    for (int i = 0; i < freeLine.Points.Count; i++)
+                    {
+                        points.Add(new Point(position.X + (freeLine.Points[i].X - start.X), position.Y + (freeLine.Points[i].Y - start.Y)));
+                    }
+                    freeLine.Points = points; //update all points in the free line
+                }
+            }
+            this.Invalidate();
+        }
+
         public void SelectShapes()
         {
             if (this.shapes.Count() == 0)
