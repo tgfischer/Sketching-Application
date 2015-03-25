@@ -10,10 +10,16 @@ namespace Sketch_Application
     public class Select : Rectangle
     {
         private const float thickness = 2F;
+        public Color FillColour = Color.FromArgb(128, 0, 136, 255);
 
         public Select(Point start)
-            : base(start, Color.Red)
+            : base(start, Color.FromArgb(255, 0, 65, 122))
         { }
+
+        public void Draw(Graphics g, Brush brush)
+        {
+            g.FillRectangle(brush, this.StartPoint.X, this.StartPoint.Y, this.Width, this.Height);
+        }
 
         public GroupedShape FindContainedShapes(List<Shape> shapes, int width)
         {

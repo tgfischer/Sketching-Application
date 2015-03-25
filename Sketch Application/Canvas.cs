@@ -44,6 +44,16 @@ namespace Sketch_Application
 
             foreach (Shape shape in this.shapes)
             {
+                if (shape is Select)
+                {
+                    Select select = (Select)shape;
+
+                    using (Brush brush = new SolidBrush(select.FillColour))
+                    {
+                        select.Draw(p.Graphics, brush);
+                    }
+                }
+
                 using (Pen pen = new Pen(shape.Colour, shape.Thickness))
                 {
                     shape.Draw(p.Graphics, pen);

@@ -36,7 +36,7 @@ namespace Sketch_Application
         [XmlIgnore]
         public Color Colour
         {
-            get { return this.IsSelected ? Color.Blue : this.colour; }
+            get { return this.IsSelected ? Color.FromArgb(255, 0, 65, 122) : this.colour; }
             set { this.colour = value; }
         }
 

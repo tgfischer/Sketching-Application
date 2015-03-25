@@ -230,7 +230,7 @@ namespace Sketch_Application
         {
             if (this.canvas.Shapes.Count == 0)
             {
-                MessageBox.Show("There is nothing to save!");
+                MessageBox.Show("There is nothing to save!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -254,7 +254,7 @@ namespace Sketch_Application
         {
             if (this.canvas.Shapes.Count == 0)
             {
-                MessageBox.Show("There is nothing to save!");
+                MessageBox.Show("There is nothing to save!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
