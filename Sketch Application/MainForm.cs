@@ -82,16 +82,11 @@ namespace Sketch_Application
         {
             this.mouseDownPanel.BackColor = Color.Tomato;
 
-            Console.WriteLine(this.canvas.Bounds);
-            Console.WriteLine(this.canvas.PointToScreen(Cursor.Position));
-
-            if (e.Button == MouseButtons.Right && this.canvas.Mode == Mode.Polygon) //right click
+            if (e.Button == MouseButtons.Right && this.canvas.Mode == Mode.Polygon && isDrawing) //right click
             {
                 this.canvas.AddLineToCurrentShape(this.canvas.PointToClient(Cursor.Position));
-                this.isDrawing = false;
-                polygonFirst = true;
             }
-            else // Left click
+            else if (e.Button != MouseButtons.Right) // Left click
             {
                 if (this.canvas.Mode == Mode.Polygon && polygonFirst)
                 {
@@ -140,7 +135,6 @@ namespace Sketch_Application
             {
                 this.canvas.AddToCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 this.mouseDownPanel.BackColor = Color.CornflowerBlue;
-                //this.canvas.Bounds;
             }
         }
 
@@ -199,5 +193,16 @@ namespace Sketch_Application
             this.isDrawing = false;
             polygonFirst = true;
         }
+
+        private void contextMenuStrip_Opening(object sender, CancelEventArgs e) //opens on right click
+        {
+            if (this.canvas.Mode == Mode.Polygon && isDrawing)
+            {
+                e.Cancel = true; //don't open context menu strip
+                this.isDrawing = false; //finished drawing polygon
+                polygonFirst = true; 
+            }
+        }
+
     }
 }
