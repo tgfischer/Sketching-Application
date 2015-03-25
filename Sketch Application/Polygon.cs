@@ -26,10 +26,14 @@ namespace Sketch_Application
 
         public override void Draw(Graphics g, Pen pen)
         {
-            foreach(Line line in lines){
+            foreach (Line line in this.lines) {
                 line.Draw(g, pen);
             }
-            //g.DrawLine(pen, this.start, this.end);
+        }
+
+        public override void Shift(int x, int y)
+        {
+
         }
 
         public void addLine(Line line)

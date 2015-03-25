@@ -15,9 +15,9 @@ namespace Sketch_Application
             : base(start, Color.Red)
         { }
 
-        public List<Shape> FindContainedShapes(List<Shape> shapes, int width)
+        public GroupedShape FindContainedShapes(List<Shape> shapes, int width)
         {
-            List<Shape> selectedShapes = new List<Shape>();
+            GroupedShape groupedShape = new GroupedShape();
 
             foreach (Shape shape in shapes)
             {
@@ -25,11 +25,11 @@ namespace Sketch_Application
                 {
                     shape.Thickness = thickness;
                     shape.isSelected = true;
-                    selectedShapes.Add(shape);
+                    groupedShape.Shapes.Add(shape);
                 }
             }
 
-            return selectedShapes;
+            return groupedShape;
         }
 
         public bool Contains(Shape shape, int width)

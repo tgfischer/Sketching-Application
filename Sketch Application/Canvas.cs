@@ -15,8 +15,8 @@ namespace Sketch_Application
     public partial class Canvas : Panel
     {
         private List<Shape> shapes = new List<Shape>();
-        private List<Shape> selectedShapes = new List<Shape>();
-        private List<Shape> clipBoard = new List<Shape>();
+        private GroupedShape selectedShapes = new GroupedShape();
+        private GroupedShape clipBoard = new GroupedShape();
         private bool clear = false;
         public Color Colour = Color.Black;
         public Mode Mode = Mode.Select;
@@ -207,7 +207,7 @@ namespace Sketch_Application
         {
             this.clipBoard = selectedShapes;
 
-            foreach (Shape s in clipBoard)
+            foreach (Shape s in clipBoard.Shapes)
             {
                 this.shapes.Remove(s);
             }
@@ -217,7 +217,7 @@ namespace Sketch_Application
 
         public void Paste(Point startPoint)
         {
-            foreach (Shape s in clipBoard)
+            foreach (Shape s in clipBoard.Shapes)
             {
                 if (s is FreeLine)
                 {
@@ -314,6 +314,7 @@ namespace Sketch_Application
 
                     Square newSquare = new Square(new Point(firstX, firstY), Color.Black);
                     Point newEndPoint = new Point(square.EndPoint.X + xD, square.EndPoint.Y + yD);
+
                     newSquare.EndPoint = newEndPoint;
                     this.shapes.Add(newSquare);
                 }
@@ -321,8 +322,8 @@ namespace Sketch_Application
                 {
                     Ellipse ellipse = (Ellipse)s;
                     Ellipse newEllipse = new Ellipse(startPoint, Color.Black);
-                    int xD = startPoint.X - ellipse.StartPointX + ellipse.EndPoint.X;
-                    int yD = startPoint.Y - ellipse.StartPointY + ellipse.EndPoint.Y;
+                    int xD = startPoint.X - ellipse.StartPoint.X + ellipse.EndPoint.X;
+                    int yD = startPoint.Y - ellipse.StartPoint.Y + ellipse.EndPoint.Y;
                     Point newEndPoint = new Point(xD, yD);
                     newEllipse.EndPoint = newEndPoint;
                     this.shapes.Add(newEllipse);
@@ -331,8 +332,8 @@ namespace Sketch_Application
                 {
                     Circle circle = (Circle)s;
                     Circle newCircle = new Circle(startPoint, Color.Black);
-                    int xD = startPoint.X - circle.StartPointX + circle.EndPoint.X;
-                    int yD = startPoint.Y - circle.StartPointY + circle.EndPoint.Y;
+                    int xD = startPoint.X - circle.StartPoint.X + circle.EndPoint.X;
+                    int yD = startPoint.Y - circle.StartPoint.Y + circle.EndPoint.Y;
                     Point newEndPoint = new Point(xD, yD);
                     newCircle.EndPoint = newEndPoint;
                     this.shapes.Add(newCircle);
@@ -357,7 +358,7 @@ namespace Sketch_Application
         {
             this.shapes.RemoveAll(x => x is Select);
 
-            foreach (Shape selectedShape in this.selectedShapes)
+            foreach (Shape selectedShape in this.selectedShapes.Shapes)
             {
                 selectedShape.isSelected = false;
                 selectedShape.Thickness = 1F;

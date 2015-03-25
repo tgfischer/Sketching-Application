@@ -23,12 +23,17 @@ namespace Sketch_Application
 
         public override void Draw(Graphics g, Pen pen)
         {
-            g.DrawRectangle(pen, this.StartPointX, this.StartPointY, this.Width, this.Height);
+            g.DrawRectangle(pen, this.StartPoint.X, this.StartPoint.Y, this.Width, this.Height);
         }
 
-        public Point StartPoint
+        public override void Shift(int x, int y)
         {
-            get { return new Point(this.StartPointX, this.StartPointY); }
+
+        }
+
+        public virtual Point StartPoint
+        {
+            get { return new Point(Math.Min(this.start.X, this.end.X), Math.Min(this.start.Y, this.end.Y)); }
             set { this.start = value; }
         }
 
@@ -38,24 +43,16 @@ namespace Sketch_Application
             set { this.end = value; }
         }
 
-        public virtual int StartPointX
-        {
-            get { return Math.Min(this.start.X, this.end.X); }
-        }
-
-        public virtual int StartPointY
-        {
-            get { return Math.Min(this.start.Y, this.end.Y); }
-        }
-
-        public int Width
+        public virtual int Width
         {
             get { return Math.Abs(this.start.X - this.end.X); }
+            set { }
         }
 
-        public int Height
+        public virtual int Height
         {
             get { return Math.Abs(this.start.Y - this.end.Y); }
+            set { }
         }
 
         public override Point UpperLeftPoint

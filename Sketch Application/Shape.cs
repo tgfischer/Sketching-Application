@@ -37,6 +37,8 @@ namespace Sketch_Application
 
         public abstract void Draw(Graphics g, Pen pen);
 
+        public abstract void Shift(int x, int y);
+
         public abstract Point UpperLeftPoint
         {
             get;

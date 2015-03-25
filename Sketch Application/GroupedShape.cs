@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
-    class GroupedShape : Shape
+    public class GroupedShape : Shape
     {
         public List<Shape> Shapes = new List<Shape>();
 
@@ -21,6 +21,14 @@ namespace Sketch_Application
             foreach (Shape shape in this.Shapes)
             {
                 shape.Draw(g, pen);
+            }
+        }
+
+        public override void Shift(int x, int y)
+        {
+            foreach (Shape shape in this.Shapes)
+            {
+                shape.Shift(x, y);
             }
         }
 

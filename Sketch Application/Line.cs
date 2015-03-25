@@ -26,6 +26,11 @@ namespace Sketch_Application
             g.DrawLine(pen, this.start, this.end);
         }
 
+        public override void Shift(int x, int y)
+        {
+
+        }
+
         public Point StartPoint
         {
             get { return this.start; }
