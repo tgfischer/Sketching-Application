@@ -88,13 +88,12 @@ namespace Sketch_Application
             {
                 points.Add(new Point(p.X + x, p.Y + y));
             }
-            //FreeLine newLine = new FreeLine(points.First<Point>(), Color.Black);
             //draw new line and erase old
-            //foreach (Point p in points)
-            //{
-            //    //this.Points.Remove(new Point(p.X - x, p.Y - y));
-            //    this.Points.Add(p);
-            //}
+            foreach (Point p in points)
+            {
+                this.Points.Remove(new Point(p.X - x, p.Y - y));
+                this.Points.Add(p);
+            }
 
         }
 

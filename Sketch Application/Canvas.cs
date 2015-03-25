@@ -25,7 +25,6 @@ namespace Sketch_Application
             : base()
         {
             InitializeComponent();
-
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
@@ -247,11 +246,14 @@ namespace Sketch_Application
 
         public void Paste(Point startPoint)
         {
+            if (clipBoard == null)
+                return;
             //Shape newShape = clipBoard;
             int xD = startPoint.X - clipBoard.UpperLeftPoint.X;
             int yD = startPoint.Y - clipBoard.UpperLeftPoint.Y;
             clipBoard.Shift(xD, yD);
             this.Shapes.Add(clipBoard);
+            clipBoard = null;
             this.Invalidate();
         }
 
