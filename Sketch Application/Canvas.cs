@@ -217,8 +217,6 @@ namespace Sketch_Application
 
         public void Paste(Point startPoint)
         {
-            //int minX = Int32.MaxValue;
-            //int minY = Int32.MaxValue;
             foreach (Shape s in clipBoard)
             {
                 if (s is FreeLine)
@@ -291,20 +289,31 @@ namespace Sketch_Application
                 else if (s is Rectangle)
                 {
                     Rectangle rectangle = (Rectangle)s;
-                    Rectangle newRectangle = new Rectangle(startPoint, Color.Black);
-                    int xD = startPoint.X + rectangle.Width;
-                    int yD = startPoint.Y + rectangle.Height;
-                    Point newEndPoint = new Point(xD, yD);
+
+                    int xD = startPoint.X - rectangle.UpperLeftPoint.X;
+                    int yD = startPoint.Y - rectangle.UpperLeftPoint.Y;
+
+                    int firstX = startPoint.X;// +xD;
+                    int firstY = startPoint.Y;// +yD;
+
+                    Rectangle newRectangle = new Rectangle(new Point(firstX, firstY), Color.Black);
+                    
+                    Point newEndPoint = new Point(rectangle.EndPoint.X+xD, rectangle.EndPoint.Y+yD);
                     newRectangle.EndPoint = newEndPoint;
                     this.shapes.Add(newRectangle);
                 }
                 else if (s is Square)
                 {
                     Square square = (Square)s;
-                    Square newSquare = new Square(startPoint, Color.Black);
-                    int xD = startPoint.X - square.StartPointX + square.EndPoint.X;
-                    int yD = startPoint.Y - square.StartPointY + square.EndPoint.Y;
-                    Point newEndPoint = new Point(xD, yD);
+
+                    int xD = startPoint.X - square.UpperLeftPoint.X;
+                    int yD = startPoint.Y - square.UpperLeftPoint.Y;
+
+                    int firstX = square.StartPoint.X;// +xD;
+                    int firstY = square.StartPoint.Y;// +yD;
+
+                    Square newSquare = new Square(new Point(firstX, firstY), Color.Black);
+                    Point newEndPoint = new Point(square.EndPoint.X + xD, square.EndPoint.Y + yD);
                     newSquare.EndPoint = newEndPoint;
                     this.shapes.Add(newSquare);
                 }
