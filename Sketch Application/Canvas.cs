@@ -222,19 +222,55 @@ namespace Sketch_Application
                 if (s is FreeLine)
                 {
                     FreeLine freeLine = (FreeLine)s;
-
                     int xD = startPoint.X - freeLine.UpperLeftPoint.X;
                     int yD = startPoint.Y - freeLine.UpperLeftPoint.Y;
-
-                    int firstX = freeLine.Points.First<Point>().X + xD;
-                    int firstY = freeLine.Points.First<Point>().Y + yD;
-                    FreeLine newLine = new FreeLine(new Point(firstX, firstY), Color.Black);
-                    List<Point> points = new List<Point>();
-                    foreach (Point p in freeLine.Points)
-                    {
-                        newLine.Points.Add(new Point(p.X+xD, p.Y+yD));
-                    }
-                    this.shapes.Add(newLine);
+                    freeLine.Shift(xD, yD);
+                    this.shapes.Add(freeLine);
+                }
+                else if (s is Line)
+                {
+                    Line line = (Line)s;
+                    int xD = startPoint.X - line.UpperLeftPoint.X;
+                    int yD = startPoint.Y - line.UpperLeftPoint.Y;
+                    line.Shift(xD, yD);
+                    this.shapes.Add(line);
+                }
+                else if (s is Rectangle)
+                {
+                    Rectangle rectangle = (Rectangle)s;
+                    int xD = startPoint.X - rectangle.UpperLeftPoint.X;
+                    int yD = startPoint.Y - rectangle.UpperLeftPoint.Y;
+                    rectangle.Shift(xD, yD);
+                    this.shapes.Add(rectangle);
+                }
+                else if (s is Square)
+                {
+                    Square square = (Square)s;
+                    int xD = startPoint.X - square.UpperLeftPoint.X;
+                    int yD = startPoint.Y - square.UpperLeftPoint.Y;
+                    square.Shift(xD, yD);
+                    this.shapes.Add(square);
+                }
+                else if (s is Ellipse)
+                {
+                    Ellipse ellipse = (Ellipse)s;
+                    int xD = startPoint.X - ellipse.UpperLeftPoint.X;
+                    int yD = startPoint.Y - ellipse.UpperLeftPoint.Y;
+                    ellipse.Shift(xD, yD);
+                    this.shapes.Add(ellipse);
+                }
+                else if (s is Circle)
+                {
+                    Circle circle = (Circle)s;
+                    int xD = startPoint.X - circle.UpperLeftPoint.X;
+                    int yD = startPoint.Y - circle.UpperLeftPoint.Y;
+                    circle.Shift(xD, yD);
+                    this.shapes.Add(circle);
+                }
+                else if (s is Polygon)
+                {
+                    Polygon polygon = (Polygon)s;
+                    //polygon.getCurrentLine().EndPoint = position;
                 }
                 else if (s is GroupedShape)
                 {
@@ -270,78 +306,6 @@ namespace Sketch_Application
                         }
                         this.shapes.Add(sh);
                     }
-                }
-                else if (s is Line)
-                {
-                    Line line = (Line)s;
-
-                    int xD = startPoint.X - line.UpperLeftPoint.X;
-                    int yD = startPoint.Y - line.UpperLeftPoint.Y;
-
-                    int firstX = line.StartPoint.X + xD;
-                    int firstY = line.StartPoint.Y + yD;
-
-                    Line newLine = new Line(new Point(firstX, firstY), Color.Black);
-                    Point newEndPoint = new Point(line.EndPoint.X+xD, line.EndPoint.Y+yD);
-                    newLine.EndPoint = newEndPoint;
-                    this.shapes.Add(newLine);
-                }
-                else if (s is Rectangle)
-                {
-                    Rectangle rectangle = (Rectangle)s;
-
-                    int xD = startPoint.X - rectangle.UpperLeftPoint.X;
-                    int yD = startPoint.Y - rectangle.UpperLeftPoint.Y;
-
-                    int firstX = startPoint.X;// +xD;
-                    int firstY = startPoint.Y;// +yD;
-
-                    Rectangle newRectangle = new Rectangle(new Point(firstX, firstY), Color.Black);
-                    
-                    Point newEndPoint = new Point(rectangle.EndPoint.X+xD, rectangle.EndPoint.Y+yD);
-                    newRectangle.EndPoint = newEndPoint;
-                    this.shapes.Add(newRectangle);
-                }
-                else if (s is Square)
-                {
-                    Square square = (Square)s;
-
-                    int xD = startPoint.X - square.UpperLeftPoint.X;
-                    int yD = startPoint.Y - square.UpperLeftPoint.Y;
-
-                    int firstX = square.StartPoint.X;// +xD;
-                    int firstY = square.StartPoint.Y;// +yD;
-
-                    Square newSquare = new Square(new Point(firstX, firstY), Color.Black);
-                    Point newEndPoint = new Point(square.EndPoint.X + xD, square.EndPoint.Y + yD);
-
-                    newSquare.EndPoint = newEndPoint;
-                    this.shapes.Add(newSquare);
-                }
-                else if (s is Ellipse)
-                {
-                    Ellipse ellipse = (Ellipse)s;
-                    Ellipse newEllipse = new Ellipse(startPoint, Color.Black);
-                    int xD = startPoint.X - ellipse.StartPoint.X + ellipse.EndPoint.X;
-                    int yD = startPoint.Y - ellipse.StartPoint.Y + ellipse.EndPoint.Y;
-                    Point newEndPoint = new Point(xD, yD);
-                    newEllipse.EndPoint = newEndPoint;
-                    this.shapes.Add(newEllipse);
-                }
-                else if (s is Circle)
-                {
-                    Circle circle = (Circle)s;
-                    Circle newCircle = new Circle(startPoint, Color.Black);
-                    int xD = startPoint.X - circle.StartPoint.X + circle.EndPoint.X;
-                    int yD = startPoint.Y - circle.StartPoint.Y + circle.EndPoint.Y;
-                    Point newEndPoint = new Point(xD, yD);
-                    newCircle.EndPoint = newEndPoint;
-                    this.shapes.Add(newCircle);
-                }
-                else if (s is Polygon)
-                {
-                    Polygon polygon = (Polygon)s;
-                    //polygon.getCurrentLine().EndPoint = position;
                 }
             }
             this.Invalidate();

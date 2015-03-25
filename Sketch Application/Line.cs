@@ -28,7 +28,10 @@ namespace Sketch_Application
 
         public override void Shift(int x, int y)
         {
-
+            this.start.X += x;
+            this.start.Y += y;
+            this.end.X += x;
+            this.end.Y += y;
         }
 
         public Point StartPoint
