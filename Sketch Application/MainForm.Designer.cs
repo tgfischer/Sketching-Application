@@ -349,19 +349,20 @@
             this.cutRightToolStripMenuItem,
             this.pasteRightToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(103, 48);
+            this.contextMenuStrip.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // cutRightToolStripMenuItem
             // 
             this.cutRightToolStripMenuItem.Name = "cutRightToolStripMenuItem";
-            this.cutRightToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.cutRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cutRightToolStripMenuItem.Text = "Cut";
             this.cutRightToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // pasteRightToolStripMenuItem
             // 
             this.pasteRightToolStripMenuItem.Name = "pasteRightToolStripMenuItem";
-            this.pasteRightToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.pasteRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pasteRightToolStripMenuItem.Text = "Paste";
             this.pasteRightToolStripMenuItem.Click += new System.EventHandler(this.pasteRightToolStripMenuItem_Click);
             // 
