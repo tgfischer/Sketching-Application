@@ -213,10 +213,24 @@ namespace Sketch_Application
                 if (s is FreeLine)
                 {
                     FreeLine freeLine = (FreeLine)s;
-                    FreeLine newLine = new FreeLine(startPoint, Color.Black);
+                    int minX = 10000;
+                    int minY = 10000;
+
+                    foreach (Point p in freeLine.Points)
+                    {
+                        if (p.X < minX)
+                            minX = p.X;
+                        if (p.Y < minY)
+                            minY = p.Y;
+                    }
+
+                    int xD = startPoint.X - minX;
+                    int yD = startPoint.Y - minY;
+
+                    int firstX = freeLine.Points.First<Point>().X + xD;
+                    int firstY = freeLine.Points.First<Point>().Y + yD;
+                    FreeLine newLine = new FreeLine(new Point(firstX, firstY), Color.Black);
                     List<Point> points = new List<Point>();
-                    int xD = startPoint.X - freeLine.Points.First<Point>().X;
-                    int yD = startPoint.Y - freeLine.Points.First<Point>().Y;
                     foreach (Point p in freeLine.Points)
                     {
                         newLine.Points.Add(new Point(p.X+xD, p.Y+yD));
@@ -247,8 +261,8 @@ namespace Sketch_Application
                 {
                     Square square = (Square)s;
                     Square newSquare = new Square(startPoint, Color.Black);
-                    int xD = startPoint.X + square.Height;
-                    int yD = startPoint.Y + square.Height;
+                    int xD = startPoint.X - square.StartPointX + square.EndPoint.X;
+                    int yD = startPoint.Y - square.StartPointY + square.EndPoint.Y;
                     Point newEndPoint = new Point(xD, yD);
                     newSquare.EndPoint = newEndPoint;
                     this.shapes.Add(newSquare);
@@ -256,12 +270,22 @@ namespace Sketch_Application
                 else if (s is Ellipse)
                 {
                     Ellipse ellipse = (Ellipse)s;
-                    //ellipse.EndPoint = position;
+                    Ellipse newEllipse = new Ellipse(startPoint, Color.Black);
+                    int xD = startPoint.X - ellipse.StartPointX + ellipse.EndPoint.X;
+                    int yD = startPoint.Y - ellipse.StartPointY + ellipse.EndPoint.Y;
+                    Point newEndPoint = new Point(xD, yD);
+                    newEllipse.EndPoint = newEndPoint;
+                    this.shapes.Add(newEllipse);
                 }
                 else if (s is Circle)
                 {
                     Circle circle = (Circle)s;
-                    //circle.EndPoint = position;
+                    Circle newCircle = new Circle(startPoint, Color.Black);
+                    int xD = startPoint.X - circle.StartPointX + circle.EndPoint.X;
+                    int yD = startPoint.Y - circle.StartPointY + circle.EndPoint.Y;
+                    Point newEndPoint = new Point(xD, yD);
+                    newCircle.EndPoint = newEndPoint;
+                    this.shapes.Add(newCircle);
                 }
                 else if (s is Polygon)
                 {
