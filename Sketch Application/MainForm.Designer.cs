@@ -414,6 +414,7 @@
             this.canvas.BackColor = System.Drawing.Color.White;
             this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.canvas.ContextMenuStrip = this.contextMenuStrip;
+            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(90, 3);
             this.canvas.Name = "canvas";

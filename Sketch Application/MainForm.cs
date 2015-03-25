@@ -33,54 +33,63 @@ namespace Sketch_Application
         {
             this.canvas.Mode = Mode.Select;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Cross;
         }
 
         private void moveButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Move;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.SizeAll;
         }
 
         private void freeDrawButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.FreeHand;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void lineButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Line;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void rectangleButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Rectangle;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void squareButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Square;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void ellipseButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Ellipse;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void circleButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Circle;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void polygonButton_Click(object sender, EventArgs e)
         {
             this.canvas.Mode = Mode.Polygon;
             this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
         }
 
         private void clearButton_Click(object sender, EventArgs e)
