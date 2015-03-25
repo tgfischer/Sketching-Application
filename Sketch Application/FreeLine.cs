@@ -23,7 +23,6 @@ namespace Sketch_Application
 
         public override void Draw(Graphics g, Pen pen)
         {
-            // FOR SMOOTHNESS
             if (this.Points.Count > smoothness)                     // Make sure there is enough points in the list
             {
                 // Draw a curve using every nth point in the list
@@ -53,7 +52,7 @@ namespace Sketch_Application
                 {
                     // Draw 1 single pixel
                     g.FillRectangle(brush, this.Points.First().X, this.Points.First().Y, 1, 1);
-                }
+            }
             }*/
 
             // FOR COOLNESS
