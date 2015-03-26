@@ -46,6 +46,16 @@ namespace Sketch_Application
 
             foreach (Shape shape in this.shapes)
             {
+                if (shape is Select)
+                {
+                    Select select = (Select)shape;
+
+                    using (Brush brush = new SolidBrush(select.FillColour))
+                    {
+                        select.Draw(p.Graphics, brush);
+                    }
+                }
+
                 using (Pen pen = new Pen(shape.Colour, shape.Thickness))
                 {
                     shape.Draw(p.Graphics, pen);
@@ -199,12 +209,13 @@ namespace Sketch_Application
         public void MoveCurrentShape(Point position)
         {
             if (this.selectedShapes.Shapes.Count == 0)
+            {
                 return;
-            
+            }
             int xD = position.X - selectedShapes.UpperLeftPoint.X;
             int yD = position.Y - selectedShapes.UpperLeftPoint.Y;
             selectedShapes.Shift(xD, yD);
-                
+            //this.shapes.Add(selectedShapes);
             this.Invalidate();
         }
 
@@ -224,6 +235,11 @@ namespace Sketch_Application
                 this.RemoveSelect();
 
                 this.selectedShapes = select.FindContainedShapes(this.shapes.Where(x => !(x is Select)).ToList(), this.Width);
+                
+                if (this.selectedShapes.Shapes.Count > 0)
+                {
+                    this.selectedShapes.Select();
+                }
             }
 
             this.Invalidate(); // Update the canvas
@@ -233,6 +249,11 @@ namespace Sketch_Application
 
         public void GroupSelectedShapes()
         {
+            if (this.selectedShapes.Shapes.Count < 2)
+            {
+                return;
+            }
+
             foreach (Shape shape in this.selectedShapes.Shapes)
             {
                 this.shapes.Remove(shape);
@@ -241,36 +262,62 @@ namespace Sketch_Application
             this.shapes.Add(this.selectedShapes);
         }
 
-        public void UngroupSelectedShapes()
+        public void UngroupSelectedShapes(Shape shape)
         {
-            foreach (Shape shape in this.selectedShapes.Shapes)
+            if (shape is GroupedShape)
             {
-                this.shapes.Remove(shape);
-            }
+                GroupedShape groupedShape = (GroupedShape)shape;
 
-            this.shapes.Add(this.selectedShapes);
+                foreach (Shape subShape in groupedShape.Shapes)
+                {
+                    if (subShape is GroupedShape)
+                    {
+                        this.shapes.Remove(subShape);
+                        this.UngroupSelectedShapes(subShape);
+                    }
+                    else
+                    {
+                        this.shapes.Add(subShape);
+                    }
+                }
+            }
         }
 
         public void Cut()
         {
+            //this.RemoveSelect();
             this.clipBoard = selectedShapes;
+
+
+            Console.WriteLine("clipboard " + this.clipBoard.Shapes.Count);
+            Console.WriteLine("shapes " + this.shapes.Count);
+            
+            this.shapes.Remove(clipBoard);
             foreach (Shape s in clipBoard.Shapes)
             {
                 this.shapes.Remove(s);
             }
+            Console.WriteLine("shapes after " + this.shapes.Count);
+            
+
             this.Invalidate();
         }
 
         public void Paste(Point startPoint)
         {
-            if (clipBoard == null)
+            if (clipBoard.Shapes.Count == 0)
                 return;
-            //Shape newShape = clipBoard;
+
+            this.RemoveSelect();
+            Shape newShape = this.clipBoard.Clone<Shape>();
             int xD = startPoint.X - clipBoard.UpperLeftPoint.X;
             int yD = startPoint.Y - clipBoard.UpperLeftPoint.Y;
-            clipBoard.Shift(xD, yD);
-            this.Shapes.Add(clipBoard);
-            clipBoard = null;
+            newShape.Shift(xD, yD);
+            newShape.Select();
+            this.Shapes.Add(newShape);
+            this.selectedShapes.Shapes.Clear();
+            this.selectedShapes.Shapes.Add(newShape);
+
             this.Invalidate();
         }
 
@@ -307,12 +354,16 @@ namespace Sketch_Application
         public void RemoveSelect()
         {
             this.shapes.RemoveAll(x => x is Select);
-
-            foreach (Shape selectedShape in this.selectedShapes.Shapes)
+            
+            foreach (Shape shape in this.shapes)
             {
-                selectedShape.isSelected = false;
-                selectedShape.Thickness = 1F;
+                if (shape.IsSelected)
+                {
+                    shape.Deselect();
+                }
             }
+
+            this.Invalidate();
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 

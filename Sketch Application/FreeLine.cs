@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
+    [Serializable]
     public class FreeLine : Shape
     {
         public List<Point> Points;                                  // A list that stores all of the points in the line
@@ -94,7 +95,6 @@ namespace Sketch_Application
                 this.Points.Remove(new Point(p.X - x, p.Y - y));
                 this.Points.Add(p);
             }
-
         }
 
         public override Point UpperLeftPoint

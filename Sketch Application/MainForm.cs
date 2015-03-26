@@ -125,6 +125,7 @@ namespace Sketch_Application
                 }
                 else if(this.canvas.Mode == Mode.Move)
                 {
+                    Console.WriteLine("move current");
                     this.canvas.MoveCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 }
                 else
@@ -150,7 +151,7 @@ namespace Sketch_Application
             if (this.canvas.Mode == Mode.Select)
             {
                 this.groupShapesToolStripMenuItem.Enabled = this.canvas.SelectShapes();
-                this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton();
+                this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton(this.canvas.SelectedShape);
             }
             else if (this.canvas.Mode == Mode.Move)
             {
@@ -211,28 +212,6 @@ namespace Sketch_Application
             }
         }
 
-        /* every time we click on the Edit menu option, call to canvas to check if there are undos/ redos 
-         * in their respective lists. If so, we enable the buttons Undo/Redo 
-         * */
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool enableUndoBtn = this.canvas.checkForUndos();
-            bool enableRedoBtn = this.canvas.checkForRedos();
-
-            if (enableUndoBtn)
-            {
-                this.undoToolStripMenuItem.Enabled = true;
-                // now, check to see what type of item is at the top of stack and change text accordingly
-            }
-            else this.undoToolStripMenuItem.Enabled = false;
-            if (enableRedoBtn)
-            {
-                this.redoToolStripMenuItem.Enabled = true;
-                // now, check to see what type of item is at the top of stack and change text accordingly
-            }
-            else this.redoToolStripMenuItem.Enabled = false;
-        }
-
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.canvas.Undo(); 
@@ -262,7 +241,7 @@ namespace Sketch_Application
         {
             if (this.canvas.Shapes.Count == 0)
             {
-                MessageBox.Show("There is nothing to save!");
+                MessageBox.Show("There is nothing to save!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -286,7 +265,7 @@ namespace Sketch_Application
         {
             if (this.canvas.Shapes.Count == 0)
             {
-                MessageBox.Show("There is nothing to save!");
+                MessageBox.Show("There is nothing to save!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -322,24 +301,33 @@ namespace Sketch_Application
         private void groupShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.canvas.GroupSelectedShapes();
-            this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton();
+            this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton(this.canvas.SelectedShape);
         }
 
         private void ungroupShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.canvas.UngroupSelectedShapes(this.canvas.SelectedShape);
+            this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton(this.canvas.SelectedShape);
+            this.canvas.RemoveSelect();
         }
 
-        private bool EnableUngroupButton()
+        private bool EnableUngroupButton(Shape shape)
         {
-            if (this.canvas.SelectedShape.Shapes.Count == 0 || this.canvas.Shapes.Count == 0)
+            if (this.canvas.Shapes.Count == 0)
             {
                 return false;
             }
 
-            if (this.canvas.Shapes.Contains(this.canvas.SelectedShape))
+            if (shape is GroupedShape)
             {
-                return true;
+                GroupedShape selectedShapes = (GroupedShape)shape;
+
+                if (selectedShapes.Shapes.Count == 1 && selectedShapes.Shapes.First() is GroupedShape)
+                {
+                    return EnableUngroupButton(selectedShapes.Shapes.First());
+                }
+
+                return selectedShapes.Shapes.Count > 1;
             }
 
             return false;
@@ -368,6 +356,25 @@ namespace Sketch_Application
                 this.isDrawing = false; //finished drawing polygon
                 polygonFirst = true; 
             }
+        }
+
+        private void editTooStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            bool enableUndoBtn = this.canvas.checkForUndos();
+            bool enableRedoBtn = this.canvas.checkForRedos();
+
+            if (enableUndoBtn)
+            {
+                this.undoToolStripMenuItem.Enabled = true;
+                // now, check to see what type of item is at the top of stack and change text accordingly
+            }
+            else this.undoToolStripMenuItem.Enabled = false;
+            if (enableRedoBtn)
+            {
+                this.redoToolStripMenuItem.Enabled = true;
+                // now, check to see what type of item is at the top of stack and change text accordingly
+            }
+            else this.redoToolStripMenuItem.Enabled = false;
         }
     }
 }

@@ -10,26 +10,31 @@ namespace Sketch_Application
     public class Select : Rectangle
     {
         private const float thickness = 2F;
+        public Color FillColour = Color.FromArgb(128, 0, 136, 255);
 
         public Select(Point start)
-            : base(start, Color.Red)
+            : base(start, Color.FromArgb(255, 0, 65, 122))
         { }
+
+        public void Draw(Graphics g, Brush brush)
+        {
+            g.FillRectangle(brush, this.StartPoint.X, this.StartPoint.Y, this.Width, this.Height);
+        }
 
         public GroupedShape FindContainedShapes(List<Shape> shapes, int width)
         {
-            GroupedShape groupedShape = new GroupedShape();
+            GroupedShape selectedShapes = new GroupedShape();
 
             foreach (Shape shape in shapes)
             {
                 if (this.Contains(shape, width))
                 {
-                    shape.Thickness = thickness;
-                    shape.isSelected = true;
-                    groupedShape.Shapes.Add(shape);
+                    shape.Select();
+                    selectedShapes.Shapes.Add(shape);
                 }
             }
 
-            return groupedShape;
+            return selectedShapes;
         }
 
         public bool Contains(Shape shape, int width)

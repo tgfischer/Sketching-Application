@@ -8,10 +8,11 @@ using System.Xml.Serialization;
 
 namespace Sketch_Application
 {
+    [Serializable]
     public abstract class Shape
     {
         protected Color colour = Color.Black;
-        public bool isSelected = false;
+        public bool IsSelected = false;
         public float Thickness = 1F;
 
         protected Shape() { }
@@ -21,10 +22,22 @@ namespace Sketch_Application
             this.colour = colour;
         }
 
+        public void Select()
+        {
+            this.IsSelected = true;
+            this.Thickness = 2F;
+        }
+
+        public void Deselect()
+        {
+            this.IsSelected = false;
+            this.Thickness = 1F;
+        }
+
         [XmlIgnore]
         public Color Colour
         {
-            get { return this.isSelected ? Color.Blue : this.colour; }
+            get { return this.IsSelected ? Color.FromArgb(255, 0, 65, 122) : this.colour; }
             set { this.colour = value; }
         }
 
