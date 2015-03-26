@@ -72,6 +72,9 @@
     <Compile Include="Shape.cs" />
     <Compile Include="Mode.cs" />
     <Compile Include="Square.cs" />
+    <EmbeddedResource Include="Canvas.resx">
+      <DependentUpon>Canvas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

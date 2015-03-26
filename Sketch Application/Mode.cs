@@ -8,6 +8,7 @@ namespace Sketch_Application
 {
     public enum Mode
     {
+        
         Select,
         Move,
         FreeHand,
@@ -16,6 +17,7 @@ namespace Sketch_Application
         Square,
         Ellipse,
         Circle,
-        Polygon
+        Polygon,
+        ColourFill      // for implementing filling a closed loop on click 
     }
 }
