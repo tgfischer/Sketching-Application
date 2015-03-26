@@ -12,7 +12,8 @@ namespace Sketch_Application
         private Point start;
         private Point end;
         private Line currentLine;
-        private List<Line> lines;
+        public List<Line> lines;
+
         
         private Polygon() { }
 
@@ -53,6 +54,11 @@ namespace Sketch_Application
         public Point getStartPoint()
         {
             return start;
+        }
+
+        public Point getEndPoint()
+        {
+            return end;
         }
 
         public virtual Point EndPoint

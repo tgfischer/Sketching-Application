@@ -20,6 +20,8 @@ namespace Sketch_Application
         private bool clear = false;
         public Color Colour = Color.Black;
         public Mode Mode = Mode.Select;
+        private Stack<Shape> undoStack = new Stack<Shape>();
+        private Stack<Shape> redoStack = new Stack<Shape>();
 
         public Canvas()
             : base()
@@ -62,31 +64,43 @@ namespace Sketch_Application
                 case Mode.FreeHand:
                     FreeLine freeLine = new FreeLine(position, this.Colour);
                     this.shapes.Add(freeLine);
+                    // add a line here that adds each shape as something that can be undone
+                    this.undoStack.Push(freeLine);
                     break;
 
                 case Mode.Line:
                     Line line = new Line(position, this.Colour);
                     this.shapes.Add(line);
+                    // add a line here that adds each shape as something that can be undone
+                    this.undoStack.Push(line);
                     break;
 
                 case Mode.Rectangle:
                     Rectangle rectangle = new Rectangle(position, this.Colour);
                     this.shapes.Add(rectangle);
+                    // add a line here that adds each shape as something that can be undone
+                    this.undoStack.Push(rectangle);
                     break;
 
                 case Mode.Square:
                     Square square = new Square(position, this.Colour);
                     this.shapes.Add(square);
+                    // add a line here that adds each shape as something that can be undone
+                    this.undoStack.Push(square);
                     break;
 
                 case Mode.Ellipse:
                     Ellipse ellipse = new Ellipse(position, this.Colour);
                     this.shapes.Add(ellipse);
+                    // add a line here that adds each shape as something that can be undone
+                    this.undoStack.Push(ellipse);
                     break;
 
                 case Mode.Circle:
                     Circle circle = new Circle(position, this.Colour);
                     this.shapes.Add(circle);
+                    // add a line here that adds each shape as something that can be undone
+                    this.undoStack.Push(circle);
                     break;
 
                 case Mode.Polygon:
@@ -94,6 +108,9 @@ namespace Sketch_Application
                     Line line1 = new Line(position, this.Colour);
                     polygon.addLine(line1);
                     this.shapes.Add(polygon);
+                    // add a line here that adds each shape as something that can be undone
+                    // undo one line of the polygon at a time
+                    this.undoStack.Push(polygon);
                     break;
             }
 
@@ -257,10 +274,33 @@ namespace Sketch_Application
             this.Invalidate();
         }
 
+        public void Undo()
+        {
+            /* At this point, we have loaded all shapes into the stack. When we click Undo, we will be
+             * sent here, where we will have to pop the top shape on the stack. Then, we have to remove 
+             * that shape from the total list of shapes. We also have to put the popped value in the 
+             * stack for redos for it to be readded on redo */
+
+            Shape tempShape = this.undoStack.Pop();
+            this.shapes.Remove(tempShape);
+            this.redoStack.Push(tempShape);
+            this.Invalidate();   
+        }
+
+        public void Redo()
+        {
+            Shape tempShape = this.redoStack.Pop();
+            this.undoStack.Push(tempShape);
+            this.shapes.Add(tempShape);
+            this.Invalidate();
+        }
+
         public void ClearCanvas()
         {
             this.clear = true;
             this.shapes.Clear();
+            this.undoStack.Clear();
+            this.redoStack.Clear();
             this.Invalidate();
         }
 
@@ -285,6 +325,18 @@ namespace Sketch_Application
         public GroupedShape SelectedShape
         {
             get { return this.selectedShapes; }
+        }
+
+        public bool checkForUndos()
+        {
+            // return true if the undo stack has something in it 
+            return !(this.undoStack.Count == 0);
+        }
+
+        public bool checkForRedos()
+        {
+            // return true if the redo stack has something in it
+            return !(this.redoStack.Count == 0);
         }
     }
 }
