@@ -125,6 +125,7 @@ namespace Sketch_Application
                 }
                 else if(this.canvas.Mode == Mode.Move)
                 {
+                    Console.WriteLine("move current");
                     this.canvas.MoveCurrentShape(this.canvas.PointToClient(Cursor.Position));
                 }
                 else
