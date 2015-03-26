@@ -195,7 +195,6 @@ namespace Sketch_Application
             {
                 return;
             }
-            
             int xD = position.X - selectedShapes.UpperLeftPoint.X;
             int yD = position.Y - selectedShapes.UpperLeftPoint.Y;
             selectedShapes.Shift(xD, yD);
