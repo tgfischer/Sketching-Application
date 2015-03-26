@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
+    [Serializable]
     public class Square : Rectangle
     {
         private int width = 0;

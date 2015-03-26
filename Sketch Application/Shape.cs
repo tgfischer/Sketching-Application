@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 
 namespace Sketch_Application
 {
+    [Serializable]
     public abstract class Shape
     {
         protected Color colour = Color.Black;
