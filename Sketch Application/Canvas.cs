@@ -281,15 +281,15 @@ namespace Sketch_Application
 
         public void Paste(Point startPoint)
         {
-            if (clipBoard == null)
-                return;
+            this.RemoveSelect();
+            GroupedShape newShape = this.clipBoard.Clone();
 
-            //Shape newShape = clipBoard;
-            int xD = startPoint.X - clipBoard.UpperLeftPoint.X;
-            int yD = startPoint.Y - clipBoard.UpperLeftPoint.Y;
-            clipBoard.Shift(xD, yD);
-            this.Shapes.Add(clipBoard);
-            clipBoard = null;
+            int xD = startPoint.X - newShape.UpperLeftPoint.X;
+            int yD = startPoint.Y - newShape.UpperLeftPoint.Y;
+            newShape.Shift(xD, yD);
+
+            this.Shapes.Add(newShape);
+
             this.Invalidate();
         }
 

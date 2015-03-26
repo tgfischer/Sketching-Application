@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Sketch_Application
 {
+    [Serializable]
     public class GroupedShape : Shape
     {
         public List<Shape> Shapes = new List<Shape>();
