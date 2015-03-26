@@ -211,28 +211,6 @@ namespace Sketch_Application
             }
         }
 
-        /* every time we click on the Edit menu option, call to canvas to check if there are undos/ redos 
-         * in their respective lists. If so, we enable the buttons Undo/Redo 
-         * */
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool enableUndoBtn = this.canvas.checkForUndos();
-            bool enableRedoBtn = this.canvas.checkForRedos();
-
-            if (enableUndoBtn)
-            {
-                this.undoToolStripMenuItem.Enabled = true;
-                // now, check to see what type of item is at the top of stack and change text accordingly
-            }
-            else this.undoToolStripMenuItem.Enabled = false;
-            if (enableRedoBtn)
-            {
-                this.redoToolStripMenuItem.Enabled = true;
-                // now, check to see what type of item is at the top of stack and change text accordingly
-            }
-            else this.redoToolStripMenuItem.Enabled = false;
-        }
-
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.canvas.Undo(); 
@@ -377,6 +355,25 @@ namespace Sketch_Application
                 this.isDrawing = false; //finished drawing polygon
                 polygonFirst = true; 
             }
+        }
+
+        private void editTooStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            bool enableUndoBtn = this.canvas.checkForUndos();
+            bool enableRedoBtn = this.canvas.checkForRedos();
+
+            if (enableUndoBtn)
+            {
+                this.undoToolStripMenuItem.Enabled = true;
+                // now, check to see what type of item is at the top of stack and change text accordingly
+            }
+            else this.undoToolStripMenuItem.Enabled = false;
+            if (enableRedoBtn)
+            {
+                this.redoToolStripMenuItem.Enabled = true;
+                // now, check to see what type of item is at the top of stack and change text accordingly
+            }
+            else this.redoToolStripMenuItem.Enabled = false;
         }
     }
 }

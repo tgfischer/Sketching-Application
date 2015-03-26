@@ -124,7 +124,7 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 19);
             this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            this.editToolStripMenuItem.DropDownOpened += new System.EventHandler(this.editTooStripMenuItem_DropDownOpened);
             // 
             // undoToolStripMenuItem
             // 
