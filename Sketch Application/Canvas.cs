@@ -195,7 +195,6 @@ namespace Sketch_Application
             {
                 return;
             }
-            
             int xD = position.X - selectedShapes.UpperLeftPoint.X;
             int yD = position.Y - selectedShapes.UpperLeftPoint.Y;
             selectedShapes.Shift(xD, yD);
@@ -281,15 +280,15 @@ namespace Sketch_Application
 
         public void Paste(Point startPoint)
         {
+            if (clipBoard.Shapes.Count == 0)
+                return;
+
             this.RemoveSelect();
-            GroupedShape newShape = this.clipBoard.Clone();
-
-            int xD = startPoint.X - newShape.UpperLeftPoint.X;
-            int yD = startPoint.Y - newShape.UpperLeftPoint.Y;
+            Shape newShape = this.clipBoard.Clone<Shape>();
+            int xD = startPoint.X - clipBoard.UpperLeftPoint.X;
+            int yD = startPoint.Y - clipBoard.UpperLeftPoint.Y;
             newShape.Shift(xD, yD);
-
             this.Shapes.Add(newShape);
-
             this.Invalidate();
         }
 
