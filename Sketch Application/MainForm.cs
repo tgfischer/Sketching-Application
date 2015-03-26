@@ -297,6 +297,7 @@ namespace Sketch_Application
         {
             this.canvas.UngroupSelectedShapes(this.canvas.SelectedShape);
             this.ungroupShapesToolStripMenuItem.Enabled = this.EnableUngroupButton(this.canvas.SelectedShape);
+            this.canvas.RemoveSelect();
         }
 
         private bool EnableUngroupButton(Shape shape)

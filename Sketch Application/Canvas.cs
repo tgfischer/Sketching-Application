@@ -311,6 +311,8 @@ namespace Sketch_Application
                     shape.Deselect();
                 }
             }
+
+            this.Invalidate();
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
