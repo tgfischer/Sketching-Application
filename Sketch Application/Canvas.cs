@@ -290,8 +290,8 @@ namespace Sketch_Application
         public void Redo()
         {
             Shape tempShape = this.redoStack.Pop();
-            this.undoStack.Push(tempShape);
             this.shapes.Add(tempShape);
+            this.undoStack.Push(tempShape);
             this.Invalidate();
         }
 
