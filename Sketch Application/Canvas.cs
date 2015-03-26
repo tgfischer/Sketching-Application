@@ -215,7 +215,7 @@ namespace Sketch_Application
             int xD = position.X - selectedShapes.UpperLeftPoint.X;
             int yD = position.Y - selectedShapes.UpperLeftPoint.Y;
             selectedShapes.Shift(xD, yD);
-                
+            //this.shapes.Add(selectedShapes);
             this.Invalidate();
         }
 
@@ -285,12 +285,20 @@ namespace Sketch_Application
 
         public void Cut()
         {
+            //this.RemoveSelect();
             this.clipBoard = selectedShapes;
 
+
+            Console.WriteLine("clipboard " + this.clipBoard.Shapes.Count);
+            Console.WriteLine("shapes " + this.shapes.Count);
+            
+            this.shapes.Remove(clipBoard);
             foreach (Shape s in clipBoard.Shapes)
             {
                 this.shapes.Remove(s);
             }
+            Console.WriteLine("shapes after " + this.shapes.Count);
+            
 
             this.Invalidate();
         }
@@ -305,7 +313,11 @@ namespace Sketch_Application
             int xD = startPoint.X - clipBoard.UpperLeftPoint.X;
             int yD = startPoint.Y - clipBoard.UpperLeftPoint.Y;
             newShape.Shift(xD, yD);
+            newShape.Select();
             this.Shapes.Add(newShape);
+            this.selectedShapes.Shapes.Clear();
+            this.selectedShapes.Shapes.Add(newShape);
+
             this.Invalidate();
         }
 
