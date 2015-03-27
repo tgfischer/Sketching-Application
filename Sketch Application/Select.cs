@@ -51,6 +51,21 @@ namespace Sketch_Application
             {
                 return Geometry.RectangleIntersectsSelect((Rectangle)shape, this);
             }
+            else if (shape is Polygon)
+            {
+                bool isSelected = false;
+                Polygon selectedP = (Polygon)shape;
+
+                foreach (Line line in selectedP.lines)
+                {
+                    isSelected = Geometry.LineIntersectsSelect(line, this);
+
+                    if (isSelected == true)
+                        break;
+                }
+
+                return isSelected;
+            }
             else if (shape is GroupedShape)
             {
                 GroupedShape groupedShape = (GroupedShape)shape;

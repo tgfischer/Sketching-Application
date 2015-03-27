@@ -78,7 +78,22 @@ namespace Sketch_Application
         {
             get
             {
-                return new Point(0, 0);
+                int x = Int32.MaxValue;
+                int y = Int32.MaxValue;
+
+                for (int i = 0; i < this.lines.Count(); i++)
+                {
+                    if (this.lines.ElementAt(i).EndPoint.X < x)
+                        x = this.lines.ElementAt(i).EndPoint.X;
+                    if (this.lines.ElementAt(i).EndPoint.Y < y)
+                        y = this.lines.ElementAt(i).EndPoint.Y;
+                    if (this.lines.ElementAt(i).StartPoint.X < x)
+                        x = this.lines.ElementAt(i).StartPoint.X;
+                    if (this.lines.ElementAt(i).StartPoint.Y < y)
+                        y = this.lines.ElementAt(i).StartPoint.Y;
+                }
+
+                return new Point(x, y);
             }
         }
     }
