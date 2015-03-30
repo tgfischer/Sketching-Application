@@ -99,7 +99,7 @@ namespace Sketch_Application
 
             float a = ellRect.Width / 2;
             float b = ellRect.Height / 2;
-
+            
             List<Point> points = new List<Point>();
             points.Add(new Point(select.StartPoint.X - (int)cx, select.StartPoint.Y - (int)cy));
             points.Add(new Point(select.StartPoint.X + select.Width - (int)cx, select.StartPoint.Y - (int)cy));
@@ -155,12 +155,12 @@ namespace Sketch_Application
                 // don't care if they are), add them to the list.
                 if (t >= 0f && t <= 1f)
                 {
-                    return true;
+                return true;
                 }
             }
 
             // Return the points.
-            return false;
+                return false;
         }
     }
 }

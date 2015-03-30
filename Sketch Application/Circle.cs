@@ -78,6 +78,11 @@ namespace Sketch_Application
                 this.width = width < height ? width : height;
                 this.height = height < width ? height : width;
 
+                if (this.width > this.height)
+                    this.end.X = this.start.X + this.height;
+                else if (this.height > this.width)
+                    this.end.Y = this.start.Y + this.width;
+
             }
         }
     }
