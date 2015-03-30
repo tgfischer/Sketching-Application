@@ -90,15 +90,22 @@ namespace Sketch_Application
 
         public static bool EllipseIntersectsSelect(Ellipse ellipse, Select select)
         {
-            float a = (ellipse.StartPoint.X - ellipse.EndPoint.X) / 2;
-            float b = (ellipse.StartPoint.Y - ellipse.EndPoint.Y) / 2;
+            System.Drawing.Rectangle ellRect = new System.Drawing.Rectangle(ellipse.UpperLeftPoint.X, ellipse.UpperLeftPoint.Y, ellipse.Width, ellipse.Height);
 
+            float cx = ellRect.Left + ellRect.Width / 2f;
+            float cy = ellRect.Top + ellRect.Height / 2f;
+            ellRect.X = ellRect.Left - (int)cx;
+            ellRect.Y = ellRect.Top - (int)cy;
+
+            float a = ellRect.Width / 2;
+            float b = ellRect.Height / 2;
+            
             List<Point> points = new List<Point>();
-            points.Add(new Point(0, 0));
-            points.Add(new Point(select.Width, 0));
-            points.Add(new Point(select.Width, select.Height));
-            points.Add(new Point(0, select.Height));
-
+            points.Add(new Point (select.StartPoint.X - (int)cx, select.StartPoint.Y - (int)cy));
+            points.Add(new Point(select.StartPoint.X + select.Width - (int)cx, select.StartPoint.Y - (int)cy));
+            points.Add(new Point(select.StartPoint.X + select.Width - (int)cx, select.StartPoint.Y + select.Height - (int)cy));
+            points.Add(new Point(select.StartPoint.X - (int)cx, select.StartPoint.Y + select.Height - (int)cy));
+            
             for (int i = 1; i < points.Count; i++)
             {
                 if (LineIntersectsEllipse(points.ElementAt(i - 1), points.ElementAt(i), a, b))
@@ -115,14 +122,15 @@ namespace Sketch_Application
             return false;
         }
 
-        public static bool LineIntersectsEllipse(Point p1, Point p2, float a, float b)
+        public static bool LineIntersectsEllipse(Point pt1, Point pt2, float a, float b)
         {
-            float A = (p2.X - p1.X) * (p2.X - p1.X) / a / a + (p2.Y - p1.Y) * (p2.Y - p1.Y) / b / b;
-            float B = 2 * p1.X * (p2.X - p1.X) / a / a + 2 * p1.Y * (p2.Y - p1.Y) / b / b;
-            float C = p1.X * p1.X / a / a + p1.Y * p1.Y / b / b - 1;
 
-            float discriminant = B * B - 4 * A * C;
-            if (discriminant >= 0)
+            float A = ((pt2.X - pt1.X) * (pt2.X - pt1.X)) / (a * a) + ((pt2.Y - pt1.Y) * (pt2.Y - pt1.Y)) / (b * b);
+            float B = ((2 * pt1.X * (pt2.X - pt1.X)) / (a * a)) + ((2 * pt1.Y * (pt2.Y - pt1.Y)) / (b * b));
+            float C = (pt1.X * pt1.X) / (a * a) + (pt1.Y * pt1.Y) / (b * b) - 1;
+
+            float discriminant = (B * B) - (4 * A * C);
+            if (discriminant > 0)
                 return true;
             else
                 return false;
