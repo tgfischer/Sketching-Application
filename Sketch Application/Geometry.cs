@@ -130,32 +130,17 @@ namespace Sketch_Application
             float B = 2 * pt1.X * (pt2.X - pt1.X) / a / a + 2 * pt1.Y * (pt2.Y - pt1.Y) / b / b;
             float C = pt1.X * pt1.X / a / a + pt1.Y * pt1.Y / b / b - 1;
 
-            // Make a list of t values.
-            List<float> t_values = new List<float>();
-
             // Calculate the discriminant.
             float discriminant = B * B - 4 * A * C;
-            if (discriminant == 0)
-            {
-                // One real solution.
-                t_values.Add(-B / 2 / A);
-            }
-            else if (discriminant > 0)
-            {
-                // Two real solutions.
-                t_values.Add((float)((-B + Math.Sqrt(discriminant)) / 2 / A));
-                t_values.Add((float)((-B - Math.Sqrt(discriminant)) / 2 / A));
-            }
 
-            // Convert the t values into points.
-            List<PointF> points = new List<PointF>();
-            foreach (float t in t_values)
+            if (discriminant >= 0 && discriminant <= 1)
             {
-                // If the points are on the segment (or we
-                // don't care if they are), add them to the list.
-                if (t >= 0f && t <= 1f)
+                float t1 = (float)((-B + Math.Sqrt(discriminant)) / 2 / A);
+                float t2 = (float)((-B - Math.Sqrt(discriminant)) / 2 / A);
+
+                if (t1 >= 0 && t1 <= 1 || t2 >= 0 && t2 <= 1)
                 {
-                return true;
+                    return true;
                 }
             }
 
