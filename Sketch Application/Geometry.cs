@@ -133,19 +133,32 @@ namespace Sketch_Application
             // Calculate the discriminant.
             float discriminant = B * B - 4 * A * C;
 
-            if (discriminant >= 0 && discriminant <= 1)
-            {
-                float t1 = (float)((-B + Math.Sqrt(discriminant)) / 2 / A);
-                float t2 = (float)((-B - Math.Sqrt(discriminant)) / 2 / A);
+            List<float> t_values = new List<float>();
 
-                if (t1 >= 0 && t1 <= 1 || t2 >= 0 && t2 <= 1)
+            if (discriminant == 0)
+            {
+                // One real solution.
+                t_values.Add(-B / 2 / A);
+            }
+            else if (discriminant > 0)
+            {
+                // Two real solutions.
+                t_values.Add((float)((-B + Math.Sqrt(discriminant)) / 2 / A));
+                t_values.Add((float)((-B - Math.Sqrt(discriminant)) / 2 / A));
+            }
+
+            // Convert the t values into points.
+            List<PointF> points = new List<PointF>();
+            foreach (float t in t_values)
+           {
+                if (t >= 0f && t <= 1f)
                 {
                     return true;
                 }
             }
 
-            // Return the points.
-                return false;
+           // Return the points.
+            return false;
         }
     }
 }
