@@ -119,6 +119,9 @@ namespace Sketch_Application
                 return true;
             }
 
+            if (LineIntersectsEllipse(points.First(), points.ElementAt(2), a, b))
+                return true;
+
             return false;
         }
 
