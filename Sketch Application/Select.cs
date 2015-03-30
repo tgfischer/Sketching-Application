@@ -51,6 +51,10 @@ namespace Sketch_Application
             {
                 return Geometry.RectangleIntersectsSelect((Rectangle)shape, this);
             }
+            else if (shape is Circle || shape is Ellipse)
+            {
+                return Geometry.EllipseIntersectsSelect((Ellipse)shape, this);
+            }
             else if (shape is Polygon)
             {
                 bool isSelected = false;

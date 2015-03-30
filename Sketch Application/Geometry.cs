@@ -87,5 +87,11 @@ namespace Sketch_Application
 
             return true;
         }
+
+        public static bool EllipseIntersectsSelect(Ellipse ellipse, Select select)
+        {
+
+            return true;
+        }
     }
 }
