@@ -77,6 +77,7 @@ namespace Sketch_Application
 
                 this.width = width < height ? width : height;
                 this.height = height < width ? height : width;
+
             }
         }
     }

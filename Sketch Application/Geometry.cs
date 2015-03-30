@@ -90,8 +90,42 @@ namespace Sketch_Application
 
         public static bool EllipseIntersectsSelect(Ellipse ellipse, Select select)
         {
+            float a = (ellipse.StartPoint.X - ellipse.EndPoint.X) / 2;
+            float b = (ellipse.StartPoint.Y - ellipse.EndPoint.Y) / 2;
 
-            return true;
+            List<Point> points = new List<Point>();
+            points.Add(new Point(0, 0));
+            points.Add(new Point(select.Width, 0));
+            points.Add(new Point(select.Width, select.Height));
+            points.Add(new Point(0, select.Height));
+
+            for (int i = 1; i < points.Count; i++)
+            {
+                if (LineIntersectsEllipse(points.ElementAt(i - 1), points.ElementAt(i), a, b))
+                {
+                    return true;
+                }
+            }
+
+            if (LineIntersectsEllipse(points.Last(), points.First(), a, b))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool LineIntersectsEllipse(Point p1, Point p2, float a, float b)
+        {
+            float A = (p2.X - p1.X) * (p2.X - p1.X) / a / a + (p2.Y - p1.Y) * (p2.Y - p1.Y) / b / b;
+            float B = 2 * p1.X * (p2.X - p1.X) / a / a + 2 * p1.Y * (p2.Y - p1.Y) / b / b;
+            float C = p1.X * p1.X / a / a + p1.Y * p1.Y / b / b - 1;
+
+            float discriminant = B * B - 4 * A * C;
+            if (discriminant >= 0)
+                return true;
+            else
+                return false;
         }
     }
 }
