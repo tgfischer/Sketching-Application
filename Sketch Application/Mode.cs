@@ -18,6 +18,6 @@ namespace Sketch_Application
         Ellipse,
         Circle,
         Polygon,
-        ColourFill      // for implementing filling a closed loop on click 
+        Fill      // for implementing filling a closed loop on click 
     }
 }

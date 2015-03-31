@@ -87,7 +87,14 @@ namespace Sketch_Application
 
         private void polygonButton_Click(object sender, EventArgs e)
         {
-            this.canvas.Mode = Mode.Polygon;
+            this.canvas.Mode = Mode.Polygon ;
+            this.SetCurrentButton(this, (Button)sender);
+            this.canvas.Cursor = Cursors.Default;
+        }
+
+        private void fillButton_Click(object sender, EventArgs e)
+        {
+            this.canvas.Mode = Mode.Fill;
             this.SetCurrentButton(this, (Button)sender);
             this.canvas.Cursor = Cursors.Default;
         }
@@ -127,6 +134,10 @@ namespace Sketch_Application
                 {
                     Console.WriteLine("move current");
                     this.canvas.MoveCurrentShape(this.canvas.PointToClient(Cursor.Position));
+                }
+                else if (this.canvas.Mode == Mode.Fill)
+                {
+                    this.canvas.FillClickedShape(this.canvas.PointToClient(Cursor.Position));
                 }
                 else
                 {
@@ -358,6 +369,25 @@ namespace Sketch_Application
             }
         }
 
+        private void contextMenuStrinp_Opened(object sender, EventArgs e)
+        {
+            bool enableUndoBtn = this.canvas.checkForUndos();
+            bool enableRedoBtn = this.canvas.checkForRedos();
+
+            if (enableUndoBtn)
+            {
+                this.undoToolStripMenuItem1.Enabled = true;
+                // now, check to see what type of item is at the top of stack and change text accordingly
+            }
+            else this.undoToolStripMenuItem1.Enabled = false;
+            if (enableRedoBtn)
+            {
+                this.redoToolStripMenuItem1.Enabled = true;
+                // now, check to see what type of item is at the top of stack and change text accordingly
+            }
+            else this.redoToolStripMenuItem1.Enabled = false;
+        }
+
         private void editTooStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
             bool enableUndoBtn = this.canvas.checkForUndos();
@@ -375,6 +405,16 @@ namespace Sketch_Application
                 // now, check to see what type of item is at the top of stack and change text accordingly
             }
             else this.redoToolStripMenuItem.Enabled = false;
+        }
+
+        private void undoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.canvas.Undo(); 
+        }
+
+        private void redoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.canvas.Redo();
         }
     }
 }

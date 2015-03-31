@@ -44,7 +44,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instructionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.fillButton = new System.Windows.Forms.TableLayoutPanel();
             this.selectButton = new System.Windows.Forms.Button();
             this.moveButton = new System.Windows.Forms.Button();
             this.freeDrawButton = new System.Windows.Forms.Button();
@@ -63,9 +63,11 @@
             this.ungroupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.undoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.canvas = new Sketch_Application.Canvas();
             this.menuStrip.SuspendLayout();
-            this.tableLayoutPanel.SuspendLayout();
+            this.fillButton.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,7 +132,7 @@
             // 
             this.undoToolStripMenuItem.Enabled = false;
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -138,21 +140,21 @@
             // 
             this.redoToolStripMenuItem.Enabled = false;
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -178,42 +180,43 @@
             this.instructionsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.instructionsToolStripMenuItem.Text = "Instructions";
             // 
-            // tableLayoutPanel
+            // fillButton
             // 
-            this.tableLayoutPanel.ColumnCount = 12;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.Controls.Add(this.selectButton, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.moveButton, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.freeDrawButton, 2, 0);
-            this.tableLayoutPanel.Controls.Add(this.lineButton, 3, 0);
-            this.tableLayoutPanel.Controls.Add(this.rectangleButton, 4, 0);
-            this.tableLayoutPanel.Controls.Add(this.squareButton, 5, 0);
-            this.tableLayoutPanel.Controls.Add(this.ellipseButton, 6, 0);
-            this.tableLayoutPanel.Controls.Add(this.circleButton, 7, 0);
-            this.tableLayoutPanel.Controls.Add(this.polygonButton, 8, 0);
-            this.tableLayoutPanel.Controls.Add(this.colourPanel, 9, 0);
-            this.tableLayoutPanel.Controls.Add(this.clearButton, 11, 0);
-            this.tableLayoutPanel.Controls.Add(this.canvas, 0, 1);
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 25);
-            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 2;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(1269, 708);
-            this.tableLayoutPanel.TabIndex = 1;
+            this.fillButton.ColumnCount = 13;
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.fillButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.Controls.Add(this.selectButton, 0, 0);
+            this.fillButton.Controls.Add(this.moveButton, 1, 0);
+            this.fillButton.Controls.Add(this.freeDrawButton, 2, 0);
+            this.fillButton.Controls.Add(this.lineButton, 3, 0);
+            this.fillButton.Controls.Add(this.rectangleButton, 4, 0);
+            this.fillButton.Controls.Add(this.squareButton, 5, 0);
+            this.fillButton.Controls.Add(this.ellipseButton, 6, 0);
+            this.fillButton.Controls.Add(this.circleButton, 7, 0);
+            this.fillButton.Controls.Add(this.polygonButton, 8, 0);
+            this.fillButton.Controls.Add(this.colourPanel, 9, 0);
+            this.fillButton.Controls.Add(this.clearButton, 12, 0);
+            this.fillButton.Controls.Add(this.canvas, 0, 1);
+            this.fillButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fillButton.Location = new System.Drawing.Point(0, 25);
+            this.fillButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.fillButton.Name = "fillButton";
+            this.fillButton.RowCount = 2;
+            this.fillButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.fillButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.fillButton.Size = new System.Drawing.Size(1269, 708);
+            this.fillButton.TabIndex = 1;
             // 
             // selectButton
             // 
@@ -394,10 +397,13 @@
             this.cutRightToolStripMenuItem,
             this.pasteRightToolStripMenuItem,
             this.groupShapesToolStripMenuItem,
-            this.ungroupShapesToolStripMenuItem});
+            this.ungroupShapesToolStripMenuItem,
+            this.undoToolStripMenuItem1,
+            this.redoToolStripMenuItem1});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(162, 92);
+            this.contextMenuStrip.Size = new System.Drawing.Size(162, 158);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            this.contextMenuStrip.Opened += new System.EventHandler(this.contextMenuStrinp_Opened);
             // 
             // cutRightToolStripMenuItem
             // 
@@ -433,11 +439,27 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // undoToolStripMenuItem1
+            // 
+            this.undoToolStripMenuItem1.Enabled = false;
+            this.undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
+            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
+            this.undoToolStripMenuItem1.Text = "Undo";
+            this.undoToolStripMenuItem1.Click += new System.EventHandler(this.undoToolStripMenuItem1_Click);
+            // 
+            // redoToolStripMenuItem1
+            // 
+            this.redoToolStripMenuItem1.Enabled = false;
+            this.redoToolStripMenuItem1.Name = "redoToolStripMenuItem1";
+            this.redoToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
+            this.redoToolStripMenuItem1.Text = "Redo";
+            this.redoToolStripMenuItem1.Click += new System.EventHandler(this.redoToolStripMenuItem1_Click);
+            // 
             // canvas
             // 
             this.canvas.BackColor = System.Drawing.Color.White;
             this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tableLayoutPanel.SetColumnSpan(this.canvas, 12);
+            this.fillButton.SetColumnSpan(this.canvas, 13);
             this.canvas.ContextMenuStrip = this.contextMenuStrip;
             this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -455,7 +477,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1269, 733);
-            this.Controls.Add(this.tableLayoutPanel);
+            this.Controls.Add(this.fillButton);
             this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -467,7 +489,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.tableLayoutPanel.ResumeLayout(false);
+            this.fillButton.ResumeLayout(false);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -482,7 +504,6 @@
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colourToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.Button freeDrawButton;
         private System.Windows.Forms.Button lineButton;
@@ -510,7 +531,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ToolStripMenuItem ungroupShapesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem groupShapesToolStripMenuItem;
-
+        public System.Windows.Forms.TableLayoutPanel fillButton;
+        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem1;
     }
 }
 
