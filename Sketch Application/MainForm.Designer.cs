@@ -56,16 +56,16 @@
             this.polygonButton = new System.Windows.Forms.Button();
             this.colourPanel = new System.Windows.Forms.Panel();
             this.clearButton = new System.Windows.Forms.Button();
+            this.canvas = new Sketch_Application.Canvas();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ungroupShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.undoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.canvas = new Sketch_Application.Canvas();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip.SuspendLayout();
             this.fillButton.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -391,15 +391,32 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
+            // canvas
+            // 
+            this.canvas.BackColor = System.Drawing.Color.White;
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.fillButton.SetColumnSpan(this.canvas, 13);
+            this.canvas.ContextMenuStrip = this.contextMenuStrip;
+            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(3, 83);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(1263, 622);
+            this.canvas.TabIndex = 9;
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoToolStripMenuItem1,
+            this.redoToolStripMenuItem1,
             this.cutRightToolStripMenuItem,
             this.pasteRightToolStripMenuItem,
             this.groupShapesToolStripMenuItem,
-            this.ungroupShapesToolStripMenuItem,
-            this.undoToolStripMenuItem1,
-            this.redoToolStripMenuItem1});
+            this.ungroupShapesToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
             this.contextMenuStrip.Size = new System.Drawing.Size(162, 158);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
@@ -435,10 +452,6 @@
             this.ungroupShapesToolStripMenuItem.Text = "Ungroup Shapes";
             this.ungroupShapesToolStripMenuItem.Click += new System.EventHandler(this.ungroupShapesToolStripMenuItem_Click);
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            // 
             // undoToolStripMenuItem1
             // 
             this.undoToolStripMenuItem1.Enabled = false;
@@ -455,22 +468,9 @@
             this.redoToolStripMenuItem1.Text = "Redo";
             this.redoToolStripMenuItem1.Click += new System.EventHandler(this.redoToolStripMenuItem1_Click);
             // 
-            // canvas
+            // openFileDialog
             // 
-            this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.fillButton.SetColumnSpan(this.canvas, 13);
-            this.canvas.ContextMenuStrip = this.contextMenuStrip;
-            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(3, 83);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(1263, 622);
-            this.canvas.TabIndex = 9;
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.canvas.MouseLeave += new System.EventHandler(this.canvas_MouseLeave);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            this.openFileDialog.FileName = "openFileDialog";
             // 
             // MainForm
             // 

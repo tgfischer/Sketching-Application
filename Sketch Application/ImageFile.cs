@@ -61,7 +61,8 @@ namespace Sketch_Application
                 typeof(Square),
                 typeof(Ellipse),
                 typeof(Circle),
-                typeof(Polygon)
+                typeof(Polygon),
+                typeof(GroupedShape)
             });
         }
     }
