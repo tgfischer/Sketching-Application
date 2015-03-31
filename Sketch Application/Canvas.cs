@@ -340,10 +340,11 @@ namespace Sketch_Application
                 this.undoStack.Push(new List<Shape>(this.shapes));
                 GroupedShape groupedShape = (GroupedShape)shape;
 
-                this.shapes.Remove(groupedShape);
+                //this.shapes.Remove(groupedShape)
 
                 foreach (Shape subShape in groupedShape.Shapes)
                 {
+                    this.shapes.Remove(subShape);
                     if (subShape is GroupedShape)
                     {
                         this.shapes.Remove(subShape);
