@@ -376,5 +376,14 @@ namespace Sketch_Application
             }
             else this.redoToolStripMenuItem.Enabled = false;
         }
+
+        private void instructionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HelpInfo newWindow = new HelpInfo();
+            // Set the parent form of the child window.
+            newWindow.Show();
+
+            Form activeChild = this.ActiveMdiChild; 
+        }
     }
 }

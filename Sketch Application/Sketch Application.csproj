@@ -55,6 +55,12 @@
     <Compile Include="FreeLine.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="GroupedShape.cs" />
+    <Compile Include="HelpInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelpInfo.Designer.cs">
+      <DependentUpon>HelpInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageFile.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="MainForm.cs">
@@ -74,6 +80,9 @@
     <Compile Include="Square.cs" />
     <EmbeddedResource Include="Canvas.resx">
       <DependentUpon>Canvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelpInfo.resx">
+      <DependentUpon>HelpInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
