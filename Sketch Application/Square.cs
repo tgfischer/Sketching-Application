@@ -23,6 +23,11 @@ namespace Sketch_Application
             g.DrawRectangle(pen, this.StartPoint.X, this.StartPoint.Y, this.Width, this.Height);
         }
 
+        public void Fill(Graphics g, Brush brush)
+        {
+            g.FillRectangle(brush, new System.Drawing.Rectangle(this.StartPoint.X, this.StartPoint.Y, Width, Width));
+        }
+
         public override Point StartPoint
         {
             get 

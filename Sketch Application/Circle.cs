@@ -23,6 +23,10 @@ namespace Sketch_Application
             g.DrawEllipse(pen, this.StartPoint.X, this.StartPoint.Y, this.Diameter, this.Diameter);
         }
 
+        public void Fill(Graphics g, Brush brush)
+        {
+            g.FillEllipse(brush, new System.Drawing.Rectangle(this.StartPoint.X, this.StartPoint.Y, this.Diameter, this.Diameter));
+        }
         public override Point StartPoint
         {
             get

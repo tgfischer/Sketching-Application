@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
@@ -20,8 +21,8 @@ namespace Sketch_Application
         private bool clear = false;
         public Color Colour = Color.Black;
         public Mode Mode = Mode.Select;
-        private Stack<Shape> undoStack = new Stack<Shape>();
-        private Stack<Shape> redoStack = new Stack<Shape>();
+        private Stack<List<Shape>> undoStack = new Stack<List<Shape>>();
+        private Stack<List<Shape>> redoStack = new Stack<List<Shape>>();
 
         public Canvas()
             : base()
@@ -63,6 +64,81 @@ namespace Sketch_Application
             }
         }
 
+        public void FillClickedShape(Point position)
+        {
+            /*  - iterate through all shapes on canvas 
+             *  - if the click was inside a shape (excluding polygon), fill the shape with the current colour
+             *  - else, don't colour entire board just return */
+
+            foreach (Shape s in this.shapes)
+            {
+                if (s is Square)
+                {
+                    Square temp = (Square)s;
+
+                    if ((temp.UpperLeftPoint.X <= position.X) && (temp.UpperLeftPoint.Y <= position.Y)
+                        && ((temp.UpperLeftPoint.X + temp.Width) >= position.X) && ((temp.UpperLeftPoint.Y +
+                        temp.Height) >= position.Y))
+                    {
+                        Console.Write("inside a square");
+                        Graphics g;
+                        g = this.CreateGraphics();
+                        temp.Fill(g, new SolidBrush(this.Colour));
+                        break;
+                    }
+                }
+                else if (s is Rectangle)
+                {
+                    Rectangle temp = (Rectangle)s;
+
+                    if ((temp.UpperLeftPoint.X <= position.X) && (temp.UpperLeftPoint.Y <= position.Y)
+                        && ((temp.UpperLeftPoint.X + temp.Width) >= position.X) && ((temp.UpperLeftPoint.Y +
+                        temp.Height) >= position.Y))
+                    {
+                        Console.Write("inside a rectangle");
+                        Graphics g;
+                        g = this.CreateGraphics();
+                        temp.Fill(g, new SolidBrush(this.Colour));
+                        break;
+                    }
+                }
+                
+                else if (s is Circle)
+                {
+                    Circle temp = (Circle)s;
+
+                    if ((temp.UpperLeftPoint.X <= position.X) && (temp.UpperLeftPoint.Y <= position.Y)
+                        && ((temp.UpperLeftPoint.X + temp.Width) >= position.X) && ((temp.UpperLeftPoint.Y +
+                        temp.Height) >= position.Y))
+                    {
+                        Console.Write("inside a circle");
+                        Graphics g;
+                        g = this.CreateGraphics();
+                        temp.Fill(g, new SolidBrush(this.Colour));
+                        List<Shape> tempAddList = new List<Shape>();
+                        break;
+                    }
+                }
+                else if (s is Ellipse)
+                {
+                    Ellipse temp = (Ellipse)s;
+
+                    if ((temp.UpperLeftPoint.X <= position.X) && (temp.UpperLeftPoint.Y <= position.Y)
+                        && ((temp.UpperLeftPoint.X + temp.Width) >= position.X) && ((temp.UpperLeftPoint.Y +
+                        temp.Height) >= position.Y))
+                    {
+                        Console.Write("inside an ellispe");
+                        Graphics g;
+                        g = this.CreateGraphics();
+                        temp.Fill(g, new SolidBrush(this.Colour));
+                        List<Shape> tempAddList = new List<Shape>();
+                        break;
+                    }
+                }
+            }
+            
+
+        }
         public void AddNewShape(Point position)
         {
             switch (this.Mode) {
@@ -73,54 +149,46 @@ namespace Sketch_Application
 
                 case Mode.FreeHand:
                     FreeLine freeLine = new FreeLine(position, this.Colour);
+                    this.undoStack.Push(new List<Shape>(this.shapes));
                     this.shapes.Add(freeLine);
-                    // add a line here that adds each shape as something that can be undone
-                    this.undoStack.Push(freeLine);
                     break;
 
                 case Mode.Line:
                     Line line = new Line(position, this.Colour);
+                    this.undoStack.Push(new List<Shape>(this.shapes));
                     this.shapes.Add(line);
-                    // add a line here that adds each shape as something that can be undone
-                    this.undoStack.Push(line);
                     break;
 
                 case Mode.Rectangle:
                     Rectangle rectangle = new Rectangle(position, this.Colour);
+                    this.undoStack.Push(new List<Shape>(this.shapes));
                     this.shapes.Add(rectangle);
-                    // add a line here that adds each shape as something that can be undone
-                    this.undoStack.Push(rectangle);
                     break;
 
                 case Mode.Square:
                     Square square = new Square(position, this.Colour);
+                    this.undoStack.Push(new List<Shape>(this.shapes));
                     this.shapes.Add(square);
-                    // add a line here that adds each shape as something that can be undone
-                    this.undoStack.Push(square);
                     break;
 
                 case Mode.Ellipse:
                     Ellipse ellipse = new Ellipse(position, this.Colour);
+                    this.undoStack.Push(new List<Shape>(this.shapes));
                     this.shapes.Add(ellipse);
-                    // add a line here that adds each shape as something that can be undone
-                    this.undoStack.Push(ellipse);
                     break;
 
                 case Mode.Circle:
                     Circle circle = new Circle(position, this.Colour);
+                    this.undoStack.Push(new List<Shape>(this.shapes));
                     this.shapes.Add(circle);
-                    // add a line here that adds each shape as something that can be undone
-                    this.undoStack.Push(circle);
                     break;
 
                 case Mode.Polygon:
                     Polygon polygon = new Polygon(position, this.Colour);
                     Line line1 = new Line(position, this.Colour);
                     polygon.addLine(line1);
+                    this.undoStack.Push(new List<Shape>(this.shapes));
                     this.shapes.Add(polygon);
-                    // add a line here that adds each shape as something that can be undone
-                    // undo one line of the polygon at a time
-                    this.undoStack.Push(polygon);
                     break;
             }
 
@@ -212,6 +280,8 @@ namespace Sketch_Application
             {
                 return;
             }
+            //this.undoStack.Push(new List<Shape>(this.shapes));
+            
             int xD = position.X - selectedShapes.UpperLeftPoint.X;
             int yD = position.Y - selectedShapes.UpperLeftPoint.Y;
             selectedShapes.Shift(xD, yD);
@@ -254,20 +324,21 @@ namespace Sketch_Application
                 return;
             }
 
+            this.undoStack.Push(new List<Shape>(this.shapes));
             foreach (Shape shape in this.selectedShapes.Shapes)
             {
                 this.shapes.Remove(shape);
             }
-
             this.shapes.Add(this.selectedShapes);
         }
 
         public void UngroupSelectedShapes(Shape shape)
         {
+            
             if (shape is GroupedShape)
             {
+                this.undoStack.Push(new List<Shape>(this.shapes));
                 GroupedShape groupedShape = (GroupedShape)shape;
-
                 foreach (Shape subShape in groupedShape.Shapes)
                 {
                     if (subShape is GroupedShape)
@@ -291,7 +362,8 @@ namespace Sketch_Application
 
             Console.WriteLine("clipboard " + this.clipBoard.Shapes.Count);
             Console.WriteLine("shapes " + this.shapes.Count);
-            
+
+            this.undoStack.Push(new List<Shape>(this.shapes));
             this.shapes.Remove(clipBoard);
             foreach (Shape s in clipBoard.Shapes)
             {
@@ -314,6 +386,7 @@ namespace Sketch_Application
             int yD = startPoint.Y - clipBoard.UpperLeftPoint.Y;
             newShape.Shift(xD, yD);
             newShape.Select();
+            this.undoStack.Push(new List<Shape>(this.shapes));
             this.Shapes.Add(newShape);
             this.selectedShapes.Shapes.Clear();
             this.selectedShapes.Shapes.Add(newShape);
@@ -323,22 +396,21 @@ namespace Sketch_Application
 
         public void Undo()
         {
-            /* At this point, we have loaded all shapes into the stack. When we click Undo, we will be
-             * sent here, where we will have to pop the top shape on the stack. Then, we have to remove 
-             * that shape from the total list of shapes. We also have to put the popped value in the 
-             * stack for redos for it to be readded on redo */
-
-            Shape tempShape = this.undoStack.Pop();
-            this.shapes.Remove(tempShape);
-            this.redoStack.Push(tempShape);
-            this.Invalidate();   
+            List<Shape> tempListOfShapes = new List<Shape>();
+            tempListOfShapes.AddRange(this.undoStack.Pop());
+            this.redoStack.Push(new List<Shape>(this.shapes));
+            this.shapes.Clear();
+            this.shapes.AddRange(tempListOfShapes);
+            this.Invalidate();
         }
 
         public void Redo()
         {
-            Shape tempShape = this.redoStack.Pop();
-            this.shapes.Add(tempShape);
-            this.undoStack.Push(tempShape);
+            List<Shape> tempListOfShapes = new List<Shape>();
+            tempListOfShapes.AddRange(this.redoStack.Pop());
+            this.undoStack.Push(new List<Shape>(this.shapes));
+            this.shapes.Clear();
+            this.shapes.AddRange(tempListOfShapes);
             this.Invalidate();
         }
 

@@ -27,6 +27,11 @@ namespace Sketch_Application
             g.DrawEllipse(pen, this.StartPoint.X, this.StartPoint.Y, this.Width, this.Height);
         }
 
+        public void Fill(Graphics g, Brush brush)
+        {
+            g.FillEllipse(brush, new System.Drawing.Rectangle(this.StartPoint.X, this.StartPoint.Y, Width, Height));
+        }
+
         public virtual Point StartPoint
         {
             get { return new Point(Math.Min(this.start.X, this.end.X), Math.Min(this.start.Y, this.end.Y)); }
