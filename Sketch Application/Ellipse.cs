@@ -38,12 +38,12 @@ namespace Sketch_Application
             set { this.start = value; }
         }
 
-        public int Width
+        public virtual int Width
         {
             get { return Math.Abs(this.start.X - this.end.X); }
         }
 
-        public int Height
+        public virtual int Height
         {
             get { return Math.Abs(this.start.Y - this.end.Y); }
         }

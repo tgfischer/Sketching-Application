@@ -280,6 +280,7 @@ namespace Sketch_Application
             {
                 return;
             }
+
             //this.undoStack.Push(new List<Shape>(this.shapes));
             
             int xD = position.X - selectedShapes.UpperLeftPoint.X;
@@ -314,7 +315,7 @@ namespace Sketch_Application
 
             this.Invalidate(); // Update the canvas
 
-            return this.selectedShapes.Shapes.Count > 0;
+            return this.selectedShapes.Shapes.Count > 1;
         }
 
         public void GroupSelectedShapes()
@@ -436,6 +437,8 @@ namespace Sketch_Application
                     shape.Deselect();
                 }
             }
+
+            this.selectedShapes = new GroupedShape();
 
             this.Invalidate();
         }
