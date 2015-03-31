@@ -88,12 +88,28 @@ namespace Sketch_Application
             return true;
         }
 
-        public static bool EllipseIntersectsSelect(Ellipse ellipse, Select select)
+        public static bool EllipseIntersectsSelect(Ellipse ellipse, Select select, Boolean isCircle)
         {
+
             System.Drawing.Rectangle ellRect = new System.Drawing.Rectangle(ellipse.UpperLeftPoint.X, ellipse.UpperLeftPoint.Y, ellipse.Width, ellipse.Height);
+
+            if (isCircle == true)
+            {
+                if (ellRect.Width > ellRect.Height)
+                {
+                    ellRect.Right.Equals(ellRect.Left + ellRect.Height);
+                    ellRect.Width = ellRect.Height;
+                }
+                else if (ellRect.Height > ellRect.Width)
+                {
+                    ellRect.Bottom.Equals(ellRect.Top + ellRect.Width);
+                    ellRect.Height = ellRect.Width;
+                }
+            }
 
             float cx = ellRect.Left + ellRect.Width / 2f;
             float cy = ellRect.Top + ellRect.Height / 2f;
+
             ellRect.X = ellRect.Left - (int)cx;
             ellRect.Y = ellRect.Top - (int)cy;
 
