@@ -334,11 +334,13 @@ namespace Sketch_Application
 
         public void UngroupSelectedShapes(Shape shape)
         {
-            
             if (shape is GroupedShape)
             {
                 this.undoStack.Push(new List<Shape>(this.shapes));
                 GroupedShape groupedShape = (GroupedShape)shape;
+
+                this.shapes.Remove(groupedShape);
+
                 foreach (Shape subShape in groupedShape.Shapes)
                 {
                     if (subShape is GroupedShape)
